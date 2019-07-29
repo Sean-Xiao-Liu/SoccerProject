@@ -1,0 +1,5 @@
+com/xiao/soccerproject/model/Matches.class
+com/xiao/soccerproject/jdbc/PlayerDAO.class
+com/xiao/soccerproject/jdbc/MatchesDAO.class
+com/xiao/soccerproject/model/Team.class
+com/xiao/soccerproject/App.class

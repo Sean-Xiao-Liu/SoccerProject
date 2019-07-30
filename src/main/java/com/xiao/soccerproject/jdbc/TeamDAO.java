@@ -153,23 +153,6 @@ public class TeamDAO { //same as the plug in fills
 
 
     public static void main(String[] args) {
-        TeamDAO de = new TeamDAO();
-//        List<Team> team = de.getTeam();
-//        int team2 = de.updateTeam("T15",12);
-//        System.out.println(" total updates required: "+team2);
-//
-//
-//        int team3 = de.updateTeam("T15",10);
-//        System.out.println(" total updates required: "+team3);
-
-//       Team team = de.getTeam("T15");
-//       System.out.println(team);
-
-
-        List<Team> teams = de.getTeam();
-        for (Team t : teams) {
-            System.out.println(t.toString());
-        }
     }
 
 

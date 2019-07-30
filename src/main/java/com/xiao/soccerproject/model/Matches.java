@@ -61,6 +61,6 @@ public class Matches {
     public void setAveragepassstreak(int averagepassstreak){this.averagepassstreak = averagepassstreak;}
 
     public String toString(){
-        return "The team  id is " + matchid ;
+        return "The match id is " + matchid + ", the team " + teamid +" "+ matchresult  + " this game ";
     }
 }

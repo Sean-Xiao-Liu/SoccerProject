@@ -6,7 +6,9 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses(
         {
-                PlayerDAOTest.class
+                PlayerDAOTest.class,
+                MatchesDAOTest.class,
+                TeamDAOTest.class
         }
 )
 

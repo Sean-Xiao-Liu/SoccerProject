@@ -59,12 +59,6 @@ public class MatchesDAO {
     }
 
     public static void main(String[] args) {
-        MatchesDAO team = new MatchesDAO();
-        List<Matches> matches = team.getMatches();
-
-        for(Matches m : matches){
-            System.out.println(m.toString());
-        }
 
 
     }

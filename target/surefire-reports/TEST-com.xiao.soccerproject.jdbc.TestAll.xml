@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.xiao.soccerproject.jdbc.TestAll" time="0.092" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.xiao.soccerproject.jdbc.TestAll" time="0.206" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -7,7 +7,7 @@
     <property name="java.specification.version" value="1.8"/>
     <property name="sun.cpu.isalist" value=""/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/xiaoliu/IdeaProjects/SoccerProject/target/test-classes:/Users/xiaoliu/IdeaProjects/SoccerProject/target/classes:/Users/xiaoliu/.m2/repository/junit/junit/4.12/junit-4.12.jar:/Users/xiaoliu/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/xiaoliu/.m2/repository/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar:"/>
+    <property name="java.class.path" value="/Users/xiaoliu/IdeaProjects/SoccerProject/target/test-classes:/Users/xiaoliu/IdeaProjects/SoccerProject/target/classes:/Users/xiaoliu/.m2/repository/junit/junit/4.12/junit-4.12.jar:/Users/xiaoliu/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/xiaoliu/.m2/repository/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar:/Users/xiaoliu/.m2/repository/org/slf4j/slf4j-simple/1.7.26/slf4j-simple-1.7.26.jar:/Users/xiaoliu/.m2/repository/org/slf4j/slf4j-api/1.7.26/slf4j-api-1.7.26.jar:"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
@@ -17,8 +17,9 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_212.jdk/Contents/Home/jre/lib"/>
-    <property name="sun.java.command" value="/Users/xiaoliu/IdeaProjects/SoccerProject/target/surefire/surefirebooter304761197547413789.jar /Users/xiaoliu/IdeaProjects/SoccerProject/target/surefire 2019-07-29T14-57-27_247-jvmRun1 surefire4668167227341480036tmp surefire_01207276406604230517tmp"/>
-    <property name="surefire.test.class.path" value="/Users/xiaoliu/IdeaProjects/SoccerProject/target/test-classes:/Users/xiaoliu/IdeaProjects/SoccerProject/target/classes:/Users/xiaoliu/.m2/repository/junit/junit/4.12/junit-4.12.jar:/Users/xiaoliu/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/xiaoliu/.m2/repository/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar:"/>
+    <property name="sun.java.command" value="/Users/xiaoliu/IdeaProjects/SoccerProject/target/surefire/surefirebooter7764843730415133911.jar /Users/xiaoliu/IdeaProjects/SoccerProject/target/surefire 2019-07-30T14-21-17_122-jvmRun1 surefire5310040296856404105tmp surefire_06435722443825808120tmp"/>
+    <property name="test" value="TestAll"/>
+    <property name="surefire.test.class.path" value="/Users/xiaoliu/IdeaProjects/SoccerProject/target/test-classes:/Users/xiaoliu/IdeaProjects/SoccerProject/target/classes:/Users/xiaoliu/.m2/repository/junit/junit/4.12/junit-4.12.jar:/Users/xiaoliu/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/xiaoliu/.m2/repository/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar:/Users/xiaoliu/.m2/repository/org/slf4j/slf4j-simple/1.7.26/slf4j-simple-1.7.26.jar:/Users/xiaoliu/.m2/repository/org/slf4j/slf4j-api/1.7.26/slf4j-api-1.7.26.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/xiaoliu"/>
     <property name="user.language" value="en"/>
@@ -30,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/Users/xiaoliu/IdeaProjects/SoccerProject/target/surefire/surefirebooter304761197547413789.jar"/>
+    <property name="surefire.real.class.path" value="/Users/xiaoliu/IdeaProjects/SoccerProject/target/surefire/surefirebooter7764843730415133911.jar"/>
     <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_212.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_212.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_212.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_212.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_212.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_212.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_212.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_212.jdk/Contents/Home/jre/classes"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="1.8.0_212-b10"/>
@@ -50,6 +51,7 @@
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
     <property name="sun.os.patch.level" value="unknown"/>
+    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="info"/>
     <property name="java.library.path" value="/Users/xiaoliu/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.vendor" value="Oracle Corporation"/>
@@ -58,5 +60,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="getPlayerTest" classname="com.xiao.soccerproject.jdbc.PlayerDAOTest" time="0.091"/>
+  <testcase name="getPlayerTest" classname="com.xiao.soccerproject.jdbc.PlayerDAOTest" time="0.131"/>
+  <testcase name="getMatchesTest" classname="com.xiao.soccerproject.jdbc.MatchesDAOTest" time="0.009"/>
+  <testcase name="updateTeamTest" classname="com.xiao.soccerproject.jdbc.TeamDAOTest" time="0.015"/>
+  <testcase name="getTeamTest" classname="com.xiao.soccerproject.jdbc.TeamDAOTest" time="0.011"/>
+  <testcase name="getTeamInfoTest" classname="com.xiao.soccerproject.jdbc.TeamDAOTest" time="0.008"/>
 </testsuite>

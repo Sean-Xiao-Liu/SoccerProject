@@ -15,7 +15,6 @@ public class PlayerDAO {
     static final String DB_URL = "jdbc:postgresql://localhost:5431/SoccerProject_db";
     static final String USER = "admin";
     static final String PASS = "123456";
-
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //method 1
@@ -69,8 +68,11 @@ public class PlayerDAO {
                 se.printStackTrace();
             }
 
-            logger.debug(String.format("xxxxxxx"));
-            logger.info("logger works!") ;
+            logger.debug( "debug player size = "+ Player.size());
+            logger.info("info player size = " +  + Player.size()) ;
+            logger.trace("trace player size = " + Player.size());
+            logger.warn( "warn player size = "+ Player.size());
+            logger.error( " error player size = "+ Player.size());
         }
         return Player;
     }

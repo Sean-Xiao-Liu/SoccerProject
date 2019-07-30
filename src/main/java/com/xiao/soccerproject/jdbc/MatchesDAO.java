@@ -1,6 +1,8 @@
 package com.xiao.soccerproject.jdbc;
 
 import com.xiao.soccerproject.model.Matches;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ public class MatchesDAO {
     static final String DB_URL = "jdbc:postgresql://localhost:5431/SoccerProject_db";
     static final String USER = "admin";
     static final String PASS = "123456";
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
     //method 1

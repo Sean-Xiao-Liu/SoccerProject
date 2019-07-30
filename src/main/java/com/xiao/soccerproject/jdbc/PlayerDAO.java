@@ -20,6 +20,7 @@ public class PlayerDAO {
     //method 1
     //read all content in the table
     public List<Player> getPlayer(){
+        logger.info("Enter the method getPlayer");
         List<Player> Player = new ArrayList<>();
         Connection conn = null;
         Statement stmt = null;
@@ -57,7 +58,7 @@ public class PlayerDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error(e.getMessage());
+            logger.error("The error message is "+e.getMessage());
         } finally {
             //STEP 6: finally block used to close resources
             try {
@@ -68,13 +69,15 @@ public class PlayerDAO {
                 se.printStackTrace();
             }
 
-            logger.debug( "debug player size = "+ Player.size());
-            logger.info("info player size = " +  + Player.size()) ;
-            logger.trace("trace player size = " + Player.size());
-            logger.warn( "warn player size = "+ Player.size());
-            logger.error( " error player size = "+ Player.size());
+//            logger.debug( "debug player size = "+ Player.size());
+//            logger.info("info player size = " +  + Player.size()) ;
+//            logger.trace("trace player size = " + Player.size());
+//            logger.warn( "warn player size = "+ Player.size());
+//            logger.error( " error player size = "+ Player.size());
         }
+        logger.info("Exit the method getPlayer");
         return Player;
+
     }
 
     public static void main(String[] args) {

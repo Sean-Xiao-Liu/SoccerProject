@@ -3,6 +3,7 @@ package com.xiao.soccerproject.jdbc;
 import com.xiao.soccerproject.model.Team;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -28,9 +29,9 @@ public class TeamDAOTest {
         }
     }
 
-    @Test
+    @Ignore
     public void updateTeamTest(){
-        int team1 = teamDAO.updateTeam("T15",2); // update Real Madrid home win
+        int team1 = teamDAO.updateTeam("T15",14); // update Real Madrid home win to 14
         System.out.println(" total updates required: "+team1);
     }
 

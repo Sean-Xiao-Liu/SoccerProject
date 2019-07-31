@@ -1,5 +1,5 @@
 
-INSERT INTO matches (matchid,ishome,teamid,goals,losts,matchresult,shots,shotsontarget,fouls,corner,offsides,yellowcard,redcard,formation,passsuccessrate,possessionpercentage,passes,averagepassstreak)
+INSERT INTO Game (matchid,ishome,teamid,goals,losts,matchresult,shots,shotsontarget,fouls,corner,offsides,yellowcard,redcard,formation,passsuccessrate,possessionpercentage,passes,averagepassstreak)
 VALUES
 ('M1','Yes','T7',2,1,'Win',11,6,14,1,0,3,0,'4-2-3-1',0.76,0.5,404,4),
 ('M1','No','T8',1,2,'Lose',12,6,17,8,0,3,0,'4-2-3-1',0.73,0.5,405,4),

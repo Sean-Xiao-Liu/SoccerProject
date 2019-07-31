@@ -1,6 +1,6 @@
 package com.xiao.soccerproject.model;
 
-public class Matches {
+public class Game{
 
     private String matchid;
     private String ishome;

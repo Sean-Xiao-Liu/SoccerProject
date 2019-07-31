@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses(
         {
                 PlayerDAOTest.class,
-                MatchesDAOTest.class,
+                GameDAOTest.class,
                 TeamDAOTest.class
         }
 )

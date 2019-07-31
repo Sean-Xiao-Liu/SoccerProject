@@ -1,6 +1,6 @@
--- Create tables for data of matches, players and teams
+-- Create tables for data of games, players and teams
 
-CREATE TABLE Matches
+CREATE TABLE Game
 (
     matchid character varying(50)  NOT NULL,
     ishome character varying(50) NOT NULL,

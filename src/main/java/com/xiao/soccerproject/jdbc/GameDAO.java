@@ -1,6 +1,6 @@
 package com.xiao.soccerproject.jdbc;
 
-import com.xiao.soccerproject.model.Matches;
+import com.xiao.soccerproject.model.Game;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MatchesDAO {
+public class GameDAO {
     static final String DB_URL = "jdbc:postgresql://localhost:5431/SoccerProject_db";
     static final String USER = "admin";
     static final String PASS = "123456";
@@ -18,8 +18,8 @@ public class MatchesDAO {
 
     //method 1
     //read all content in the table
-    public List<Matches> getMatches(){
-        List<Matches> Matches = new ArrayList<>();
+    public List<Game> getGame(){
+        List<Game> Game = new ArrayList<>();
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -32,7 +32,7 @@ public class MatchesDAO {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * FROM Matches";
+            sql = "SELECT * FROM Game";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 //Retrieve by column name
@@ -40,11 +40,11 @@ public class MatchesDAO {
                 String teamId = rs.getString("teamid");
                 String matchResult = rs.getString("matchresult");
 
-                Matches mat = new Matches();
-                mat.setMatchid(matchId);
-                mat.setTeamid(teamId);
-                mat.setMatchresult(matchResult);
-                Matches.add(mat);
+                Game game = new Game();
+                game.setMatchid(matchId);
+                game.setTeamid(teamId);
+                game.setMatchresult(matchResult);
+                Game.add(game);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,7 +58,7 @@ public class MatchesDAO {
                 se.printStackTrace();
             }
         }
-        return Matches; // this Matches is defined by :  List<Matches> Matches = new ArrayList<>();
+        return Game; // this game is defined by :  List<Matches> Game = new ArrayList<>();
     }
 
     public static void main(String[] args) {

@@ -1,22 +1,62 @@
 package com.xiao.soccerproject.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Team")
 public class Team {
+    @Column(name="team_name")
     private String teamname;
+    @Id
+    @Column(name="team_id")
     private String teamid;
+
+    @Column(name = "home_win")
     private int homewin;
+
+    @Column(name = "away_win")
     private int awaywin;
+
+    @Column(name = "home_loss")
     private int homeloss;
+
+    @Column(name = "away_loss")
     private int awayloss;
+
+    @Column(name = "matches_won")
     private int matcheswon;
+
+    @Column(name = "matches_lost")
     private int matcheslost;
+
+    @Column(name = "matches_drawn")
     private int matchesdrawn;
+
+    @Column(name = "total_matches")
     private int totalmatches;
+
+    @Column(name = "points")
     private int points;
+
+    @Column(name = "finish_position")
     private int finishposition;
+
+    @Column(name = "home_goals")
     private int homegoals;
+
+    @Column(name = "away_goals")
     private int awaygoals;
+
+    @Column(name = "goals_scored")
     private int goalsscored;
+
+    @Column(name = "goals_conceded")
     private int goalsconceded;
+
+    @Column(name = "goal_difference")
     private int goaldifference;
 
     public String getTeamname (){return teamname;}

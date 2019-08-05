@@ -25,19 +25,34 @@ public class TeamDAOTest {
     public void getTeamTest(){
         List<Team> teams = teamDAO.getTeam();
         for (Team t : teams) {
+//            assertEquals("",t.getTeamname());
             System.out.println(t.toString());
         }
     }
 
-    @Ignore
-    public void updateTeamTest(){
-        int team1 = teamDAO.updateTeam("T15",14); // update Real Madrid home win to 14
-        System.out.println(" total updates required: "+team1);
-    }
 
     @Test
     public void getTeamInfoTest(){
         Team team = teamDAO.getTeamInfo("T15");
         System.out.println(team.toString());
+    }
+
+
+    @Test
+    public void insertTeam(){
+        int team2 = teamDAO.insertTeam("testTeam","T21");
+        System.out.println(team2);
+
+    }
+
+    @Test
+    public void updateTeamTest(){
+        int team1 = teamDAO.updateTeam("T21",99); // update Real Madrid home win to 14
+        System.out.println(" total updates required: "+team1);
+    }
+
+     @Test
+    public void deleteTeam(){
+        teamDAO.deleteTeam("T21");
     }
 }

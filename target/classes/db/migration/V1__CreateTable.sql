@@ -1,4 +1,4 @@
--- Create tables for data of matches, players and teams
+-- Create tables for data of games, players and teams
 
 CREATE TABLE Game
 (

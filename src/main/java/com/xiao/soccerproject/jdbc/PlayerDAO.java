@@ -1,6 +1,7 @@
 package com.xiao.soccerproject.jdbc;
 
 import com.xiao.soccerproject.model.Player;
+import com.xiao.soccerproject.model.Team;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,21 +81,105 @@ public class PlayerDAO {
 
     }
 
-    public static void main(String[] args) {
-        PlayerDAO obj = new PlayerDAO();
-        List<Player> players = obj.getPlayer();
-        for(Player p : players){
-            System.out.println(p.toString());
-        }
 
+    //method 2
+    //insert record of player
+    public int insertPlayer(String playerId,String teamId, String playerName) {
+        List<Player> Player = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int result = 0;
+
+        try {
+            //STEP 2: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            //STEP 3: Execute a query
+            System.out.println("Creating statement...");
+            String sql = "INSERT INTO Player (playerid, teamid, playername) " + "VALUES (? , ?, ?)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, playerId);
+            stmt.setString(2, teamId);
+            stmt.setString(3, playerName);
+
+            result = stmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //STEP 6: finally block used to close resources
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    // method 3
+    // delete record of player from table Player
+    public int deletePlayer(String playerId) {
+        List<Player> Player = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int result = 0;
+
+        try {
+            //STEP 2: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            //STEP 3: Execute a query
+            System.out.println("Creating statement...");
+            String sql = "DELETE FROM Player " + "WHERE playerid = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, playerId);
+
+            result = stmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //STEP 6: finally block used to close resources
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return result;
     }
 
 
+    //method 4
+    //update a
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static void main(String[] args) {
+    }
 
 }
 

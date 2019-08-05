@@ -44,13 +44,13 @@ public class PlayerDAOTest {
     }
 
     @Test
-    public void assertTryOut(){
-        String str1 = "Happy";
-        String str2 = "happy";
-        String str3 = new String("ABC");
-        String str4 = new String("ABC");
-
-        Assert.assertEquals(str3 , str4);
-//        Assert.assertSame(str1, str2);
+    public void insertPlayer(){
+        playerDAO.insertPlayer("PTest","TTest","Player Test");
     }
+
+    @Test
+    public void deletePlayer(){
+        playerDAO.deletePlayer("PTest");
+    }
+
 }

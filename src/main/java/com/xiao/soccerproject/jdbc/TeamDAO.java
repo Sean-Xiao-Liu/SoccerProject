@@ -149,14 +149,84 @@ public class TeamDAO { //same as the plug in fills
                 se.printStackTrace();
             }
         }
-
-
-
-
-
         return team;
-
     }
+
+    //method 4
+    //delete records of certain team
+    public int deleteTeam(String teamId) {
+        List<Team> Team = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int result = 0;
+
+        try {
+            //STEP 2: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            //STEP 3: Execute a query
+            System.out.println("Creating statement...");
+            String sql = "DELETE FROM Team " + "WHERE teamid = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, teamId);
+
+            result = stmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //STEP 6: finally block used to close resources
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    // method 5
+    // insert record of team
+    public int insertTeam(String teamName,String teamId) {
+        List<Team> Team = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int result = 0;
+
+        try {
+            //STEP 2: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            //STEP 3: Execute a query
+            System.out.println("Creating statement...");
+            String sql = "INSERT INTO Team (teamname, teamid) " + "VALUES (? , ?)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, teamName);
+            stmt.setString(2, teamId);
+
+            result = stmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //STEP 6: finally block used to close resources
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+
+
 
 
     public static void main(String[] args) {

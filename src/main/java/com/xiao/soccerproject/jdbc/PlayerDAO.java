@@ -40,20 +40,20 @@ public class PlayerDAO {
             //STEP 4: Extract data from result set
             while (rs.next()) {
                 //Retrieve by column name
-                String playerId = rs.getString("playerid");
-                String teamId = rs.getString("teamid");
-                String playerName = rs.getString("playername");
+                String playerId = rs.getString("player_id");
+                String teamId = rs.getString("team_id");
+                String playerName = rs.getString("player_name");
                 int age = rs.getInt("age");
-                String playerPosition = rs.getString("playerposition");
+                String playerPosition = rs.getString("player_position");
                 String nationality = rs.getString("nationality");
 
                 //Fill the object
                 Player players = new Player();
-                players.setPlayerid(playerId);
-                players.setTeamid(teamId);
-                players.setPlayername(playerName);
+                players.setPlayerId(playerId);
+                players.setTeamId(teamId);
+                players.setPlayerName(playerName);
                 players.setAge(age);
-                players.setPlayerposition(playerPosition);
+                players.setPlayerPosition(playerPosition);
                 players.setNationality(nationality);
                 Player.add(players);
             }
@@ -97,7 +97,7 @@ public class PlayerDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "INSERT INTO Player (playerid, teamid, playername) " + "VALUES (? , ?, ?)";
+            String sql = "INSERT INTO Player (player_id, team_id, player_name) " + "VALUES (? , ?, ?)";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, playerId);
             stmt.setString(2, teamId);
@@ -135,7 +135,7 @@ public class PlayerDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "DELETE FROM Player " + "WHERE playerid = ?";
+            String sql = "DELETE FROM Player " + "WHERE player_id = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, playerId);
 
@@ -159,24 +159,6 @@ public class PlayerDAO {
 
     //method 4
     //update a
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static void main(String[] args) {
     }

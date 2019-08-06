@@ -1,4 +1,3 @@
 com/xiao/soccerproject/model/Team.class
 com/xiao/soccerproject/App.class
-util/HibernateUtil.class
 com/xiao/soccerproject/jdbc/PlayerDAO.class

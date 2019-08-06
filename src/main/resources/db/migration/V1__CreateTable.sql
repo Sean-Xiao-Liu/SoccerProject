@@ -46,7 +46,7 @@ CREATE TABLE Player
     shooting numeric,
     positioning numeric,
     finishing numeric,
-    shotpower numeric,
+    shot_power numeric,
     long_shots numeric,
     volleys numeric,
     penalties numeric,

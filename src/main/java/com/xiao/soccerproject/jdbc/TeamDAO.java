@@ -34,18 +34,18 @@ public class TeamDAO { //same as the plug in fills
             rs = stmt.executeQuery(sql);
             //STEP 4: Extract data from result set
             while (rs.next()) {
-                //Retrieve by column name
-                String teamname = rs.getString("teamname");
-                String teamid = rs.getString("teamid");
-                int homewin = rs.getInt("homewin");
-                int awaywin = rs.getInt("awaywin");
+                //Retrieve by column name!!!
+                String teamName = rs.getString("team_name");
+                String teamId = rs.getString("team_id");
+                int homeWin = rs.getInt("home_win");
+                int awayWin = rs.getInt("away_win");
 
                 //Fill the object
                 Team teams = new Team();
-                teams.setTeamname(teamname);
-                teams.setTeamid(teamid);
-                teams.setHomewin(homewin);
-                teams.setAwaywin(awaywin);
+                teams.setTeamName(teamName);
+                teams.setTeamId(teamId);
+                teams.setHomeWin(homeWin);
+                teams.setAwayWin(awayWin);
                 Team.add(teams);
             }
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class TeamDAO { //same as the plug in fills
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "UPDATE Team " + "SET homewin = ? WHERE teamid =? ";
+            String sql = "UPDATE Team " + "SET home_win = ? WHERE team_id =? ";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, homeWin);
             stmt.setString(2, teamId);
@@ -116,7 +116,7 @@ public class TeamDAO { //same as the plug in fills
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "SELECT * FROM Team WHERE teamid = ?";
+            String sql = "SELECT * FROM Team WHERE team_id = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, tId);
             rs = stmt.executeQuery();
@@ -124,17 +124,17 @@ public class TeamDAO { //same as the plug in fills
 
             while (rs.next()) {
                 //Retrieve by column name
-                String teamName = rs.getString("teamname");
-                String teamId = rs.getString("teamid");
-                int homeWin = rs.getInt("homewin");
-                int awayWin = rs.getInt("awaywin");
+                String teamName = rs.getString("team_name");
+                String teamId = rs.getString("team_id");
+                int homeWin = rs.getInt("home_win");
+                int awayWin = rs.getInt("away_win");
 
                 //Fill the object
 
-                team.setTeamname(teamName);
-                team.setTeamid(teamId);
-                team.setHomewin(homeWin);
-                team.setAwaywin(awayWin);
+                team.setTeamName(teamName);
+                team.setTeamId(teamId);
+                team.setHomeWin(homeWin);
+                team.setAwayWin(awayWin);
 //                Team.add(teams);
             }
         } catch (Exception e) {
@@ -167,7 +167,7 @@ public class TeamDAO { //same as the plug in fills
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "DELETE FROM Team " + "WHERE teamid = ?";
+            String sql = "DELETE FROM Team " + "WHERE team_id = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, teamId);
 
@@ -203,7 +203,7 @@ public class TeamDAO { //same as the plug in fills
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "INSERT INTO Team (teamname, teamid) " + "VALUES (? , ?)";
+            String sql = "INSERT INTO Team (team_name, team_id) " + "VALUES (? , ?)";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, teamName);
             stmt.setString(2, teamId);

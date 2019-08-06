@@ -26,7 +26,7 @@ public class TeamDAOTest {
         List<Team> teams = teamDAO.getTeam();
         for (Team t : teams) {
 //            assertEquals("",t.getTeamname());
-            System.out.print(t.getTeamname());
+            System.out.print(t.getTeamName());
             System.out.println(t.toString());
         }
     }

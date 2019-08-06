@@ -9,94 +9,195 @@ import javax.persistence.Table;
 @Table(name = "Team")
 public class Team {
     @Column(name="team_name")
-    private String teamname;
+    private String teamName;
     @Id
     @Column(name="team_id")
-    private String teamid;
+    private String teamId;
 
     @Column(name = "home_win")
-    private int homewin;
+    private int homeWin;
 
     @Column(name = "away_win")
-    private int awaywin;
+    private int awayWin;
 
     @Column(name = "home_loss")
-    private int homeloss;
+    private int homeLoss;
 
     @Column(name = "away_loss")
-    private int awayloss;
+    private int awayLoss;
 
     @Column(name = "matches_won")
-    private int matcheswon;
+    private int matchesWon;
 
     @Column(name = "matches_lost")
-    private int matcheslost;
+    private int matchesLost;
 
     @Column(name = "matches_drawn")
-    private int matchesdrawn;
+    private int matchesDrawn;
 
     @Column(name = "total_matches")
-    private int totalmatches;
+    private int totalMatches;
 
     @Column(name = "points")
     private int points;
 
     @Column(name = "finish_position")
-    private int finishposition;
+    private int finishPosition;
 
     @Column(name = "home_goals")
-    private int homegoals;
+    private int homeGoals;
 
     @Column(name = "away_goals")
-    private int awaygoals;
+    private int awayGoals;
 
     @Column(name = "goals_scored")
-    private int goalsscored;
+    private int goalsScored;
 
     @Column(name = "goals_conceded")
-    private int goalsconceded;
+    private int goalsConceded;
 
     @Column(name = "goal_difference")
-    private int goaldifference;
+    private int goalDifference;
 
-    public String getTeamname (){return teamname;}
-    public String getTeamid (){return teamid;}
-    public int getHomewin (){return homewin;}
-    public int getAwaywin (){return awaywin;}
-    public int getHomeloss(){return homeloss;}
-    public int getAwayloss(){return awayloss;}
-    public int getMatcheswon(){return matcheswon;}
-    public int getMatcheslost(){return matcheslost;}
-    public int getMatchesdrawn(){return matchesdrawn;}
-    public int getTotalmatches(){return totalmatches;}
-    public int getPoints(){return points;}
-    public int getFinishposition(){return finishposition;}
-    public int getHomegoals(){return homegoals;}
-    public int getAwaygoals(){return awaygoals;}
-    public int getGoalsscored(){return goalsscored;}
-    public int getGoalsconceded(){return goalsconceded;}
-    public int getGoaldifference(){return goaldifference;}
 
-    public void setTeamname (String teamname){this.teamname = teamname;}
-    public void setTeamid (String teamid){this.teamid = teamid;}
-    public void setHomewin (int homewin){this.homewin = homewin;}
-    public void setAwaywin (int awaywin){this.awaywin = awaywin;}
-    public void setHomeloss(int homeloss){this.homeloss = homeloss;}
-    public void setAwayloss(int awayloss){this.awayloss = awayloss;}
-    public void setMatcheswon(int matcheswon){this.matcheswon = matcheswon;}
-    public void setMatcheslost(int matcheslost){this.matcheslost = matcheslost;}
-    public void setMatchesdrawn(int matchesdrawn){this.matchesdrawn = matchesdrawn;}
-    public void setTotalmatches(int totalmatches){this.totalmatches = totalmatches;}
-    public void setPoints(int points){this.points = points;}
-    public void setFinishposition(int finishposition){this.finishposition = finishposition;}
-    public void setHomegoals(int homegoals){this.homegoals = homegoals;}
-    public void setAwaygoals(int awaygoals){this.awaygoals = awaygoals;}
-    public void setGoalsscored(int goalsscored){this.goalsscored = goalsscored;}
-    public void setGoalsconceded(int goalsconceded){this.goalsconceded = goalsconceded;}
-    public void setGoaldifference(int goaldifference){this.goaldifference = goaldifference;}
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public String getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
+    }
+
+    public int getHomeWin() {
+        return homeWin;
+    }
+
+    public void setHomeWin(int homeWin) {
+        this.homeWin = homeWin;
+    }
+
+    public int getAwayWin() {
+        return awayWin;
+    }
+
+    public void setAwayWin(int awayWin) {
+        this.awayWin = awayWin;
+    }
+
+    public int getHomeLoss() {
+        return homeLoss;
+    }
+
+    public void setHomeLoss(int homeLoss) {
+        this.homeLoss = homeLoss;
+    }
+
+    public int getAwayLoss() {
+        return awayLoss;
+    }
+
+    public void setAwayLoss(int awayLoss) {
+        this.awayLoss = awayLoss;
+    }
+
+    public int getMatchesWon() {
+        return matchesWon;
+    }
+
+    public void setMatchesWon(int matchesWon) {
+        this.matchesWon = matchesWon;
+    }
+
+    public int getMatchesLost() {
+        return matchesLost;
+    }
+
+    public void setMatchesLost(int matchesLost) {
+        this.matchesLost = matchesLost;
+    }
+
+    public int getMatchesDrawn() {
+        return matchesDrawn;
+    }
+
+    public void setMatchesDrawn(int matchesDrawn) {
+        this.matchesDrawn = matchesDrawn;
+    }
+
+    public int getTotalMatches() {
+        return totalMatches;
+    }
+
+    public void setTotalMatches(int totalMatches) {
+        this.totalMatches = totalMatches;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getFinishPosition() {
+        return finishPosition;
+    }
+
+    public void setFinishPosition(int finishPosition) {
+        this.finishPosition = finishPosition;
+    }
+
+    public int getHomeGoals() {
+        return homeGoals;
+    }
+
+    public void setHomeGoals(int homeGoals) {
+        this.homeGoals = homeGoals;
+    }
+
+    public int getAwayGoals() {
+        return awayGoals;
+    }
+
+    public void setAwayGoals(int awayGoals) {
+        this.awayGoals = awayGoals;
+    }
+
+    public int getGoalsScored() {
+        return goalsScored;
+    }
+
+    public void setGoalsScored(int goalsScored) {
+        this.goalsScored = goalsScored;
+    }
+
+    public int getGoalsConceded() {
+        return goalsConceded;
+    }
+
+    public void setGoalsConceded(int goalsConceded) {
+        this.goalsConceded = goalsConceded;
+    }
+
+    public int getGoalDifference() {
+        return goalDifference;
+    }
+
+    public void setGoalDifference(int goalDifference) {
+        this.goalDifference = goalDifference;
+    }
 
     public String toString() {
-        return "the team  name is " + this.teamname + ", the home win times are " + this.homewin;
+        return "the team  name is " + this.teamName + ", the home win times are " + this.homeWin;
     }
 
 

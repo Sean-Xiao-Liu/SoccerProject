@@ -11,13 +11,26 @@ import java.util.List;
 public class HibernateMappingTest {
 
     @Test
-    public void mappingTest(){
+    public void teamMappingTest(){
         String hql = "FROM Team";
         List<Team> teams = null;
 //        try(
             Session session = HibernateUtil.getSessionFactory().openSession();
             Query<Team> query = session.createQuery(hql);
             teams = query.list();
+//        }
+//        catch
+    }
+
+
+    @Test
+    public void playerMappingTest(){
+        String hql = "FROM Player";
+        List<Team> teams = null;
+//        try(
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query<Team> query = session.createQuery(hql);
+        teams = query.list();
 //        }
 //        catch
     }

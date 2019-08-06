@@ -36,14 +36,14 @@ public class GameDAO {
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 //Retrieve by column name
-                String matchId = rs.getString("matchid");
-                String teamId = rs.getString("teamid");
-                String matchResult = rs.getString("matchresult");
+//                String matchId = rs.getString("match_id");
+                String teamId = rs.getString("team_id");
+                String matchResult = rs.getString("match_result");
 
                 Game game = new Game();
-                game.setMatchid(matchId);
-                game.setTeamid(teamId);
-                game.setMatchresult(matchResult);
+//                game.setMatchId(matchId);
+                game.setTeamId(teamId);
+                game.setMatchResult(matchResult);
                 Game.add(game);
             }
         } catch (Exception e) {
@@ -58,7 +58,7 @@ public class GameDAO {
                 se.printStackTrace();
             }
         }
-        return Game; // this game is defined by :  List<Matches> Game = new ArrayList<>();
+        return Game; // this game is defined by :  List<Game> Game = new ArrayList<>();
     }
 
     public static void main(String[] args) {

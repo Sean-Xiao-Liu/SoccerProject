@@ -45,12 +45,13 @@ public class PlayerDAOTest {
 
     @Test
     public void insertPlayer(){
-        playerDAO.insertPlayer("PTest","TTest","Player Test");
+        playerDAO.insertPlayer(99,99,"Player Test");
     }
+
 
     @Test
     public void deletePlayer(){
-        playerDAO.deletePlayer("PTest");
+        playerDAO.deletePlayer(99);
     }
 
 }

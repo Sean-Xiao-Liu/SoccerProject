@@ -31,4 +31,21 @@ public class GameDAOTest {
 
     }
 
+
+    @Test
+    public void insertGameTest(){
+        int game1 = gameDAO.insertGame(99,"Test Home",99);
+        System.out.println(game1);
+    }
+
+    @Test
+    public void deleteGameTest(){
+        gameDAO.deleteGame(99);
+    }
+
+    @Test
+    public void updateGameTest(){
+        int game2 = gameDAO.updateGame(99,99);
+        System.out.println(game2);
+    }
 }

@@ -30,20 +30,20 @@ public class TeamDAO { //same as the plug in fills
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * FROM Team";
+            sql = "SELECT * FROM Teams";
             rs = stmt.executeQuery(sql);
             //STEP 4: Extract data from result set
             while (rs.next()) {
                 //Retrieve by column name!!!
                 String teamName = rs.getString("team_name");
-                String teamId = rs.getString("team_id");
+                int id = rs.getInt("id");
                 int homeWin = rs.getInt("home_win");
                 int awayWin = rs.getInt("away_win");
 
                 //Fill the object
                 Team teams = new Team();
                 teams.setTeamName(teamName);
-                teams.setTeamId(teamId);
+                teams.setId(id);
                 teams.setHomeWin(homeWin);
                 teams.setAwayWin(awayWin);
                 Team.add(teams);
@@ -65,7 +65,7 @@ public class TeamDAO { //same as the plug in fills
 
     // method 2
     // Update database Team
-    public int updateTeam(String teamId, int homeWin) {
+    public int updateTeam(int id, int homeWin) {
         List<Team> Team = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -78,10 +78,10 @@ public class TeamDAO { //same as the plug in fills
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "UPDATE Team " + "SET home_win = ? WHERE team_id =? ";
+            String sql = "UPDATE Teams " + "SET home_win = ? WHERE id =? ";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, homeWin);
-            stmt.setString(2, teamId);
+            stmt.setInt(2, id);
 
             result = stmt.executeUpdate();
 
@@ -103,7 +103,7 @@ public class TeamDAO { //same as the plug in fills
 
     // method 3
     // get info of 1 team
-    public Team getTeamInfo(String tId) {
+    public Team getTeamInfo(int tId) {
         Team team = new Team();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -116,23 +116,23 @@ public class TeamDAO { //same as the plug in fills
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "SELECT * FROM Team WHERE team_id = ?";
+            String sql = "SELECT * FROM Teams WHERE id = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, tId);
+            stmt.setInt(1, tId);
             rs = stmt.executeQuery();
             //STEP 4: Extract data from result set
 
             while (rs.next()) {
                 //Retrieve by column name
                 String teamName = rs.getString("team_name");
-                String teamId = rs.getString("team_id");
+                int id = rs.getInt("id");
                 int homeWin = rs.getInt("home_win");
                 int awayWin = rs.getInt("away_win");
 
                 //Fill the object
 
                 team.setTeamName(teamName);
-                team.setTeamId(teamId);
+                team.setId(id);
                 team.setHomeWin(homeWin);
                 team.setAwayWin(awayWin);
 //                Team.add(teams);
@@ -154,7 +154,7 @@ public class TeamDAO { //same as the plug in fills
 
     //method 4
     //delete records of certain team
-    public int deleteTeam(String teamId) {
+    public int deleteTeam(int id) {
         List<Team> Team = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -167,9 +167,9 @@ public class TeamDAO { //same as the plug in fills
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "DELETE FROM Team " + "WHERE team_id = ?";
+            String sql = "DELETE FROM Teams " + "WHERE id = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, teamId);
+            stmt.setInt(1, id);
 
             result = stmt.executeUpdate();
 
@@ -190,7 +190,7 @@ public class TeamDAO { //same as the plug in fills
 
     // method 5
     // insert record of team
-    public int insertTeam(String teamName,String teamId) {
+    public int insertTeam(String teamName,int id) {
         List<Team> Team = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -203,10 +203,10 @@ public class TeamDAO { //same as the plug in fills
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "INSERT INTO Team (team_name, team_id) " + "VALUES (? , ?)";
+            String sql = "INSERT INTO Teams (team_name, id) " + "VALUES (? , ?)";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, teamName);
-            stmt.setString(2, teamId);
+            stmt.setInt(2, id);
 
             result = stmt.executeUpdate();
 
@@ -224,10 +224,6 @@ public class TeamDAO { //same as the plug in fills
         }
         return result;
     }
-
-
-
-
 
     public static void main(String[] args) {
     }

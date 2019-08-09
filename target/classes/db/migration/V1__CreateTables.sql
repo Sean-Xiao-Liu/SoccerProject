@@ -1,0 +1,96 @@
+-- Create tables for data of games, players and teams
+
+CREATE TABLE Games
+(
+    id bigint  NOT NULL,
+    is_home character varying(50) NOT NULL,
+    team_id bigint,
+    goals smallint,
+    losts smallint,
+    match_result character varying(50),
+--     shots numeric,
+--     shots_on_target numeric,
+--     fouls numeric,
+--     corner numeric,
+--     off_sides numeric,
+--     yellow_card numeric,
+--     red_card numeric,
+--     formation character varying(50),
+--     pass_success_rate numeric,
+--     possession_percentage numeric,
+--     passes numeric,
+--     average_pass_streak numeric,
+    CONSTRAINT game_pkey PRIMARY KEY (id, is_home)
+);
+
+CREATE TABLE Players
+(
+    id bigint NOT NULL,
+    team_id bigint NOT NULL,
+    player_name character varying(50) ,
+    age smallint,
+    player_position character varying(50) ,
+    nationality character varying(50) ,
+--     height numeric,
+--     weight numeric,
+--     overall_score numeric,
+--     pace numeric,
+--     acceleration numeric,
+--     sprint_speed numeric,
+--     dribbling numeric,
+--     agility numeric,
+--     balance numeric,
+--     reactions numeric,
+--     ball_control numeric,
+--     composure numeric,
+--     shooting numeric,
+--     positioning numeric,
+--     finishing numeric,
+--     shot_power numeric,
+--     long_shots numeric,
+--     volleys numeric,
+--     penalties numeric,
+--     passing_ability numeric,
+--     vision numeric,
+--     crossing numeric,
+--     free_kick numeric,
+--     short_pass numeric,
+--     long_pass numeric,
+--     pass_curve numeric,
+--     defending numeric,
+--     interceptions numeric,
+--     heading numeric,
+--     marking numeric,
+--     standing_tackle numeric,
+--     sliding_tackle numeric,
+--     physicality numeric,
+--     jumping numeric,
+--     stamina numeric,
+--     strength numeric,
+--     aggression numeric,
+    CONSTRAINT player_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE Teams
+(
+
+    team_name character varying(50) ,
+    id bigint NOT NULL,
+    home_win smallint,
+    away_win smallint,
+    home_loss smallint,
+    away_loss smallint,
+--     matches_won numeric,
+--     matches_lost numeric,
+--     matches_drawn numeric,
+--     total_matches numeric,
+--     points numeric,
+--     finish_position numeric,
+--     home_goals numeric,
+--     away_goals numeric,
+--     goals_scored numeric,
+--     goals_conceded numeric,
+--     goal_difference numeric,
+    CONSTRAINT team_pkey PRIMARY KEY (id)
+);
+

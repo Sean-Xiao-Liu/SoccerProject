@@ -35,13 +35,13 @@ public class PlayerDAO {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * FROM Player";
+            sql = "SELECT * FROM Players";
             rs = stmt.executeQuery(sql);
             //STEP 4: Extract data from result set
             while (rs.next()) {
                 //Retrieve by column name
-                String playerId = rs.getString("player_id");
-                String teamId = rs.getString("team_id");
+                int id = rs.getInt("id");
+                int teamId = rs.getInt("team_id");
                 String playerName = rs.getString("player_name");
                 int age = rs.getInt("age");
                 String playerPosition = rs.getString("player_position");
@@ -49,7 +49,7 @@ public class PlayerDAO {
 
                 //Fill the object
                 Player players = new Player();
-                players.setPlayerId(playerId);
+                players.setId(id);
                 players.setTeamId(teamId);
                 players.setPlayerName(playerName);
                 players.setAge(age);
@@ -81,10 +81,9 @@ public class PlayerDAO {
 
     }
 
-
     //method 2
     //insert record of player
-    public int insertPlayer(String playerId,String teamId, String playerName) {
+    public int insertPlayer(int id,int teamId, String playerName) {
         List<Player> Player = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -97,10 +96,10 @@ public class PlayerDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "INSERT INTO Player (player_id, team_id, player_name) " + "VALUES (? , ?, ?)";
+            String sql = "INSERT INTO Players (id, team_id, player_name) " + "VALUES (? , ?, ?)";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, playerId);
-            stmt.setString(2, teamId);
+            stmt.setInt(1, id);
+            stmt.setInt(2, teamId);
             stmt.setString(3, playerName);
 
             result = stmt.executeUpdate();
@@ -122,7 +121,7 @@ public class PlayerDAO {
 
     // method 3
     // delete record of player from table Player
-    public int deletePlayer(String playerId) {
+    public int deletePlayer(int id) {
         List<Player> Player = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -135,9 +134,9 @@ public class PlayerDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "DELETE FROM Player " + "WHERE player_id = ?";
+            String sql = "DELETE FROM Players " + "WHERE id = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, playerId);
+            stmt.setInt(1, id);
 
             result = stmt.executeUpdate();
 
@@ -156,9 +155,6 @@ public class PlayerDAO {
         return result;
     }
 
-
-    //method 4
-    //update a
 
     public static void main(String[] args) {
     }

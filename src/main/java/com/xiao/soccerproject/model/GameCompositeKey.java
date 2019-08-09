@@ -13,32 +13,49 @@ import java.io.Serializable;
 @Embeddable
 public class GameCompositeKey implements Serializable {
 
-    @Column(name = "match_id")
-    private String matchid;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "is_home")
-    private String ishome;
+    private String isHome;
 
-    public GameCompositeKey(String matchid, String ishome) {
-        this.matchid = matchid;
-        this.ishome = ishome;
+    public GameCompositeKey(int id, String isHome) {
+        this.id = id;
+        this.isHome = isHome;
     }
     public GameCompositeKey(){}; // default constructor
+//
+//    public String getMatchid() {
+//        return matchid;
+//    }
+//
+//    public void setMatchid(String matchid) {
+//        this.matchid = matchid;
+//    }
+//
+//    public String getIshome() {
+//        return ishome;
+//    }
+//
+//    public void setIshome(String ishome) {
+//        this.ishome = ishome;
+//    }
 
-    public String getMatchid() {
-        return matchid;
+
+    public int getId() {
+        return id;
     }
 
-    public void setMatchid(String matchid) {
-        this.matchid = matchid;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getIshome() {
-        return ishome;
+    public String getIsHome() {
+        return isHome;
     }
 
-    public void setIshome(String ishome) {
-        this.ishome = ishome;
+    public void setIsHome(String isHome) {
+        this.isHome = isHome;
     }
 
     @Override

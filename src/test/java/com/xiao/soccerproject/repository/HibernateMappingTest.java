@@ -16,12 +16,9 @@ public class HibernateMappingTest {
     public void teamMappingTest(){
         String hql = "FROM Team";
         List<Team> teams = null;
-//        try(
             Session session = HibernateUtil.getSessionFactory().openSession();
             Query<Team> query = session.createQuery(hql);
             teams = query.list();
-//        }
-//        catch
     }
 
 
@@ -29,23 +26,19 @@ public class HibernateMappingTest {
     public void playerMappingTest(){
         String hql = "FROM Player";
         List<Player> players = null;
-//        try(
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query<Player> query = session.createQuery(hql);
         players = query.list();
-//        }
-//        catch
+
     }
 
     @Test
     public void gameMappingTest(){
         String hql = "FROM Game";
         List<Game> games = null;
-//        try(
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query<Game> query = session.createQuery(hql);
         games = query.list();
-//        }
-//        catch
+
     }
 }

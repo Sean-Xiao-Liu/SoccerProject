@@ -44,11 +44,12 @@ public class TeamDAOTest {
         int team2 = teamDAO.insertTeam("testTeam",21);
         System.out.println(team2);
 
+
     }
 
     @Test
     public void updateTeamTest(){
-        int team1 = teamDAO.updateTeam(21,99); // update Real Madrid home win to 14
+        int team1 = teamDAO.updateTeam(15,14); // update Real Madrid home win to 14
         System.out.println(" total updates required: "+team1);
     }
 

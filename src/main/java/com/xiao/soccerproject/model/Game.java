@@ -3,7 +3,7 @@ package com.xiao.soccerproject.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Game")
+@Table(name = "Games")
 public class Game{
 
     @EmbeddedId

@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface TeamDAO {
     boolean save(Team teams);
-    boolean update(Team teams);
-    boolean delete(String teamName);
+    int updateTeamHomeWin(int id, int homeWin);
+    int deleteById(int id);
     List<Team> getTeams();
-    Team getTeamById(String teamId);
+    Team getTeamById(int id);
 
 
 }

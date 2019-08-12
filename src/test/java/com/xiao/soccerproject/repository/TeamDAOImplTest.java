@@ -36,21 +36,21 @@ private Team teamTestRecord;
         for(Team team : teams){
             System.out.println(team);
         }
-        assertEquals(8,teams.size());// 7 original reccord plus one
+        assertEquals(1,teams.size());// 7 original reccord plus one
         assertNotNull(teamTestRecord.getId());
     }
 
     @Test
     public void updateTeamByIdTest(){ // why there is no logger in console?
-        int updatedCount = teamDAOImpl.updateTeamHomeWin(15,14);
+        int updatedCount = teamDAOImpl.updateTeamHomeWin(99,1);
         assertEquals(1,updatedCount);
     }
 
 
     @Test
     public void getTeamByIdTest(){
-        teamDAOImpl.getTeamById(2);
-        assertNotNull(teamDAOImpl.getTeamById(2));
+        teamDAOImpl.getTeamById(99);
+        assertNotNull(teamDAOImpl.getTeamById(99));
     }
 
 }

@@ -30,6 +30,7 @@ public class GameDAOImplTest {
    @After
    public void cleanup(){
        gameDAOImpl.deleteById(99);
+       //gameDAOImpl.deleteById(gameTestRecord.getId());
        gameDAOImpl = null;
        assertNull(gameDAOImpl);
    }
@@ -40,7 +41,7 @@ public class GameDAOImplTest {
         for(Game game : games){
             System.out.println(game);
         }
-        assertEquals(4,games.size());// 3 original reccord plus one
+        assertEquals(1,games.size());// 3 original reccord plus one
         assertNotNull(gameTestRecord.getId());
     }
 

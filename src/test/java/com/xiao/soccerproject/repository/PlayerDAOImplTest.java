@@ -43,7 +43,7 @@ public class PlayerDAOImplTest {
         for(Player player : players){
             System.out.println(player);
         }
-        assertEquals(6,players.size());// 7 original reccord plus one
+        assertEquals(1,players.size());// 7 original reccord plus one
         assertNotNull(playerTestRecord.getId());
     }
 

@@ -29,7 +29,6 @@ public class PlayerDAOImplTest {
         playerTestRecordOne.setPlayerPosition("GK");
         playerDAOImpl.save(playerTestRecordOne);
 
-        playerDAOImpl = new PlayerDAOImpl();
         playerTestRecordTwo = new Player();
         playerTestRecordTwo.setId(2);
         playerTestRecordTwo.setPlayerName("Test Player 2");

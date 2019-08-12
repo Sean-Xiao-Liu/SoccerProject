@@ -27,7 +27,6 @@ public class GameDAOImplTest {
        gameTestRecordOne.setHomeMatchResult("Win");
        gameDAOImpl.save(gameTestRecordOne);
 
-       gameDAOImpl = new GameDAOImpl();
        gameTestRecordTwo = new Game();
        gameTestRecordTwo.setId(2);
        gameTestRecordTwo.setHomeTeamId(3);

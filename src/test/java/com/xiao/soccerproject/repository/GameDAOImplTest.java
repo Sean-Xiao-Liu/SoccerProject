@@ -12,25 +12,36 @@ import static org.junit.Assert.*;
 
 public class GameDAOImplTest {
     public GameDAOImpl gameDAOImpl;
-    public Game gameTestRecord;
+    public Game gameTestRecordOne;
+    public Game gameTestRecordTwo;
 
    @Before
     public void init(){
        gameDAOImpl = new GameDAOImpl();
-       gameTestRecord = new Game();
-       gameTestRecord.setId(99);
-       gameTestRecord.setHomeTeamId(999);
-       gameTestRecord.setAwayTeamId(111);
-       gameTestRecord.setHomeGoals(999);
-       gameTestRecord.setHomeLosts(111);
-       gameTestRecord.setHomeMatchResult("Win");
-       boolean result = gameDAOImpl.save(gameTestRecord);
+       gameTestRecordOne = new Game();
+       gameTestRecordOne.setId(1);
+       gameTestRecordOne.setHomeTeamId(1);
+       gameTestRecordOne.setAwayTeamId(2);
+       gameTestRecordOne.setHomeGoals(1);
+       gameTestRecordOne.setHomeLosts(0);
+       gameTestRecordOne.setHomeMatchResult("Win");
+       gameDAOImpl.save(gameTestRecordOne);
+
+       gameDAOImpl = new GameDAOImpl();
+       gameTestRecordTwo = new Game();
+       gameTestRecordTwo.setId(2);
+       gameTestRecordTwo.setHomeTeamId(3);
+       gameTestRecordTwo.setAwayTeamId(4);
+       gameTestRecordTwo.setHomeGoals(0);
+       gameTestRecordTwo.setHomeLosts(1);
+       gameTestRecordTwo.setHomeMatchResult("Lose");
+       gameDAOImpl.save(gameTestRecordTwo);
    }
 
    @After
    public void cleanup(){
-       gameDAOImpl.deleteById(99);
-       //gameDAOImpl.deleteById(gameTestRecord.getId());
+       gameDAOImpl.deleteById(1);
+       gameDAOImpl.deleteById(2);
        gameDAOImpl = null;
        assertNull(gameDAOImpl);
    }
@@ -41,20 +52,20 @@ public class GameDAOImplTest {
         for(Game game : games){
             System.out.println(game);
         }
-        assertEquals(1,games.size());// 3 original reccord plus one
-        assertNotNull(gameTestRecord.getId());
+        assertEquals(2,games.size());
     }
 
     @Test
-    public void updateHomeGoalsTest(){ // why there is no logger in console?
-        int updatedCount = gameDAOImpl.updateHomeGoals(99,888);
+    public void updateHomeGoalsTest(){
+        int updatedCount = gameDAOImpl.updateHomeGoals(1,2);
         assertEquals(1,updatedCount);
     }
 
 
     @Test
     public void getGameByIdTest(){
-        gameDAOImpl.getGameById(99);
+        gameDAOImpl.getGameById(2);
+        assertNotNull(gameDAOImpl.getGameById(2));
     }
 
 }

@@ -13,26 +13,38 @@ import static org.junit.Assert.assertEquals;
 
 public class PlayerDAOImplTest {
     private PlayerDAOImpl playerDAOImpl;
-    private Player playerTestRecord;
+    private Player playerTestRecordOne;
+    private Player playerTestRecordTwo;
 
     @Before
     public void init(){
-        // seed a record for test
+        // seed two records for test
         playerDAOImpl = new PlayerDAOImpl();
-        playerTestRecord = new Player();
-        playerTestRecord.setId(99);
-        playerTestRecord.setPlayerName("Test Player");
-        playerTestRecord.setAge(99);
-        playerTestRecord.setTeamId(99);
-        playerTestRecord.setNationality("Test Country");
-        playerTestRecord.setPlayerPosition("GK");
-        boolean result = playerDAOImpl.save(playerTestRecord);
+        playerTestRecordOne = new Player();
+        playerTestRecordOne.setId(1);
+        playerTestRecordOne.setPlayerName("Test Player 1");
+        playerTestRecordOne.setAge(1);
+        playerTestRecordOne.setTeamId(1);
+        playerTestRecordOne.setNationality("Test Country");
+        playerTestRecordOne.setPlayerPosition("GK");
+        playerDAOImpl.save(playerTestRecordOne);
+
+        playerDAOImpl = new PlayerDAOImpl();
+        playerTestRecordTwo = new Player();
+        playerTestRecordTwo.setId(2);
+        playerTestRecordTwo.setPlayerName("Test Player 2");
+        playerTestRecordTwo.setAge(2);
+        playerTestRecordTwo.setTeamId(2);
+        playerTestRecordTwo.setNationality("Test Country");
+        playerTestRecordTwo.setPlayerPosition("CM");
+        playerDAOImpl.save(playerTestRecordTwo);
 
     }
 
     @After
     public void cleanup(){
-        playerDAOImpl.deleteById(99);
+        playerDAOImpl.deleteById(1);
+        playerDAOImpl.deleteById(2);
         playerDAOImpl = null;
         assertNull(playerDAOImpl);
     }
@@ -43,19 +55,19 @@ public class PlayerDAOImplTest {
         for(Player player : players){
             System.out.println(player);
         }
-        assertEquals(1,players.size());// 7 original reccord plus one
-        assertNotNull(playerTestRecord.getId());
+        assertEquals(2,players.size());//
     }
 
     @Test
     public void updatePlayerByIdTest(){ // why there is no logger in console?
-        int updatedCount = playerDAOImpl.updatePlayerAge(99,99);
+        int updatedCount = playerDAOImpl.updatePlayerAge(1,3);
         assertEquals(1,updatedCount);
     }
 
 
     @Test
     public void getPlayerByIdTest(){
-        playerDAOImpl.getPlayerById(99);
+        playerDAOImpl.getPlayerById(1);
+        assertNotNull(playerDAOImpl.getPlayerById(1));
     }
 }

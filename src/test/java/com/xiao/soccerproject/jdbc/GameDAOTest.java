@@ -9,10 +9,12 @@ import java.util.List;
 
 public class GameDAOTest {
     private GameDAO gameDAO;
+    private Game gameTestRecord;
 
     @Before
     public void init(){
         gameDAO = new GameDAO();
+//        gameTestRecord = new Game();
     }
 
     @After
@@ -21,8 +23,7 @@ public class GameDAOTest {
     }
 
     @Test
-    public void getMatchesTest(){
-
+    public void getGamesTest(){
         List<Game> game = gameDAO.getGame();
 
         for(Game g : game){
@@ -34,7 +35,7 @@ public class GameDAOTest {
 
     @Test
     public void insertGameTest(){
-        int game1 = gameDAO.insertGame(99,"Test Home",99);
+        int game1 = gameDAO.insertGame(99,97,98);
         System.out.println(game1);
     }
 
@@ -44,8 +45,8 @@ public class GameDAOTest {
     }
 
     @Test
-    public void updateGameTest(){
-        int game2 = gameDAO.updateGame(99,99);
+    public void updateHomeGoalsTest(){
+        int game2 = gameDAO.updateHomeGoals(99,97);
         System.out.println(game2);
     }
 }

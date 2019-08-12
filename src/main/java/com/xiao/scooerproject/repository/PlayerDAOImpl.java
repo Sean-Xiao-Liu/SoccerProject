@@ -1,6 +1,6 @@
 package com.xiao.scooerproject.repository;
 
-import com.xiao.soccerproject.model.Team;
+import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,19 +10,19 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class TeamDAOimpl implements TeamDAO{
+public class PlayerDAOImpl implements PlayerDAO{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //method 1
-    // save team info
+    //insert a new record of player
     @Override
-    public boolean save(Team teams){
+    public boolean save(Player players){
         Transaction transaction = null;
         boolean isSuccess = true;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
-            session.save(teams);
+            session.save(players);
             transaction.commit();
         }
 
@@ -32,22 +32,33 @@ public class TeamDAOimpl implements TeamDAO{
             logger.error(e.getMessage());
         }
 
-        if (isSuccess)  logger.info("the team is saved");
+        if (isSuccess)  logger.info("the player is saved");
 
         return isSuccess;
     }
 
     //method 2
-    //update the home win numbers of a team
+    //list all players
     @Override
-    public int updateTeamHomeWin(int id, int homeWin){
-        String hql = "UPDATE Team as t set t.homeWin = :homeWin WHERE t.id = :id";
+    public List<Player> getPlayers() {
+        String hql = "FROM Player";
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            Query<Player> query = session.createQuery(hql);
+            return query.list();
+        }
+    }
+
+    //method 3
+    //update player age by id
+    @Override
+    public int updatePlayerAge(long id, int age){
+        String hql = "UPDATE Player as p set p.age = :age WHERE p.id = :id";
         int updatedCount = 0;
         Transaction transaction = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Team> query = session.createQuery(hql);
-            query.setParameter("homeWin", homeWin);
+            Query<Player> query = session.createQuery(hql);
+            query.setParameter("age", age);
             query.setParameter("id",id);
 
             transaction = session.beginTransaction();
@@ -60,20 +71,22 @@ public class TeamDAOimpl implements TeamDAO{
             if(transaction != null) transaction.rollback();
             logger.error(e.getMessage());
         }
-        logger.info(String.format("The team %s was updated, total updated record(s): %d", id, updatedCount));
+        logger.info(String.format("The player %s was updated, total updated record(s): %d", id, updatedCount));
         return updatedCount;
     }
 
-    //method 3
-    //delete a team
+
+
     @Override
-    public int deleteById(int id) {
-        String hql = "DELETE Team t WHERE t.id = :id";
+    //method 4
+    //delete a record of player
+    public int deleteById(long id){
+        String hql = "DELETE Player p WHERE p.id = :id";
         int deletedCount = 0;
         Transaction transaction = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Team> query = session.createQuery(hql);
+            Query<Player> query = session.createQuery(hql);
             query.setParameter("id",id);
 
             transaction = session.beginTransaction();
@@ -85,35 +98,28 @@ public class TeamDAOimpl implements TeamDAO{
             if (transaction != null) transaction.rollback();
             logger.error(e.getMessage());
         }
-        logger.info(String.format("The team %s was deleted, total deleted record(s): %d", id, deletedCount));
+        logger.info(String.format("The player %s was deleted, total deleted record(s): %d", id, deletedCount));
         return deletedCount;
     }
 
-    //method 4
-    //list all teams
+    //method 5
+    //get record of a player
     @Override
-    public List<Team> getTeams() {
-        String hql = "FROM Team";
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Team> query = session.createQuery(hql);
-            return query.list();
-        }
-    }
-
-    @Override
-    public Team getTeamById(int id) {
-        String hql = "FROM Team t where t.id = :id";
+    public Player getPlayerById(long id) {
+        String hql = "FROM Player p where p.id = :id";
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Team> query = session.createQuery(hql);
+            Query<Player> query = session.createQuery(hql);
             query.setParameter("id",id);
 
-            Team team = query.uniqueResult();
-            logger.info(team.toString());
+            Player player = query.uniqueResult();
+            logger.info(player.toString());
             return query.uniqueResult();
 
         }
     }
+
+
 
     public static void main(String[] args) {
 

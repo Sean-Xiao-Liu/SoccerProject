@@ -1,38 +1,38 @@
 package com.xiao.soccerproject.repository;
 
 import static org.junit.Assert.*;
-import com.xiao.scooerproject.repository.TeamDAOimpl;
+import com.xiao.scooerproject.repository.TeamDAOImpl;
 import com.xiao.soccerproject.model.Team;
 import org.junit.*;
 
 
 import java.util.List;
 
-public class TeamDAOimplTest {
-private TeamDAOimpl teamDAOimpl;
+public class TeamDAOImplTest {
+private TeamDAOImpl teamDAOImpl;
 private Team teamTestRecord;
 
     @Before
     public void init(){
         // seed a record for test
-        teamDAOimpl = new TeamDAOimpl();
+        teamDAOImpl = new TeamDAOImpl();
         teamTestRecord = new Team();
         teamTestRecord.setId(99);
         teamTestRecord.setTeamName("Test Team");
-        boolean result = teamDAOimpl.save(teamTestRecord);
+        boolean result = teamDAOImpl.save(teamTestRecord);
 
     }
 
     @After
     public void cleanup(){
-        teamDAOimpl.deleteById(99);
-        teamDAOimpl = null;
-        assertNull(teamDAOimpl);
+        teamDAOImpl.deleteById(99);
+        teamDAOImpl = null;
+        assertNull(teamDAOImpl);
     }
 
     @Test
     public void getTeamsTest(){
-        List<Team> teams = teamDAOimpl.getTeams();
+        List<Team> teams = teamDAOImpl.getTeams();
         for(Team team : teams){
             System.out.println(team);
         }
@@ -42,15 +42,15 @@ private Team teamTestRecord;
 
     @Test
     public void updateTeamByIdTest(){ // why there is no logger in console?
-        int updatedCount = teamDAOimpl.updateTeamHomeWin(15,14);
+        int updatedCount = teamDAOImpl.updateTeamHomeWin(15,14);
         assertEquals(1,updatedCount);
     }
 
 
     @Test
     public void getTeamByIdTest(){
-        teamDAOimpl.getTeamById(2);
-        assertNotNull(teamDAOimpl.getTeamById(2));
+        teamDAOImpl.getTeamById(2);
+        assertNotNull(teamDAOImpl.getTeamById(2));
     }
 
 }

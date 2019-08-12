@@ -1,6 +1,6 @@
 package com.xiao.scooerproject.repository;
 
-import com.xiao.soccerproject.model.Player;
+import com.xiao.soccerproject.model.Game;
 import com.xiao.soccerproject.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,19 +10,20 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class PlayerDAOimpl implements PlayerDAO{
+
+public class GameDAOImpl implements GameDAO{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //method 1
-    //insert a new record of player
     @Override
-    public boolean save(Player players){
+    //method 1
+    //save a game record
+    public boolean save(Game games){
         Transaction transaction = null;
         boolean isSuccess = true;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
-            session.save(players);
+            session.save(games);
             transaction.commit();
         }
 
@@ -32,38 +33,25 @@ public class PlayerDAOimpl implements PlayerDAO{
             logger.error(e.getMessage());
         }
 
-        if (isSuccess)  logger.info("the player is saved");
+        if (isSuccess)  logger.info("the game record is saved");
 
         return isSuccess;
     }
 
-    //method 2
-    //list all players
     @Override
-    public List<Player> getPlayers() {
-        String hql = "FROM Player";
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Player> query = session.createQuery(hql);
-            return query.list();
-        }
-    }
-
-    //method 3
-    //update player age by id
-    @Override
-    public int updatePlayerAge(int id, int age){
-        String hql = "UPDATE Player as p set p.age = :age WHERE p.id = :id";
+    public int updateHomeGoals(long id, int homeGoals){
+        String hql = "UPDATE Game as g set g.homeGoals = :homeGoals WHERE g.id = :id";
         int updatedCount = 0;
         Transaction transaction = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Player> query = session.createQuery(hql);
-            query.setParameter("age", age);
+            Query<Game> query = session.createQuery(hql);
+            query.setParameter("homeGoals", homeGoals);
             query.setParameter("id",id);
 
             transaction = session.beginTransaction();
             updatedCount = query.executeUpdate();
-//            session.saveOrUpdate(teams);
+//            session.saveOrUpdate(Game);
             transaction.commit();
         }
 
@@ -71,22 +59,29 @@ public class PlayerDAOimpl implements PlayerDAO{
             if(transaction != null) transaction.rollback();
             logger.error(e.getMessage());
         }
-        logger.info(String.format("The player %s was updated, total updated record(s): %d", id, updatedCount));
+        logger.info(String.format("The home goal number of %s was updated, total updated record(s): %d", id, updatedCount));
         return updatedCount;
     }
 
-
+    //method 3
+    //list all Games
+    @Override
+    public List<Game> getGames() {
+        String hql = "FROM Game";
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            Query<Game> query = session.createQuery(hql);
+            return query.list();
+        }
+    }
 
     @Override
-    //method 4
-    //delete a record of player
-    public int deleteById(int id){
-        String hql = "DELETE Player p WHERE p.id = :id";
+    public int deleteById(long id){
+        String hql = "DELETE Game g WHERE g.id = :id";
         int deletedCount = 0;
         Transaction transaction = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Player> query = session.createQuery(hql);
+            Query<Game> query = session.createQuery(hql);
             query.setParameter("id",id);
 
             transaction = session.beginTransaction();
@@ -98,28 +93,23 @@ public class PlayerDAOimpl implements PlayerDAO{
             if (transaction != null) transaction.rollback();
             logger.error(e.getMessage());
         }
-        logger.info(String.format("The player %s was deleted, total deleted record(s): %d", id, deletedCount));
+        logger.info(String.format("The game record %s was deleted, total deleted record(s): %d", id, deletedCount));
         return deletedCount;
     }
 
-    //method 5
-    //get record of a player
-    @Override
-    public Player getPlayerById(int id) {
-        String hql = "FROM Player p where p.id = :id";
+    public Game getGameById(long id){
+        String hql = "FROM Game g where g.id = :id";
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Player> query = session.createQuery(hql);
+            Query<Game> query = session.createQuery(hql);
             query.setParameter("id",id);
 
-            Player player = query.uniqueResult();
-            logger.info(player.toString());
+            Game game = query.uniqueResult();
+            logger.info(game.toString());
             return query.uniqueResult();
 
         }
     }
-
-
 
     public static void main(String[] args) {
 

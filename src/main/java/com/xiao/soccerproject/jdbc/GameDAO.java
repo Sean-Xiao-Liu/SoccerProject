@@ -1,7 +1,6 @@
 package com.xiao.soccerproject.jdbc;
 
 import com.xiao.soccerproject.model.Game;
-import com.xiao.soccerproject.model.Team;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,15 +35,15 @@ public class GameDAO {
             sql = "SELECT * FROM Games";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                //Retrieve by column name
-//                String matchId = rs.getString("match_id");
-                int teamId = rs.getInt("team_id");
-                String matchResult = rs.getString("match_result");
+                long id = rs.getLong("id");
+                int homeTeamId = rs.getInt("home_team_id");
+                int awayTeamID = rs.getInt("away_team_id");
 
                 Game game = new Game();
-//                game.setMatchId(matchId);
-                game.setTeamId(teamId);
-                game.setMatchResult(matchResult);
+
+                game.setId(id);
+                game.setHomeTeamId(homeTeamId);
+                game.setAwayTeamId(awayTeamID);
                 Game.add(game);
             }
         } catch (Exception e) {
@@ -65,7 +64,7 @@ public class GameDAO {
     //method 2
     //insert a game record
 
-    public int insertGame(int id, String teamName,int teamId) {
+    public int insertGame(long id, int homeTeamId,int awayTeamId) {
         List<Game> Game = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -78,11 +77,11 @@ public class GameDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "INSERT INTO Games (id,is_home, team_id) " + "VALUES (? , ? , ?)";
+            String sql = "INSERT INTO Games (id,home_team_id, away_team_id) " + "VALUES (? , ? , ?)";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
-            stmt.setString(2, teamName);
-            stmt.setInt(3, teamId);
+            stmt.setLong(1, id);
+            stmt.setInt(2, homeTeamId);
+            stmt.setInt(3, awayTeamId);
 
             result = stmt.executeUpdate();
 
@@ -103,7 +102,7 @@ public class GameDAO {
 
     //method 3
     // delete a game record
-    public int deleteGame(int id) {
+    public int deleteGame(long id) {
         List<Game> Game = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -118,7 +117,7 @@ public class GameDAO {
             System.out.println("Creating statement...");
             String sql = "DELETE FROM Games " + "WHERE id = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
 
             result = stmt.executeUpdate();
 
@@ -140,9 +139,7 @@ public class GameDAO {
     //method 4
     //update game record
 
-    // method 2
-    // Update database Team
-    public int updateGame(int id, int goals) {
+    public int updateHomeGoals(long id, int homeGoals) {
         List<Game> Game = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -155,10 +152,10 @@ public class GameDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "UPDATE Games " + "SET goals = ? WHERE id =? ";
+            String sql = "UPDATE Games " + "SET home_goals = ? WHERE id =? ";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, goals);
-            stmt.setInt(2, id);
+            stmt.setInt(1, homeGoals);
+            stmt.setLong(2, id);
 
             result = stmt.executeUpdate();
 
@@ -177,23 +174,6 @@ public class GameDAO {
         }
         return result;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static void main(String[] args) {
 

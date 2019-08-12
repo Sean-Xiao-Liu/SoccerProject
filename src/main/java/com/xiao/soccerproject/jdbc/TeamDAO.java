@@ -36,7 +36,7 @@ public class TeamDAO { //same as the plug in fills
             while (rs.next()) {
                 //Retrieve by column name!!!
                 String teamName = rs.getString("team_name");
-                int id = rs.getInt("id");
+                long id = rs.getLong("id");
                 int homeWin = rs.getInt("home_win");
                 int awayWin = rs.getInt("away_win");
 
@@ -65,7 +65,7 @@ public class TeamDAO { //same as the plug in fills
 
     // method 2
     // Update database Team
-    public int updateTeam(int id, int homeWin) {
+    public int updateTeam(long id, int homeWin) {
         List<Team> Team = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -81,7 +81,7 @@ public class TeamDAO { //same as the plug in fills
             String sql = "UPDATE Teams " + "SET home_win = ? WHERE id =? ";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, homeWin);
-            stmt.setInt(2, id);
+            stmt.setLong(2, id);
 
             result = stmt.executeUpdate();
 
@@ -125,7 +125,7 @@ public class TeamDAO { //same as the plug in fills
             while (rs.next()) {
                 //Retrieve by column name
                 String teamName = rs.getString("team_name");
-                int id = rs.getInt("id");
+                long id = rs.getLong("id");
                 int homeWin = rs.getInt("home_win");
                 int awayWin = rs.getInt("away_win");
 
@@ -154,7 +154,7 @@ public class TeamDAO { //same as the plug in fills
 
     //method 4
     //delete records of certain team
-    public int deleteTeam(int id) {
+    public int deleteTeam(long id) {
         List<Team> Team = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -169,7 +169,7 @@ public class TeamDAO { //same as the plug in fills
             System.out.println("Creating statement...");
             String sql = "DELETE FROM Teams " + "WHERE id = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
 
             result = stmt.executeUpdate();
 
@@ -190,7 +190,7 @@ public class TeamDAO { //same as the plug in fills
 
     // method 5
     // insert record of team
-    public int insertTeam(String teamName,int id) {
+    public int insertTeam(String teamName,long id) {
         List<Team> Team = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -206,7 +206,7 @@ public class TeamDAO { //same as the plug in fills
             String sql = "INSERT INTO Teams (team_name, id) " + "VALUES (? , ?)";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, teamName);
-            stmt.setInt(2, id);
+            stmt.setLong(2, id);
 
             result = stmt.executeUpdate();
 

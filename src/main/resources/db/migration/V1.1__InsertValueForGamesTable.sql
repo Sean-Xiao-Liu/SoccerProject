@@ -1,10 +1,7 @@
 
-INSERT INTO Games (id,is_home,team_id,goals,losts,match_result)
+INSERT INTO Games (id,home_team_id,away_team_id,home_goals,home_losts,home_match_result)
 VALUES
-(1,'Yes',7,2,1,'Win'),
-(2,'No',8,1,2,'Lose'),
-(3,'Yes',13,1,1,'Draw'),
-(4,'No',14,1,1,'Draw'),
-(5,'Yes',4,6,2,'Win'),
-(6,'No',5,2,6,'Lose');
+(1,7,8,2,1,'Win'),
+(2,13,14,1,1,'Draw'),
+(3,4,5,6,2,'Win');
 

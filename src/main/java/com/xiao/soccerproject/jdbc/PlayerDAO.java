@@ -40,7 +40,7 @@ public class PlayerDAO {
             //STEP 4: Extract data from result set
             while (rs.next()) {
                 //Retrieve by column name
-                int id = rs.getInt("id");
+                long id = rs.getLong("id");
                 int teamId = rs.getInt("team_id");
                 String playerName = rs.getString("player_name");
                 int age = rs.getInt("age");
@@ -83,7 +83,7 @@ public class PlayerDAO {
 
     //method 2
     //insert record of player
-    public int insertPlayer(int id,int teamId, String playerName) {
+    public int insertPlayer(long id, int teamId, String playerName) {
         List<Player> Player = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -98,7 +98,7 @@ public class PlayerDAO {
             System.out.println("Creating statement...");
             String sql = "INSERT INTO Players (id, team_id, player_name) " + "VALUES (? , ?, ?)";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
             stmt.setInt(2, teamId);
             stmt.setString(3, playerName);
 
@@ -121,7 +121,7 @@ public class PlayerDAO {
 
     // method 3
     // delete record of player from table Player
-    public int deletePlayer(int id) {
+    public int deletePlayer(long id) {
         List<Player> Player = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -136,7 +136,7 @@ public class PlayerDAO {
             System.out.println("Creating statement...");
             String sql = "DELETE FROM Players " + "WHERE id = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
 
             result = stmt.executeUpdate();
 

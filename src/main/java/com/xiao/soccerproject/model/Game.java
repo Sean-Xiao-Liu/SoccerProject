@@ -6,119 +6,106 @@ import javax.persistence.*;
 @Table(name = "Games")
 public class Game{
 
-    @EmbeddedId
-    private GameCompositeKey gameCompositeKey;
+//    @EmbeddedId
+//    private GameCompositeKey gameCompositeKey;
 //    private String matchid;
 //    private String ishome;
 
-    @Column(name = "team_id")
-    private int teamId;
+    @Id
+    @Column(name = "id")
+    private long id;
 
-    @Column(name = "goals")
-    private int goals;
+    @Column(name = "home_team_id")
+    private int homeTeamId;
 
-    public int getTeamId() {
-        return teamId;
-    }
+    @Column(name = "away_team_id")
+    private int awayTeamId;
 
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
-    }
 
-    public int getGoals() {
-        return goals;
-    }
+    @Column(name = "home_goals")
+    private int homeGoals;
 
-    public void setGoals(int goals) {
-        this.goals = goals;
-    }
+    @Column(name = "home_losts")
+    private int homeLosts;
 
-    public int getLosts() {
-        return losts;
-    }
+    @Column(name = "home_match_result")
+    private String homeMatchResult;
 
-    public void setLosts(int losts) {
-        this.losts = losts;
-    }
-
-    public String getMatchResult() {
-        return matchResult;
-    }
-
-    public void setMatchResult(String matchResult) {
-        this.matchResult = matchResult;
-    }
-
-    @Column(name = "losts")
-    private int losts;
-
-    @Column(name = "match_result")
-    private String matchResult;
-
-//    @Column(name = "shots")
-//    private int shots;
+//    public GameCompositeKey getGameCompositeKey() {
+//        return gameCompositeKey;
+//    }
 //
-//    @Column(name = "shots_on_target")
-//    private int shotsOnTarget;
+//    public void setGameCompositeKey(GameCompositeKey gameCompositeKey) {
+//        this.gameCompositeKey = gameCompositeKey;
+//    }
 //
-//    @Column(name = "fouls")
-//    private int fouls;
+//    public int getId() {
+//        return gameCompositeKey.getId();
+//    }
 //
-//    @Column(name = "corner")
-//    private int corner;
+//    public void setId(long id) {
+//        gameCompositeKey.setId(id);
+//    }
 //
-//    @Column(name = "off_sides")
-//    private int offSides;
+//    public String getIsHome() {
+//        return gameCompositeKey.getIsHome();
+//    }
 //
-//    @Column(name = "yellow_card")
-//    private int yellowCard;
-//
-//    @Column(name = "red_card")
-//    private int redCard;
-//
-//    @Column(name = "formation")
-//    private String formation;
-//
-//    @Column(name = "pass_success_rate")
-//    private double passSuccessRate;
-//
-//    @Column(name = "possession_percentage")
-//    private double possessionPercentage;
-//
-//    @Column(name = "passes")
-//    private int passes;
-//
-//    @Column(name = "average_pass_streak")
-//    private int averagePassStreak;
+//    public void setIsHome(String isHome) {
+//        gameCompositeKey.setIsHome(isHome);
+//    }
 
-    public GameCompositeKey getGameCompositeKey() {
-        return gameCompositeKey;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setGameCompositeKey(GameCompositeKey gameCompositeKey) {
-        this.gameCompositeKey = gameCompositeKey;
+    public void setId(long id) {
+        this.id = id;
     }
 
-
-    public int getId() {
-        return gameCompositeKey.getId();
+    public int getHomeTeamId() {
+        return homeTeamId;
     }
 
-    public void setId(int id) {
-        gameCompositeKey.setId(id);
+    public void setHomeTeamId(int homeTeamId) {
+        this.homeTeamId = homeTeamId;
     }
 
-    public String getIsHome() {
-        return gameCompositeKey.getIsHome();
+    public int getAwayTeamId() {
+        return awayTeamId;
     }
 
-    public void setIsHome(String isHome) {
-        gameCompositeKey.setIsHome(isHome);
+    public void setAwayTeamId(int awayTeamId) {
+        this.awayTeamId = awayTeamId;
     }
 
+    public int getHomeGoals() {
+        return homeGoals;
+    }
+
+    public void setHomeGoals(int homeGoals) {
+        this.homeGoals = homeGoals;
+    }
+
+    public int getHomeLosts() {
+        return homeLosts;
+    }
+
+    public void setHomeLosts(int homeLosts) {
+        this.homeLosts = homeLosts;
+    }
+
+    public String getHomeMatchResult() {
+        return homeMatchResult;
+    }
+
+    public void setHomeMatchResult(String homeMatchResult) {
+        this.homeMatchResult = homeMatchResult;
+    }
 
     public String toString(){
-        return "the team id is " + this.teamId ;
+        return "the home team is " + this.homeTeamId + " , and the away team is " + this.awayTeamId +  " , they played the match " + this.id;
     }
 
 }

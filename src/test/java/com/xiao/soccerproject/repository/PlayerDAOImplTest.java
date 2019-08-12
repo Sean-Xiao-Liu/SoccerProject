@@ -1,6 +1,6 @@
 package com.xiao.soccerproject.repository;
 
-import com.xiao.scooerproject.repository.PlayerDAOimpl;
+import com.xiao.scooerproject.repository.PlayerDAOImpl;
 import com.xiao.soccerproject.model.Player;
 import org.junit.After;
 import org.junit.Before;
@@ -11,14 +11,14 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
-public class PlayerDAOimplTest {
-    private PlayerDAOimpl playerDAOimpl;
+public class PlayerDAOImplTest {
+    private PlayerDAOImpl playerDAOImpl;
     private Player playerTestRecord;
 
     @Before
     public void init(){
         // seed a record for test
-        playerDAOimpl = new PlayerDAOimpl();
+        playerDAOImpl = new PlayerDAOImpl();
         playerTestRecord = new Player();
         playerTestRecord.setId(99);
         playerTestRecord.setPlayerName("Test Player");
@@ -26,20 +26,20 @@ public class PlayerDAOimplTest {
         playerTestRecord.setTeamId(99);
         playerTestRecord.setNationality("Test Country");
         playerTestRecord.setPlayerPosition("GK");
-        boolean result = playerDAOimpl.save(playerTestRecord);
+        boolean result = playerDAOImpl.save(playerTestRecord);
 
     }
 
     @After
     public void cleanup(){
-        playerDAOimpl.deleteById(99);
-        playerDAOimpl = null;
-        assertNull(playerDAOimpl);
+        playerDAOImpl.deleteById(99);
+        playerDAOImpl = null;
+        assertNull(playerDAOImpl);
     }
 
     @Test
     public void getPlayersTest(){
-        List<Player> players = playerDAOimpl.getPlayers();
+        List<Player> players = playerDAOImpl.getPlayers();
         for(Player player : players){
             System.out.println(player);
         }
@@ -49,13 +49,13 @@ public class PlayerDAOimplTest {
 
     @Test
     public void updatePlayerByIdTest(){ // why there is no logger in console?
-        int updatedCount = playerDAOimpl.updatePlayerAge(99,99);
+        int updatedCount = playerDAOImpl.updatePlayerAge(99,99);
         assertEquals(1,updatedCount);
     }
 
 
     @Test
     public void getPlayerByIdTest(){
-        playerDAOimpl.getPlayerById(99);
+        playerDAOImpl.getPlayerById(99);
     }
 }

@@ -6,15 +6,11 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses(
         {
-                PlayerDAOimplTest.class,
-//                .class,
-                TeamDAOimplTest.class
+                PlayerDAOImplTest.class,
+                GameDAOImplTest.class,
+                TeamDAOImplTest.class
         }
 )
-
-
-
-
 
 public class TestAll {
 }

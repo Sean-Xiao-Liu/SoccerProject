@@ -102,7 +102,8 @@ public class TeamDAOImpl implements TeamDAO{
 
     @Override
     public Team getTeamById(long id) {
-        String hql = "FROM Team t where t.id = :id";
+//        String hql = "FROM Team t where t.id = :id ";
+        String hql = "From Team t left join fetch t.homeGames where t.id = :id";
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Team> query = session.createQuery(hql);

@@ -1,9 +1,6 @@
 package com.xiao.soccerproject.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Players")
@@ -11,9 +8,6 @@ public class Player {
     @Id // don't forget the primary key, or lead to code 255
     @Column(name = "id")
     private long id;
-
-    @Column(name = "team_id")
-    private int teamId;
 
     @Column(name = "player_name")
     private String playerName;
@@ -27,20 +21,24 @@ public class Player {
     @Column(name = "nationality")
     private String nationality;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")// @Column will lead to duplication at this point
+    private Team team;
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
     }
 
     public String getPlayerName() {
@@ -75,8 +73,8 @@ public class Player {
         this.nationality = nationality;
     }
 
-    public String toString(){
-        return "The player name is "  + this.playerName + ", he is " + this.age + " years old from " + this.nationality + " who plays " + this.playerPosition;
-    }
+//    public String toString(){
+//        return "The player name is "  + this.playerName + " , he plays for team "+ this.getTeam() +", he is " + this.age + " years old from " + this.nationality + " who plays " + this.playerPosition;
+//    }
 
 }

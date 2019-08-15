@@ -1,26 +1,15 @@
 package com.xiao.soccerproject.model;
 
 import javax.persistence.*;
+import com.xiao.soccerproject.model.Team;
 
 @Entity
 @Table(name = "Games")
 public class Game{
 
-//    @EmbeddedId
-//    private GameCompositeKey gameCompositeKey;
-//    private String matchid;
-//    private String ishome;
-
     @Id
     @Column(name = "id")
     private long id;
-
-    @Column(name = "home_team_id")
-    private int homeTeamId;
-
-    @Column(name = "away_team_id")
-    private int awayTeamId;
-
 
     @Column(name = "home_goals")
     private int homeGoals;
@@ -31,53 +20,20 @@ public class Game{
     @Column(name = "home_match_result")
     private String homeMatchResult;
 
-//    public GameCompositeKey getGameCompositeKey() {
-//        return gameCompositeKey;
-//    }
-//
-//    public void setGameCompositeKey(GameCompositeKey gameCompositeKey) {
-//        this.gameCompositeKey = gameCompositeKey;
-//    }
-//
-//    public int getId() {
-//        return gameCompositeKey.getId();
-//    }
-//
-//    public void setId(long id) {
-//        gameCompositeKey.setId(id);
-//    }
-//
-//    public String getIsHome() {
-//        return gameCompositeKey.getIsHome();
-//    }
-//
-//    public void setIsHome(String isHome) {
-//        gameCompositeKey.setIsHome(isHome);
-//    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "home_team_id")
+    private Team homeTeam;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "away_team_id")
+    private Team awayTeam;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getHomeTeamId() {
-        return homeTeamId;
-    }
-
-    public void setHomeTeamId(int homeTeamId) {
-        this.homeTeamId = homeTeamId;
-    }
-
-    public int getAwayTeamId() {
-        return awayTeamId;
-    }
-
-    public void setAwayTeamId(int awayTeamId) {
-        this.awayTeamId = awayTeamId;
     }
 
     public int getHomeGoals() {
@@ -104,8 +60,25 @@ public class Game{
         this.homeMatchResult = homeMatchResult;
     }
 
-    public String toString(){
-        return "the home team is " + this.homeTeamId + " , and the away team is " + this.awayTeamId +  " , they played the match " + this.id;
+    public Team getHomeTeam() {
+        return homeTeam;
     }
+
+    public void setHomeTeam(Team homeTeam) {
+        this.homeTeam = homeTeam;
+    }
+
+    public Team getAwayTeam() {
+        return awayTeam;
+    }
+
+    public void setAwayTeam(Team awayTeam) {
+        this.awayTeam = awayTeam;
+    }
+
+//    @Override
+//    public String toString(){
+//        return "the home team is " + this.getHomeTeam() + " , and the away team is " + this.getAwayTeam() +  " , they played the match " + this.id;
+//    }
 
 }

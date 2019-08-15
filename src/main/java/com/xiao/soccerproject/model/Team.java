@@ -1,9 +1,8 @@
 package com.xiao.soccerproject.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Teams")
@@ -26,6 +25,19 @@ public class Team {
     @Column(name = "away_loss")
     private int awayLoss;
 
+    //relationship with Player table
+    @OneToMany(mappedBy = "team",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Player> players;
+
+    //relationship with Games table
+    @OneToMany(mappedBy = "homeTeam",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Game> homeGames;
+
+    @OneToMany(mappedBy = "awayTeam",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Game> awayGames;
+
+    /*getters and setters*/
+
     public String getTeamName() {
         return teamName;
     }
@@ -34,7 +46,7 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -72,6 +84,30 @@ public class Team {
 
     public void setAwayLoss(int awayLoss) {
         this.awayLoss = awayLoss;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public List<Game> getHomeGames() {
+        return homeGames;
+    }
+
+    public void setHomeGames(List<Game> homeGames) {
+        this.homeGames = homeGames;
+    }
+
+    public List<Game> getAwayGames() {
+        return awayGames;
+    }
+
+    public void setAwayGames(List<Game> awayGames) {
+        this.awayGames = awayGames;
     }
 
     public String toString() {

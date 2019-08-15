@@ -1,5 +1,6 @@
 com/xiao/soccerproject/jdbc/GameDAO.class
 com/xiao/soccerproject/model/Team.class
+com/xiao/scooerproject/repository/TeamDAOImpl.class
 com/xiao/soccerproject/util/HibernateUtil.class
 com/xiao/soccerproject/App.class
 com/xiao/soccerproject/jdbc/TeamDAO.class
@@ -7,5 +8,3 @@ com/xiao/soccerproject/model/Player.class
 com/xiao/soccerproject/model/Game.class
 com/xiao/soccerproject/jdbc/PlayerDAO.class
 com/xiao/scooerproject/repository/TeamDAO.class
-com/xiao/soccerproject/model/GameCompositeKey.class
-com/xiao/scooerproject/repository/TeamDAOimpl.class

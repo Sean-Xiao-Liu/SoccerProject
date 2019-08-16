@@ -2,7 +2,7 @@
 
 CREATE TABLE Games
 (
-    id bigint  NOT NULL,
+    id bigserial  NOT NULL,
     home_team_id bigint,
     away_team_id bigint,
     home_goals smallint,
@@ -13,7 +13,7 @@ CREATE TABLE Games
 
 CREATE TABLE Players
 (
-    id bigint NOT NULL,
+    id bigserial NOT NULL,
     team_id bigint NOT NULL,
     player_name character varying(50) ,
     age smallint,
@@ -25,13 +25,11 @@ CREATE TABLE Players
 
 CREATE TABLE Teams
 (
-
+    id bigserial PRIMARY KEY,
     team_name character varying(50) ,
-    id bigint NOT NULL,
     home_win smallint,
     away_win smallint,
     home_loss smallint,
-    away_loss smallint,
-    CONSTRAINT team_pkey PRIMARY KEY (id)
+    away_loss smallint
 );
 

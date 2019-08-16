@@ -28,7 +28,7 @@ public class GameDAOImplTest {
 
        teamDAOImpl = new TeamDAOImpl();
        teamTestRecordOne = new Team();
-       teamTestRecordOne.setId(1);
+//       teamTestRecordOne.setId(1);
        teamTestRecordOne.setTeamName("Test Team 1");
        teamTestRecordOne.setHomeWin(1);
        teamTestRecordOne.setAwayWin(1);
@@ -37,7 +37,7 @@ public class GameDAOImplTest {
        teamDAOImpl.save(teamTestRecordOne);
 
        teamTestRecordTwo = new Team();
-       teamTestRecordTwo.setId(2);
+//       teamTestRecordTwo.setId(2);
        teamTestRecordTwo.setTeamName("Test Team 2");
        teamTestRecordTwo.setHomeWin(2);
        teamTestRecordTwo.setAwayWin(2);
@@ -48,30 +48,30 @@ public class GameDAOImplTest {
 
        gameDAOImpl = new GameDAOImpl();
        gameTestRecordOne = new Game();
-       gameTestRecordOne.setId(1);
+//       gameTestRecordOne.setId(1);
        gameTestRecordOne.setHomeTeam(teamTestRecordOne);
        gameTestRecordOne.setAwayTeam(teamTestRecordTwo);
        gameTestRecordOne.setHomeGoals(1);
        gameTestRecordOne.setHomeLosts(0);
        gameTestRecordOne.setHomeMatchResult("Win");
-       gameDAOImpl.save(gameTestRecordOne);
+       gameDAOImpl.save(gameTestRecordOne,teamTestRecordOne);
 
        gameTestRecordTwo = new Game();
-       gameTestRecordTwo.setId(2);
+//       gameTestRecordTwo.setId(2);
        gameTestRecordOne.setHomeTeam(teamTestRecordTwo);
        gameTestRecordOne.setAwayTeam(teamTestRecordOne);
        gameTestRecordTwo.setHomeGoals(0);
        gameTestRecordTwo.setHomeLosts(1);
        gameTestRecordTwo.setHomeMatchResult("Lose");
-       gameDAOImpl.save(gameTestRecordTwo);
+       gameDAOImpl.save(gameTestRecordTwo,teamTestRecordTwo);
    }
 
    @After
    public void cleanup(){
-       gameDAOImpl.deleteById(1);
-       gameDAOImpl.deleteById(2);
-       teamDAOImpl.deleteById(1);
-       teamDAOImpl.deleteById(2);
+       gameDAOImpl.deleteById(gameTestRecordOne.getId());
+       gameDAOImpl.deleteById(gameTestRecordTwo.getId());
+       teamDAOImpl.deleteById(teamTestRecordOne.getId());
+       teamDAOImpl.deleteById(teamTestRecordTwo.getId());
        gameDAOImpl = null;
        assertNull(gameDAOImpl);
    }
@@ -83,7 +83,7 @@ public class GameDAOImplTest {
         for(Game game : games){
             System.out.println(game);
         }
-        assertEquals(2,games.size());
+        assertEquals(5,games.size());
     }
 
     @Test

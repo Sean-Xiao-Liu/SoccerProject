@@ -98,7 +98,7 @@
           <version>${flyway.version}</version>
           <configuration>
             <driver>org.postgresql.Driver</driver>
-            <url>jdbc:postgresql://localhost:5431/SoccerProject_db</url>
+            <url>jdbc:postgresql://localhost:5431/SoccerProject_Test_db</url>
             <user>admin</user>
             <password>123456</password>
             <schemas>

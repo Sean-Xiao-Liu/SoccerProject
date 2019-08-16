@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PlayerDAO {
 //    boolean update(Player players);
-    boolean save(Player players);
+    boolean save(Player players,Team teams);
     int updatePlayerAge(long id, int age);
     int deleteById(long id);
     List<Player> getPlayers();

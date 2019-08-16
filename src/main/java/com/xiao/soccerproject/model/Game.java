@@ -8,7 +8,8 @@ import com.xiao.soccerproject.model.Team;
 public class Game{
 
     @Id
-    @Column(name = "id")
+//    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "home_goals")
@@ -75,10 +76,4 @@ public class Game{
     public void setAwayTeam(Team awayTeam) {
         this.awayTeam = awayTeam;
     }
-
-//    @Override
-//    public String toString(){
-//        return "the home team is " + this.getHomeTeam() + " , and the away team is " + this.getAwayTeam() +  " , they played the match " + this.id;
-//    }
-
 }

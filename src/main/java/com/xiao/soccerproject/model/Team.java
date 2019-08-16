@@ -4,14 +4,17 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Table(name = "Teams")
 public class Team {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name="team_name")
     private String teamName;
-    @Id
-    @Column(name="id")
-    private long id;
 
     @Column(name = "home_win")
     private int homeWin;
@@ -46,12 +49,8 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public int getHomeWin() {

@@ -1,6 +1,7 @@
 package com.xiao.scooerproject.repository;
 
 import com.xiao.soccerproject.model.Player;
+import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -16,12 +17,13 @@ public class PlayerDAOImpl implements PlayerDAO{
     //method 1
     //insert a new record of player
     @Override
-    public boolean save(Player players){
+    public boolean save(Player players, Team teams){
         Transaction transaction = null;
         boolean isSuccess = true;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
+            players.getTeam(teams);
             session.save(players);
             transaction.commit();
         }
@@ -118,8 +120,6 @@ public class PlayerDAOImpl implements PlayerDAO{
 
         }
     }
-
-
 
     public static void main(String[] args) {
 

@@ -1,6 +1,7 @@
 package com.xiao.scooerproject.repository;
 
 import com.xiao.soccerproject.model.Game;
+import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -17,12 +18,13 @@ public class GameDAOImpl implements GameDAO{
     @Override
     //method 1
     //save a game record
-    public boolean save(Game games){
+    public boolean save(Game games,Team teams){
         Transaction transaction = null;
         boolean isSuccess = true;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
+            games.setHomeTeam(teams);
             session.save(games);
             transaction.commit();
         }

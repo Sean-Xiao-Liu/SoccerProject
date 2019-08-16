@@ -6,7 +6,8 @@ import javax.persistence.*;
 @Table(name = "Players")
 public class Player {
     @Id // don't forget the primary key, or lead to code 255
-    @Column(name = "id")
+//    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "player_name")
@@ -25,15 +26,7 @@ public class Player {
     @JoinColumn(name = "team_id")// @Column will lead to duplication at this point
     private Team team;
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -73,8 +66,11 @@ public class Player {
         this.nationality = nationality;
     }
 
-//    public String toString(){
-//        return "The player name is "  + this.playerName + " , he plays for team "+ this.getTeam() +", he is " + this.age + " years old from " + this.nationality + " who plays " + this.playerPosition;
-//    }
+    public Team getTeam(Team teams) {
+        return team;
+    }
 
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 }

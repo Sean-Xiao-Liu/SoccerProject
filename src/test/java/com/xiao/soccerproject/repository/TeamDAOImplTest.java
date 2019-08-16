@@ -20,7 +20,6 @@ private Team teamTestRecordTwo;
         // seed a record for test
         teamDAOImpl = new TeamDAOImpl();
         teamTestRecordOne = new Team();
-        teamTestRecordOne.setId(1);
         teamTestRecordOne.setTeamName("Test Team 1");
         teamTestRecordOne.setHomeWin(1);
         teamTestRecordOne.setAwayWin(1);
@@ -29,7 +28,6 @@ private Team teamTestRecordTwo;
         teamDAOImpl.save(teamTestRecordOne);
 
         teamTestRecordTwo = new Team();
-        teamTestRecordTwo.setId(2);
         teamTestRecordTwo.setTeamName("Test Team 2");
         teamTestRecordTwo.setHomeWin(2);
         teamTestRecordTwo.setAwayWin(2);
@@ -41,8 +39,8 @@ private Team teamTestRecordTwo;
 
     @After
     public void cleanup(){
-        teamDAOImpl.deleteById(1);
-        teamDAOImpl.deleteById(2);
+        teamDAOImpl.deleteById(teamTestRecordOne.getId());
+        teamDAOImpl.deleteById(teamTestRecordTwo.getId());
         teamDAOImpl = null;
         assertNull(teamDAOImpl);
     }
@@ -54,14 +52,14 @@ private Team teamTestRecordTwo;
         for(Team team : teams){
             System.out.println(team);
         }
-        assertEquals(2,teams.size());
+        assertEquals(22,teams.size());
     }
 
     @Test
     @Transactional
     public void updateTeamByIdTest(){
         int updatedCount = teamDAOImpl.updateTeamHomeWin(1,3);
-        teamDAOImpl.getTeamById(1).toString();
+        teamDAOImpl.getTeamById(teamTestRecordOne.getId()).toString();
         assertEquals(1,updatedCount);
     }
 
@@ -69,8 +67,8 @@ private Team teamTestRecordTwo;
     @Test
     @Transactional
     public void getTeamByIdTest(){
-        teamDAOImpl.getTeamById(2);
-        assertNotNull(teamDAOImpl.getTeamById(2));
+        teamDAOImpl.getTeamById(teamTestRecordTwo.getId());
+        assertNotNull(teamDAOImpl.getTeamById(1));
     }
 
 }

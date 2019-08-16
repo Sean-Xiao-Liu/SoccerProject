@@ -26,7 +26,7 @@ public class PlayerDAOImplTest {
 
         teamDAOImpl = new TeamDAOImpl();
         teamTestRecordOne = new Team();
-        teamTestRecordOne.setId(1);
+//        teamTestRecordOne.setId(1);
         teamTestRecordOne.setTeamName("Test Team 1");
         teamTestRecordOne.setHomeWin(1);
         teamTestRecordOne.setAwayWin(1);
@@ -35,7 +35,7 @@ public class PlayerDAOImplTest {
         teamDAOImpl.save(teamTestRecordOne);
 
         teamTestRecordTwo = new Team();
-        teamTestRecordTwo.setId(2);
+//        teamTestRecordTwo.setId(2);
         teamTestRecordTwo.setTeamName("Test Team 2");
         teamTestRecordTwo.setHomeWin(2);
         teamTestRecordTwo.setAwayWin(2);
@@ -46,31 +46,31 @@ public class PlayerDAOImplTest {
         // seed two records for test
         playerDAOImpl = new PlayerDAOImpl();
         playerTestRecordOne = new Player();
-        playerTestRecordOne.setId(1);
+//        playerTestRecordOne.setId(1);
         playerTestRecordOne.setPlayerName("Test Player 1");
         playerTestRecordOne.setAge(1);
         playerTestRecordOne.setTeam(teamTestRecordOne);
         playerTestRecordOne.setNationality("Test Country");
         playerTestRecordOne.setPlayerPosition("GK");
-        playerDAOImpl.save(playerTestRecordOne);
+        playerDAOImpl.save(playerTestRecordOne,teamTestRecordOne);
 
         playerTestRecordTwo = new Player();
-        playerTestRecordTwo.setId(2);
+//        playerTestRecordTwo.setId(2);
         playerTestRecordTwo.setPlayerName("Test Player 2");
         playerTestRecordTwo.setAge(2);
         playerTestRecordTwo.setTeam(teamTestRecordTwo);
         playerTestRecordTwo.setNationality("Test Country");
         playerTestRecordTwo.setPlayerPosition("CM");
-        playerDAOImpl.save(playerTestRecordTwo);
+        playerDAOImpl.save(playerTestRecordTwo,teamTestRecordTwo);
 
     }
 
     @After
     public void cleanup(){
-        playerDAOImpl.deleteById(1);
-        playerDAOImpl.deleteById(2);
-        teamDAOImpl.deleteById(1);
-        teamDAOImpl.deleteById(2);
+        playerDAOImpl.deleteById(playerTestRecordOne.getId());
+        playerDAOImpl.deleteById(playerTestRecordTwo.getId());
+        teamDAOImpl.deleteById(teamTestRecordOne.getId());
+        teamDAOImpl.deleteById(teamTestRecordTwo.getId());
         playerDAOImpl = null;
         assertNull(playerDAOImpl);
     }
@@ -81,19 +81,19 @@ public class PlayerDAOImplTest {
         for(Player player : players){
             System.out.println(player);
         }
-        assertEquals(2,players.size());//
+        assertEquals(7,players.size());//
     }
 
     @Test
     public void updatePlayerByIdTest(){ // why there is no logger in console?
-        int updatedCount = playerDAOImpl.updatePlayerAge(1,3);
+        int updatedCount = playerDAOImpl.updatePlayerAge(playerTestRecordOne.getId(),3);
         assertEquals(1,updatedCount);
     }
 
 
     @Test
     public void getPlayerByIdTest(){
-        playerDAOImpl.getPlayerById(1);
+        playerDAOImpl.getPlayerById(playerTestRecordOne.getId());
         assertNotNull(playerDAOImpl.getPlayerById(1));
     }
 }

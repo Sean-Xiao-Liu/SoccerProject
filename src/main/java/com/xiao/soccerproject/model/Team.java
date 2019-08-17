@@ -29,7 +29,7 @@ public class Team {
     private int awayLoss;
 
     //relationship with Player table
-    @OneToMany(mappedBy = "team",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "team", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Player> players;
 
     //relationship with Games table

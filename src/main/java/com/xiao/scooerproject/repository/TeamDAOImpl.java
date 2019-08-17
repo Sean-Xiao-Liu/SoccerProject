@@ -1,5 +1,6 @@
 package com.xiao.scooerproject.repository;
 
+import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.util.HibernateUtil;
 import org.hibernate.Session;
@@ -116,7 +117,20 @@ public class TeamDAOImpl implements TeamDAO{
         }
     }
 
+    @Override
+    public List<Player> getPlayersByTeamId(long id) {
+        String hql = "FROM Team t left join fetch t.players where t.id = :id";
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Player> query = session.createQuery(hql);
+            query.setParameter("id", id);
+            return query.list();
+        }
+    }
+
+
+
     public static void main(String[] args) {
 
     }
+
 }

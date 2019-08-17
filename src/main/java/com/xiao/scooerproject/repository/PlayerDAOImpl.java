@@ -17,14 +17,14 @@ public class PlayerDAOImpl implements PlayerDAO{
     //method 1
     //insert a new record of player
     @Override
-    public boolean save(Player players, Team teams){
+    public boolean save(Player player, Team teams){
         Transaction transaction = null;
         boolean isSuccess = true;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
-            players.getTeam(teams);
-            session.save(players);
+            //players.getTeam(teams);
+            session.save(player);
             transaction.commit();
         }
 

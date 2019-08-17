@@ -1,6 +1,9 @@
 package com.xiao.soccerproject.repository;
 
 import static org.junit.Assert.*;
+
+import com.xiao.scooerproject.repository.PlayerDAOImpl;
+import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.util.HibernateUtil;
 import com.xiao.scooerproject.repository.TeamDAOImpl;
 import com.xiao.soccerproject.model.Team;
@@ -14,6 +17,9 @@ public class TeamDAOImplTest {
 private TeamDAOImpl teamDAOImpl;
 private Team teamTestRecordOne;
 private Team teamTestRecordTwo;
+private PlayerDAOImpl playerDAOImpl;
+private Player playerTestRecordOne;
+private Player playerTestRecordTwo;
 
     @Before
     public void init(){
@@ -35,40 +41,70 @@ private Team teamTestRecordTwo;
         teamTestRecordTwo.setAwayLoss(2);
         teamDAOImpl.save(teamTestRecordTwo);
 
+        playerDAOImpl = new PlayerDAOImpl();
+        playerTestRecordOne = new Player();
+        playerTestRecordOne.setPlayerName("Test Player 1");
+        playerTestRecordOne.setAge(1);
+        playerTestRecordOne.setTeam(teamTestRecordOne);
+        playerTestRecordOne.setNationality("Test Country");
+        playerTestRecordOne.setPlayerPosition("GK");
+        playerDAOImpl.save(playerTestRecordOne,teamTestRecordOne);
+//
+        playerTestRecordTwo = new Player();
+        playerTestRecordTwo.setPlayerName("Test Player 2");
+        playerTestRecordTwo.setAge(2);
+        playerTestRecordTwo.setTeam(teamTestRecordOne);
+        playerTestRecordTwo.setNationality("Test Country");
+        playerTestRecordTwo.setPlayerPosition("CM");
+        playerDAOImpl.save(playerTestRecordTwo,teamTestRecordOne);
+
     }
 
     @After
     public void cleanup(){
+        playerDAOImpl.deleteById(playerTestRecordOne.getId());
+        playerDAOImpl.deleteById(playerTestRecordTwo.getId());
         teamDAOImpl.deleteById(teamTestRecordOne.getId());
         teamDAOImpl.deleteById(teamTestRecordTwo.getId());
+//        playerDAOImpl.deleteById(playerTestRecordOne.getId());
+//        playerDAOImpl.deleteById(playerTestRecordTwo.getId());
         teamDAOImpl = null;
-        assertNull(teamDAOImpl);
+//        playerDAOImpl=null;
+
     }
 
+
     @Test
-    @Transactional
+    //@Transactional
     public void getTeamsTest(){
         List<Team> teams = teamDAOImpl.getTeams();
         for(Team team : teams){
             System.out.println(team);
         }
-        assertEquals(22,teams.size());
+        assertEquals(2,teams.size());
     }
 
+
     @Test
-    @Transactional
+    //@Transactional
     public void updateTeamByIdTest(){
-        int updatedCount = teamDAOImpl.updateTeamHomeWin(1,3);
+        int updatedCount = teamDAOImpl.updateTeamHomeWin(teamTestRecordOne.getId(),3);
         teamDAOImpl.getTeamById(teamTestRecordOne.getId()).toString();
         assertEquals(1,updatedCount);
     }
 
 
     @Test
-    @Transactional
+    //@Transactional
     public void getTeamByIdTest(){
         teamDAOImpl.getTeamById(teamTestRecordTwo.getId());
-        assertNotNull(teamDAOImpl.getTeamById(1));
+        assertNotNull(teamDAOImpl.getTeamById(teamTestRecordTwo.getId()));
+    }
+
+    @Test
+    public void getPlayersByTeamTest(){
+        List<Player> players = teamDAOImpl.getPlayersByTeamId(teamTestRecordOne.getId());
+        assertEquals(2,players.size());
     }
 
 }

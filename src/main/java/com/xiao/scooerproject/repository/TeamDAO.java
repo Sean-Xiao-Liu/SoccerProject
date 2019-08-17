@@ -1,5 +1,6 @@
 package com.xiao.scooerproject.repository;
 
+import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 
 import java.util.List;
@@ -10,6 +11,7 @@ public interface TeamDAO {
     int deleteById(long id);
     List<Team> getTeams();
     Team getTeamById(long id);
-
+    List<Player> getPlayersByTeamId(long id);
+//    List<Object[]> getTeamAndPlayers(long id);
 
 }

@@ -23,7 +23,7 @@ public class Player {
     private String nationality;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")// @Column will lead to duplication at this point
+    @JoinColumn(name = "team_id" )// @Column will lead to duplication at this point
     private Team team;
 
     public long getId() {

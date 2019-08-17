@@ -83,13 +83,13 @@ public class GameDAOImplTest {
         for(Game game : games){
             System.out.println(game);
         }
-        assertEquals(5,games.size());
+        assertEquals(2,games.size());
     }
 
     @Test
     @Transactional
     public void updateHomeGoalsTest(){
-        int updatedCount = gameDAOImpl.updateHomeGoals(1,2);
+        int updatedCount = gameDAOImpl.updateHomeGoals(gameTestRecordOne.getId(),2);
         assertEquals(1,updatedCount);
     }
 
@@ -97,9 +97,8 @@ public class GameDAOImplTest {
     @Test
     @Transactional
     public void getGameByIdTest(){
-        gameDAOImpl.getGameById(2);
-        gameDAOImpl.getGameById(1);
-        assertNotNull(gameDAOImpl.getGameById(2));
+        gameDAOImpl.getGameById(gameTestRecordOne.getId());
+        assertNotNull(gameDAOImpl.getGameById(gameTestRecordTwo.getId()));
     }
 
 }

@@ -81,7 +81,7 @@ public class PlayerDAOImplTest {
         for(Player player : players){
             System.out.println(player);
         }
-        assertEquals(7,players.size());//
+        assertEquals(2,players.size());//
     }
 
     @Test
@@ -94,6 +94,6 @@ public class PlayerDAOImplTest {
     @Test
     public void getPlayerByIdTest(){
         playerDAOImpl.getPlayerById(playerTestRecordOne.getId());
-        assertNotNull(playerDAOImpl.getPlayerById(1));
+        assertNotNull(playerDAOImpl.getPlayerById(playerTestRecordOne.getId()));
     }
 }

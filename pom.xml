@@ -19,6 +19,13 @@
     <flyway.version>6.0.0-beta2</flyway.version>
   </properties>
 
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.6.RELEASE</version>
+    <relativePath />
+  </parent>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -31,11 +38,11 @@
       <artifactId>postgresql</artifactId>
       <version>42.2.5</version>
     </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>1.7.26</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.slf4j</groupId>-->
+<!--      <artifactId>slf4j-simple</artifactId>-->
+<!--      <version>1.7.26</version>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
@@ -46,7 +53,16 @@
       <artifactId>fluent-hibernate-core</artifactId>
       <version>0.3.1</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+      <version>2.1.6.RELEASE</version>
+    </dependency>
   </dependencies>
 
   <build>

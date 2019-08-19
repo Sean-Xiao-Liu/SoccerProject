@@ -1,7 +1,5 @@
 package com.xiao.soccerproject.repository;
 
-import com.xiao.scooerproject.repository.PlayerDAOImpl;
-import com.xiao.scooerproject.repository.TeamDAOImpl;
 import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 import org.junit.After;

@@ -2,15 +2,11 @@ package com.xiao.soccerproject.repository;
 
 import static org.junit.Assert.*;
 
-import com.xiao.scooerproject.repository.PlayerDAOImpl;
 import com.xiao.soccerproject.model.Player;
-import com.xiao.soccerproject.util.HibernateUtil;
-import com.xiao.scooerproject.repository.TeamDAOImpl;
 import com.xiao.soccerproject.model.Team;
 import org.junit.*;
 
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 public class TeamDAOImplTest {
@@ -66,10 +62,8 @@ private Player playerTestRecordTwo;
         playerDAOImpl.deleteById(playerTestRecordTwo.getId());
         teamDAOImpl.deleteById(teamTestRecordOne.getId());
         teamDAOImpl.deleteById(teamTestRecordTwo.getId());
-//        playerDAOImpl.deleteById(playerTestRecordOne.getId());
-//        playerDAOImpl.deleteById(playerTestRecordTwo.getId());
         teamDAOImpl = null;
-//        playerDAOImpl=null;
+         playerDAOImpl=null;
 
     }
 

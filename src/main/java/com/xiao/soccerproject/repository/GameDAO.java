@@ -1,4 +1,4 @@
-package com.xiao.scooerproject.repository;
+package com.xiao.soccerproject.repository;
 
 import com.xiao.soccerproject.model.Game;
 import com.xiao.soccerproject.model.Team;

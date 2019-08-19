@@ -1,8 +1,5 @@
 package com.xiao.soccerproject.repository;
 
-import com.xiao.soccerproject.util.HibernateUtil;
-import com.xiao.scooerproject.repository.GameDAOImpl;
-import com.xiao.scooerproject.repository.TeamDAOImpl;
 import com.xiao.soccerproject.model.Game;
 import com.xiao.soccerproject.model.Team;
 import org.junit.After;

@@ -1,4 +1,4 @@
-package com.xiao.scooerproject.repository;
+package com.xiao.soccerproject.repository;
 
 import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
@@ -10,7 +10,7 @@ public interface PlayerDAO {
     boolean save(Player players,Team teams);
     int updatePlayerAge(long id, int age);
     int deleteById(long id);
-    int deleteByName(String name);
+//    int deleteByName(String name);
     List<Player> getPlayers();
     Player getPlayerById(long id);
 //    Player getPlayerByName(String name);

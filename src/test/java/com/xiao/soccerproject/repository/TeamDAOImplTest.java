@@ -63,7 +63,7 @@ private Player playerTestRecordTwo;
         teamDAOImpl.deleteById(teamTestRecordOne.getId());
         teamDAOImpl.deleteById(teamTestRecordTwo.getId());
         teamDAOImpl = null;
-         playerDAOImpl=null;
+        playerDAOImpl=null;
 
     }
 

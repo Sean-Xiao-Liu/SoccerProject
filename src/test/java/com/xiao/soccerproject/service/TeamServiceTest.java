@@ -26,8 +26,13 @@ public class TeamServiceTest {
     @Autowired
     private TeamService teamService;
 
+    @Autowired
+    private PlayerService playerService;
+
     private Team teamTestRecordOne;
     private Team teamTestRecordTwo;
+    private Player playerTestRecordOne;
+    private Player playerTestRecordTwo;
 
     @Before
     public void init() {
@@ -49,10 +54,28 @@ public class TeamServiceTest {
         teamTestRecordTwo.setAwayLoss(2);
         teamService.save(teamTestRecordTwo);
 
+        playerTestRecordOne = new Player();
+        playerTestRecordOne.setPlayerName("Test Player 1");
+        playerTestRecordOne.setAge(1);
+        playerTestRecordOne.setTeam(teamTestRecordOne);
+        playerTestRecordOne.setNationality("Test Country");
+        playerTestRecordOne.setPlayerPosition("GK");
+        playerService.save(playerTestRecordOne,teamTestRecordOne);
+//
+        playerTestRecordTwo = new Player();
+        playerTestRecordTwo.setPlayerName("Test Player 2");
+        playerTestRecordTwo.setAge(2);
+        playerTestRecordTwo.setTeam(teamTestRecordOne);
+        playerTestRecordTwo.setNationality("Test Country");
+        playerTestRecordTwo.setPlayerPosition("CM");
+        playerService.save(playerTestRecordTwo,teamTestRecordOne);
+
     }
 
     @After
     public void cleanup() {
+        playerService.deleteById(playerTestRecordOne.getId());
+        playerService.deleteById(playerTestRecordTwo.getId());
         teamService.deleteById(teamTestRecordOne.getId());
         teamService.deleteById(teamTestRecordTwo.getId());
         teamService = null;
@@ -84,7 +107,7 @@ public class TeamServiceTest {
         assertNotNull(teamService.getTeamById(teamTestRecordTwo.getId()));
     }
 
-    @Ignore
+//    @Ignore
     @Test
     @Transactional
     public void getPlayersByTeamTest(){

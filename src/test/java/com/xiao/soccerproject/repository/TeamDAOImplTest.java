@@ -75,11 +75,14 @@ private Game gameTestRecordOne;
 
     @After
     public void cleanup(){
-        playerDAOImpl.deleteById(playerTestRecordOne.getId());
-        playerDAOImpl.deleteById(playerTestRecordTwo.getId());
-        gameDAOImpl.deleteById(gameTestRecordOne.getId());
-        teamDAOImpl.deleteById(teamTestRecordOne.getId());
-        teamDAOImpl.deleteById(teamTestRecordTwo.getId());
+        teamDAOImpl.deleteTeamByName(teamTestRecordOne.getTeamName());
+        teamDAOImpl.deleteTeamByName(teamTestRecordTwo.getTeamName());
+
+//        playerDAOImpl.deleteById(playerTestRecordOne.getId());
+//        playerDAOImpl.deleteById(playerTestRecordTwo.getId());
+//        gameDAOImpl.deleteById(gameTestRecordOne.getId());
+//        teamDAOImpl.deleteById(teamTestRecordOne.getId());
+//        teamDAOImpl.deleteById(teamTestRecordTwo.getId());
 //        teamDAOImpl.deleteById(teamTestRecordThree.getId());
         teamDAOImpl = null;
         playerDAOImpl=null;
@@ -136,7 +139,7 @@ private Game gameTestRecordOne;
 //    }
 
     @Test
-//    @Transactional
+    @Transactional
     public void deleteTeamByNameTest(){
         teamTestRecordThree = new Team();
         teamTestRecordThree.setTeamName("Test Team 3");

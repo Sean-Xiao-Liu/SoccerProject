@@ -106,6 +106,30 @@ public class PlayerDAOImpl implements PlayerDAO{
         return deletedCount;
     }
 
+    @Override
+    public int deletePlayerByName(String playerName){
+        int deletedCount = 0;
+        Transaction transaction = null;
+
+        try {
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();// use getCurrentSession instead of OpenSession, don't need close session manually.
+            transaction = session.beginTransaction();
+
+            Player player = getPlayerByName(playerName);
+            session.delete(player);
+            transaction.commit();
+            deletedCount = 1;
+        }
+
+        catch (Exception e){
+            if (transaction != null) transaction.rollback();
+            logger.error(e.getMessage());
+        }
+        logger.info(String.format("The player %s was deleted, total deleted record(s): %d", playerName, deletedCount));
+        return deletedCount;
+    }
+
+
     //method 5
     //get record of a player
     @Override
@@ -124,15 +148,15 @@ public class PlayerDAOImpl implements PlayerDAO{
     }
 
     @Override
-    public Player getPlayerByName(String playerName){
+    public Player getPlayerByName(String name){
             String hql = "From Player as p where p.playerName = :name";
 
             try (Session session = HibernateUtil.getSessionFactory().openSession()){
                 Query<Player> query = session.createQuery(hql);
-                query.setParameter("name",playerName);
+                query.setParameter("name",name);
 
                 Player player = query.uniqueResult();
-                logger.info(player.toString());
+//                logger.info(player.toString());
                 return query.uniqueResult();
 
             }

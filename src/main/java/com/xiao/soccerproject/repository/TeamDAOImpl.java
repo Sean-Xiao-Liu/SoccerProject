@@ -1,6 +1,5 @@
 package com.xiao.soccerproject.repository;
 
-import com.xiao.soccerproject.model.Game;
 import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.util.HibernateUtil;
@@ -103,7 +102,7 @@ public class TeamDAOImpl implements TeamDAO{
             transaction = session.beginTransaction();
 
             Team team = getTeamByName(teamName);
-            logger.info(String.format(">>>>>> Team: " + team.toString()));
+//            logger.info(String.format(">>>>>> Team: " + team.toString()));
 
             session.delete(team);
             transaction.commit();

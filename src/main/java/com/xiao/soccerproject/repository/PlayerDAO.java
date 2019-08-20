@@ -10,8 +10,8 @@ public interface PlayerDAO {
     boolean save(Player players,Team teams);
     int updatePlayerAge(long id, int age);
     int deleteById(long id);
-//    int deleteByName(String name);
+    int deletePlayerByName(String name);
     List<Player> getPlayers();
     Player getPlayerById(long id);
-    Player getPlayerByName(String playerName);
+    Player getPlayerByName(String name);
 }

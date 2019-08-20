@@ -16,6 +16,7 @@ public class PlayerDAOImplTest {
     private PlayerDAOImpl playerDAOImpl;
     private Player playerTestRecordOne;
     private Player playerTestRecordTwo;
+    private Player playerTestRecordThree;
     private TeamDAOImpl teamDAOImpl;
     private Team teamTestRecordOne;
     private Team teamTestRecordTwo;
@@ -98,4 +99,20 @@ public class PlayerDAOImplTest {
         playerDAOImpl.getPlayerByName(playerTestRecordOne.getPlayerName());
         assertNotNull(playerDAOImpl.getPlayerByName(playerTestRecordOne.getPlayerName()));
     }
+
+    @Test
+    @Transactional
+    public void deletePlayerByNameTest(){
+        playerTestRecordThree = new Player();
+        playerTestRecordThree.setPlayerName("Test Player 3");
+        playerTestRecordThree.setAge(3);
+        playerTestRecordThree.setTeam(teamTestRecordTwo);
+        playerTestRecordThree.setNationality("Test Country");
+        playerTestRecordThree.setPlayerPosition("CB");
+        playerDAOImpl.save(playerTestRecordThree,teamTestRecordTwo);
+
+        int deleteCount = playerDAOImpl.deletePlayerByName(playerTestRecordThree.getPlayerName());
+        assertEquals(1,deleteCount);
+    }
+
 }

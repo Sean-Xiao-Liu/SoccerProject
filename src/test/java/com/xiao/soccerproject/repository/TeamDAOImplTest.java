@@ -80,7 +80,6 @@ private Game gameTestRecordOne;
         gameDAOImpl.deleteById(gameTestRecordOne.getId());
         teamDAOImpl.deleteById(teamTestRecordOne.getId());
         teamDAOImpl.deleteById(teamTestRecordTwo.getId());
-
 //        teamDAOImpl.deleteById(teamTestRecordThree.getId());
         teamDAOImpl = null;
         playerDAOImpl=null;
@@ -137,7 +136,7 @@ private Game gameTestRecordOne;
 //    }
 
     @Test
-    @Transactional
+//    @Transactional
     public void deleteTeamByNameTest(){
         teamTestRecordThree = new Team();
         teamTestRecordThree.setTeamName("Test Team 3");
@@ -147,8 +146,9 @@ private Game gameTestRecordOne;
         teamTestRecordThree.setAwayLoss(3);
         teamDAOImpl.save(teamTestRecordThree);
 
-        teamDAOImpl.deleteTeamByName(teamTestRecordThree.getTeamName());
-        assertNull(teamTestRecordThree);
+        int deleteCount = teamDAOImpl.deleteTeamByName(teamTestRecordThree.getTeamName());
+        assertEquals(1,deleteCount);
+
     }
 
 

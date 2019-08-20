@@ -103,8 +103,10 @@ public class TeamDAOImpl implements TeamDAO{
             transaction = session.beginTransaction();
 
             Team team = getTeamByName(teamName);
+            logger.info(String.format(">>>>>> Team: " + team.toString()));
+
             session.delete(team);
-            transaction.commit(); 
+            transaction.commit();
             deletedCount = 1;
         }
 
@@ -112,7 +114,7 @@ public class TeamDAOImpl implements TeamDAO{
             if (transaction != null) transaction.rollback();
             logger.error(e.getMessage());
         }
-//        logger.info(String.format("The team %s was deleted, total deleted record(s): %d", teamName, deletedCount));
+        logger.info(String.format("The team %s was deleted, total deleted record(s): %d", teamName, deletedCount));
         return deletedCount;
     }
 

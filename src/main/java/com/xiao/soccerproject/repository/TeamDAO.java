@@ -18,5 +18,4 @@ public interface TeamDAO {
     List<Player> getPlayersByTeamId(long id);
 //    List<Game> getGamesByHomeTeamId(long id);
 
-
 }

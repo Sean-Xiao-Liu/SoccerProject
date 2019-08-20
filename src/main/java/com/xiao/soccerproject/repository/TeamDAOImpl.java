@@ -93,26 +93,28 @@ public class TeamDAOImpl implements TeamDAO{
         return deletedCount;
     }
 
-//    @Override
-//    public int deleteByName(String teamName){
-//        int deletedCount = 0;
-//        Transaction transaction = null;
-//
-//        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-//            transaction = session.beginTransaction();
-//
-//            Team team = session.get(Team.class, teamName);
-//            session.delete(team);
-//            transaction.commit(); //how to write deleteCount in this case ?
-//        }
-//
-//        catch (Exception e){
-//            if (transaction != null) transaction.rollback();
-//            logger.error(e.getMessage());
-//        }
-////        logger.info(String.format("The team %s was deleted, total deleted record(s): %d", teamName, deletedCount));
-//        return deletedCount;
-//    }
+    @Override
+    public int deleteTeamByName(String teamName){
+        int deletedCount = 0;
+        Transaction transaction = null;
+
+        try {
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();// use getCurrentSession instead of OpenSession, don't need close session manually.
+            transaction = session.beginTransaction();
+
+            Team team = getTeamByName(teamName);
+            session.delete(team);
+            transaction.commit(); 
+            deletedCount = 1;
+        }
+
+        catch (Exception e){
+            if (transaction != null) transaction.rollback();
+            logger.error(e.getMessage());
+        }
+//        logger.info(String.format("The team %s was deleted, total deleted record(s): %d", teamName, deletedCount));
+        return deletedCount;
+    }
 
 
 

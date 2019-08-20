@@ -15,7 +15,7 @@ public class TeamDAOImplTest {
 private TeamDAOImpl teamDAOImpl;
 private Team teamTestRecordOne;
 private Team teamTestRecordTwo;
-//private Team teamTestRecordThree;
+private Team teamTestRecordThree;
 private PlayerDAOImpl playerDAOImpl;
 private Player playerTestRecordOne;
 private Player playerTestRecordTwo;
@@ -136,21 +136,20 @@ private Game gameTestRecordOne;
 //        assertEquals(1,games.size());
 //    }
 
-//    @Test
-//    @Transactional
-//    public void deleteTeamByNameTest(){
-//        teamTestRecordThree = new Team();
-//        teamTestRecordThree.setTeamName("Test Team 3");
-//        teamTestRecordThree.setHomeWin(3);
-//        teamTestRecordThree.setAwayWin(3);
-//        teamTestRecordThree.setHomeLoss(3);
-//        teamTestRecordThree.setAwayLoss(3);
-//        teamDAOImpl.save(teamTestRecordThree);
-//
-//        teamDAOImpl.deleteByName(teamTestRecordThree.getTeamName());
-////        teamDAOImpl.deleteByName("Test Team 3");
-//        assertNull(teamTestRecordThree);
-//    }
+    @Test
+    @Transactional
+    public void deleteTeamByNameTest(){
+        teamTestRecordThree = new Team();
+        teamTestRecordThree.setTeamName("Test Team 3");
+        teamTestRecordThree.setHomeWin(3);
+        teamTestRecordThree.setAwayWin(3);
+        teamTestRecordThree.setHomeLoss(3);
+        teamTestRecordThree.setAwayLoss(3);
+        teamDAOImpl.save(teamTestRecordThree);
+
+        teamDAOImpl.deleteTeamByName(teamTestRecordThree.getTeamName());
+        assertNull(teamTestRecordThree);
+    }
 
 
 }

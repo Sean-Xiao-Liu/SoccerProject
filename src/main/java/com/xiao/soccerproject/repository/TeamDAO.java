@@ -11,7 +11,7 @@ public interface TeamDAO {
     boolean save(Team teams);
     int updateTeamHomeWin(long id, int homeWin);
     int deleteById(long id);
-//    int deleteByName(String teamName);
+    int deleteTeamByName(String teamName);
     List<Team> getTeams();
     Team getTeamById(long id);
     Team getTeamByName(String teamName);

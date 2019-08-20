@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -93,5 +94,12 @@ public class PlayerDAOImplTest {
     public void getPlayerByIdTest(){
         playerDAOImpl.getPlayerById(playerTestRecordOne.getId());
         assertNotNull(playerDAOImpl.getPlayerById(playerTestRecordOne.getId()));
+    }
+
+    @Test
+    @Transactional
+    public void getPlayerByNameTest(){
+        playerDAOImpl.getPlayerByName(playerTestRecordOne.getPlayerName());
+        assertNotNull(playerDAOImpl.getPlayerByName(playerTestRecordOne.getPlayerName()));
     }
 }

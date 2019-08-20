@@ -4,18 +4,25 @@ import static org.junit.Assert.*;
 
 import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
+import com.xiao.soccerproject.model.Game;
 import org.junit.*;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public class TeamDAOImplTest {
 private TeamDAOImpl teamDAOImpl;
 private Team teamTestRecordOne;
 private Team teamTestRecordTwo;
+//private Team teamTestRecordThree;
 private PlayerDAOImpl playerDAOImpl;
 private Player playerTestRecordOne;
 private Player playerTestRecordTwo;
+private GameDAOImpl gameDAOImpl;
+private Game gameTestRecordOne;
+
+
 
     @Before
     public void init(){
@@ -54,22 +61,36 @@ private Player playerTestRecordTwo;
         playerTestRecordTwo.setPlayerPosition("CM");
         playerDAOImpl.save(playerTestRecordTwo,teamTestRecordOne);
 
+        gameDAOImpl = new GameDAOImpl();
+        gameTestRecordOne = new Game();
+        gameTestRecordOne.setHomeTeam(teamTestRecordOne);
+        gameTestRecordOne.setAwayTeam(teamTestRecordTwo);
+        gameTestRecordOne.setHomeGoals(1);
+        gameTestRecordOne.setHomeLosts(0);
+        gameTestRecordOne.setHomeMatchResult("Win");
+        gameDAOImpl.save(gameTestRecordOne,teamTestRecordOne);
+
+
     }
 
     @After
     public void cleanup(){
         playerDAOImpl.deleteById(playerTestRecordOne.getId());
         playerDAOImpl.deleteById(playerTestRecordTwo.getId());
+        gameDAOImpl.deleteById(gameTestRecordOne.getId());
         teamDAOImpl.deleteById(teamTestRecordOne.getId());
         teamDAOImpl.deleteById(teamTestRecordTwo.getId());
+
+//        teamDAOImpl.deleteById(teamTestRecordThree.getId());
         teamDAOImpl = null;
         playerDAOImpl=null;
+        gameDAOImpl=null;
 
     }
 
 
     @Test
-    //@Transactional
+    @Transactional
     public void getTeamsTest(){
         List<Team> teams = teamDAOImpl.getTeams();
         for(Team team : teams){
@@ -80,7 +101,7 @@ private Player playerTestRecordTwo;
 
 
     @Test
-    //@Transactional
+    @Transactional
     public void updateTeamByIdTest(){
         int updatedCount = teamDAOImpl.updateTeamHomeWin(teamTestRecordOne.getId(),3);
         teamDAOImpl.getTeamById(teamTestRecordOne.getId()).toString();
@@ -89,7 +110,7 @@ private Player playerTestRecordTwo;
 
 
     @Test
-    //@Transactional
+    @Transactional
     public void getTeamByIdTest(){
         teamDAOImpl.getTeamById(teamTestRecordTwo.getId());
         assertNotNull(teamDAOImpl.getTeamById(teamTestRecordTwo.getId()));
@@ -100,5 +121,36 @@ private Player playerTestRecordTwo;
         List<Player> players = teamDAOImpl.getPlayersByTeamId(teamTestRecordOne.getId());
         assertEquals(2,players.size());
     }
+
+    @Test
+    @Transactional
+    public void getTeamByNameTest(){
+        teamDAOImpl.getTeamByName(teamTestRecordOne.getTeamName());
+        assertNotNull(teamDAOImpl.getTeamByName(teamTestRecordOne.getTeamName()));
+    }
+
+//
+//    @Test
+//    public void getGameByHomeTeamIdTest(){
+//        List<Game> games = teamDAOImpl.getGamesByHomeTeamId(gameTestRecordOne.getId());
+//        assertEquals(1,games.size());
+//    }
+
+//    @Test
+//    @Transactional
+//    public void deleteTeamByNameTest(){
+//        teamTestRecordThree = new Team();
+//        teamTestRecordThree.setTeamName("Test Team 3");
+//        teamTestRecordThree.setHomeWin(3);
+//        teamTestRecordThree.setAwayWin(3);
+//        teamTestRecordThree.setHomeLoss(3);
+//        teamTestRecordThree.setAwayLoss(3);
+//        teamDAOImpl.save(teamTestRecordThree);
+//
+//        teamDAOImpl.deleteByName(teamTestRecordThree.getTeamName());
+////        teamDAOImpl.deleteByName("Test Team 3");
+//        assertNull(teamTestRecordThree);
+//    }
+
 
 }

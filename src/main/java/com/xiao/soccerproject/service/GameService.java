@@ -17,8 +17,8 @@ public class GameService {
     public boolean save(Game games, Team teams){return gameDAO.save(games,teams);}
     public int updateHomeGoals(long id, int homeGoals){return  gameDAO.updateHomeGoals(id,homeGoals);}
     public int deleteById(long id){
-        return deleteById(id);
-    };
+        return gameDAO.deleteById(id);
+    }
     //    int deleteByName(String name);
     public  List<Game> getGames(){return gameDAO.getGames();}
     public Game getGameById(long id){return gameDAO.getGameById(id);}

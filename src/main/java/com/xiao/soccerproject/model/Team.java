@@ -29,15 +29,15 @@ public class Team {
     private int awayLoss;
 
     //relationship with Player table
-    @OneToMany(mappedBy = "team", orphanRemoval = true, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Player> players;
+    @OneToMany(mappedBy = "team", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Player> players;
 
     //relationship with Games table
     @OneToMany(mappedBy = "homeTeam",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Game> homeGames;
+    private Set<Game> homeGames;
 
     @OneToMany(mappedBy = "awayTeam",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Game> awayGames;
+    private Set<Game> awayGames;
 
     /*getters and setters*/
 
@@ -85,27 +85,31 @@ public class Team {
         this.awayLoss = awayLoss;
     }
 
-    public List<Player> getPlayers() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(Set<Player> players) {
         this.players = players;
     }
 
-    public List<Game> getHomeGames() {
+    public Set<Game> getHomeGames() {
         return homeGames;
     }
 
-    public void setHomeGames(List<Game> homeGames) {
+    public void setHomeGames(Set<Game> homeGames) {
         this.homeGames = homeGames;
     }
 
-    public List<Game> getAwayGames() {
+    public Set<Game> getAwayGames() {
         return awayGames;
     }
 
-    public void setAwayGames(List<Game> awayGames) {
+    public void setAwayGames(Set<Game> awayGames) {
         this.awayGames = awayGames;
     }
 

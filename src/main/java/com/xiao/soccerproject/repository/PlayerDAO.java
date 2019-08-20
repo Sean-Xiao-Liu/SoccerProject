@@ -13,5 +13,5 @@ public interface PlayerDAO {
 //    int deleteByName(String name);
     List<Player> getPlayers();
     Player getPlayerById(long id);
-//    Player getPlayerByName(String name);
+    Player getPlayerByName(String playerName);
 }

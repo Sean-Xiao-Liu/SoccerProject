@@ -18,6 +18,6 @@ public class TeamService {
     //    int deleteByName(String name);
     public List<Team> getTeams(){return teamDAO.getTeams();}
     public Team getTeamById(long id){return  teamDAO.getTeamById(id);}
-    //    Team getTeamByName(String name);
+    public Team getTeamByName(String teamName){return  teamDAO.getTeamByName(teamName);}
     public List<Player> getPlayersByTeamId(long id){return teamDAO.getPlayersByTeamId(id);}
 }

@@ -123,6 +123,22 @@ public class PlayerDAOImpl implements PlayerDAO{
         }
     }
 
+    @Override
+    public Player getPlayerByName(String playerName){
+            String hql = "From Player as p where p.playerName = :name";
+
+            try (Session session = HibernateUtil.getSessionFactory().openSession()){
+                Query<Player> query = session.createQuery(hql);
+                query.setParameter("name",playerName);
+
+                Player player = query.uniqueResult();
+                logger.info(player.toString());
+                return query.uniqueResult();
+
+            }
+
+    }
+
     public static void main(String[] args) {
 
     }

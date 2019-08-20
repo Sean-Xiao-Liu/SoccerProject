@@ -7,22 +7,32 @@ import com.xiao.soccerproject.repository.GameDAOImpl;
 import com.xiao.soccerproject.repository.TeamDAOImpl;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertNull;
+import javax.transaction.Transactional;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AppInitializer.class)
 
 public class GameServiceTest {
-    public TeamService teamService;
-    public Team teamTestRecordOne;
-    public Team teamTestRecordTwo;
-    public GameService gameService;
-    public Game gameTestRecordOne;
-    public Game gameTestRecordTwo;
+
+    @Autowired
+    private TeamService teamService;
+
+    @Autowired
+    private GameService gameService;
+
+    private Team teamTestRecordOne;
+    private Team teamTestRecordTwo;
+    private Game gameTestRecordOne;
+    private Game gameTestRecordTwo;
 
     @Before
     public void init(){
@@ -69,6 +79,31 @@ public class GameServiceTest {
         teamService.deleteById(teamTestRecordTwo.getId());
         gameService = null;
         teamService = null;
+    }
+
+    @Test
+    @Transactional
+    public void getGamesTest(){
+        List<Game> games = gameService.getGames();
+        for(Game game : games){
+            System.out.println(game);
+        }
+        assertEquals(2,games.size());
+    }
+
+    @Test
+    @Transactional
+    public void updateHomeGoalsTest(){
+        int updatedCount = gameService.updateHomeGoals(gameTestRecordOne.getId(),2);
+        assertEquals(1,updatedCount);
+    }
+
+
+    @Test
+    @Transactional
+    public void getGameByIdTest(){
+        gameService.getGameById(gameTestRecordOne.getId());
+        assertNotNull(gameService.getGameById(gameTestRecordTwo.getId()));
     }
 
 

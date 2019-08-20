@@ -4,6 +4,7 @@ import com.xiao.soccerproject.model.Game;
 import com.xiao.soccerproject.model.Team;
 
 import java.util.List;
+import java.util.Set;
 
 public interface GameDAO {
     boolean save(Game games, Team teams);
@@ -12,5 +13,4 @@ public interface GameDAO {
 //    int deleteByName(String name);
     List<Game> getGames();
     Game getGameById(long id);
-//    Game getGameByName(String name);
 }

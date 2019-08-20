@@ -21,5 +21,5 @@ public class PlayerService {
     //    int deleteByName(String name);
     public List<Player> getPlayers(){return playerDAO.getPlayers();}
     public Player getPlayerById(long id){return  playerDAO.getPlayerById(id);};
-//    Player getPlayerByName(String name);
+    public Player getPlayerByName(String playerName){return playerDAO.getPlayerByName(playerName);}
 }

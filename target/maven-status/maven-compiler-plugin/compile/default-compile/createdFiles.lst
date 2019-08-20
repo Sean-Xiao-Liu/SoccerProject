@@ -1,11 +1,5 @@
-com/xiao/scooerproject/repository/PlayerDAOImpl.class
-com/xiao/scooerproject/repository/GameDAO.class
 com/xiao/soccerproject/model/Team.class
-com/xiao/scooerproject/repository/TeamDAOImpl.class
 com/xiao/soccerproject/util/HibernateUtil.class
-com/xiao/scooerproject/repository/GameDAOImpl.class
 com/xiao/soccerproject/App.class
-com/xiao/scooerproject/repository/PlayerDAO.class
 com/xiao/soccerproject/model/Player.class
 com/xiao/soccerproject/model/Game.class
-com/xiao/scooerproject/repository/TeamDAO.class

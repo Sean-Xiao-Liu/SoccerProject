@@ -1,5 +1,6 @@
 package com.xiao.soccerproject.repository;
 
+import com.xiao.soccerproject.model.Game;
 import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.util.HibernateUtil;
@@ -92,6 +93,30 @@ public class TeamDAOImpl implements TeamDAO{
         return deletedCount;
     }
 
+//    @Override
+//    public int deleteByName(String teamName){
+//        int deletedCount = 0;
+//        Transaction transaction = null;
+//
+//        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+//            transaction = session.beginTransaction();
+//
+//            Team team = session.get(Team.class, teamName);
+//            session.delete(team);
+//            transaction.commit(); //how to write deleteCount in this case ?
+//        }
+//
+//        catch (Exception e){
+//            if (transaction != null) transaction.rollback();
+//            logger.error(e.getMessage());
+//        }
+////        logger.info(String.format("The team %s was deleted, total deleted record(s): %d", teamName, deletedCount));
+//        return deletedCount;
+//    }
+
+
+
+
     //method 4
     //list all teams
     @Override
@@ -120,6 +145,21 @@ public class TeamDAOImpl implements TeamDAO{
     }
 
     @Override
+    public Team getTeamByName(String teamName){
+        String hql = "From Team as t where t.teamName = :name";
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()){
+            Query<Team> query = session.createQuery(hql);
+            query.setParameter("name",teamName);
+
+            Team team = query.uniqueResult();
+            logger.info(team.toString());
+            return query.uniqueResult();
+
+        }
+    }
+
+    @Override
     public List<Player> getPlayersByTeamId(long id) {
         String hql = "FROM Team t left join fetch t.players where t.id = :id";
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -128,6 +168,18 @@ public class TeamDAOImpl implements TeamDAO{
             return query.list();
         }
     }
+//
+//    @Override
+//    public List<Game> getGamesByHomeTeamId(long id) {
+//        String hql = "FROM Team t join fetch t.homeGames where t.id = :id";
+//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+//            Query<Game> query = session.createQuery(hql);
+//            query.setParameter("id", id);
+//            return query.list();
+//        }
+//    }
+
+
 
     public static void main(String[] args) {
 

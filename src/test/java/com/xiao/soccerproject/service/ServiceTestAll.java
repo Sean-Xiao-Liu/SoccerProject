@@ -9,7 +9,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses(
         {
-//                PlayerServiceTest.class,
+                PlayerServiceTest.class,
                 GameServiceTest.class,
                 TeamServiceTest.class
         }

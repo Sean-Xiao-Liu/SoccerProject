@@ -115,4 +115,10 @@ public class TeamServiceTest {
         assertEquals(2,players.size());
     }
 
+    @Test
+    @Transactional
+    public void getTeamByNameTest(){
+        teamService.getTeamByName(teamTestRecordOne.getTeamName());
+        assertNotNull(teamService.getTeamByName(teamTestRecordOne.getTeamName()));
+    }
 }

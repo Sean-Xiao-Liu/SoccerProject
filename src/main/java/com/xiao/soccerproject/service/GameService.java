@@ -22,5 +22,4 @@ public class GameService {
     //    int deleteByName(String name);
     public  List<Game> getGames(){return gameDAO.getGames();}
     public Game getGameById(long id){return gameDAO.getGameById(id);}
-//    Game getGameByName(String name);
 }

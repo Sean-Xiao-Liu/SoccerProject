@@ -25,7 +25,6 @@ public class PlayerDAOImplTest {
 
         teamDAOImpl = new TeamDAOImpl();
         teamTestRecordOne = new Team();
-//        teamTestRecordOne.setId(1);
         teamTestRecordOne.setTeamName("Test Team 1");
         teamTestRecordOne.setHomeWin(1);
         teamTestRecordOne.setAwayWin(1);
@@ -34,7 +33,6 @@ public class PlayerDAOImplTest {
         teamDAOImpl.save(teamTestRecordOne);
 
         teamTestRecordTwo = new Team();
-//        teamTestRecordTwo.setId(2);
         teamTestRecordTwo.setTeamName("Test Team 2");
         teamTestRecordTwo.setHomeWin(2);
         teamTestRecordTwo.setAwayWin(2);
@@ -45,7 +43,6 @@ public class PlayerDAOImplTest {
         // seed two records for test
         playerDAOImpl = new PlayerDAOImpl();
         playerTestRecordOne = new Player();
-//        playerTestRecordOne.setId(1);
         playerTestRecordOne.setPlayerName("Test Player 1");
         playerTestRecordOne.setAge(1);
         playerTestRecordOne.setTeam(teamTestRecordOne);
@@ -54,7 +51,6 @@ public class PlayerDAOImplTest {
         playerDAOImpl.save(playerTestRecordOne,teamTestRecordOne);
 
         playerTestRecordTwo = new Player();
-//        playerTestRecordTwo.setId(2);
         playerTestRecordTwo.setPlayerName("Test Player 2");
         playerTestRecordTwo.setAge(2);
         playerTestRecordTwo.setTeam(teamTestRecordTwo);

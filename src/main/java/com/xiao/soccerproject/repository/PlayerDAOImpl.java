@@ -1,31 +1,45 @@
 package com.xiao.soccerproject.repository;
 
+import com.xiao.soccerproject.init.AppInitializer;
 import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
+import com.xiao.soccerproject.service.TeamService;
 import com.xiao.soccerproject.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Repository;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = AppInitializer.class)
 
 @Repository
 public class PlayerDAOImpl implements PlayerDAO{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+//    @Autowired
+//    TeamDAOImpl teamDAOImpl;
+
     //method 1
     //insert a new record of player
     @Override
-    public boolean save(Player player, Team teams){
+    public boolean save(Player player, long teamId){
         Transaction transaction = null;
         boolean isSuccess = true;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
-            //players.getTeam(teams);
+            TeamDAOImpl teamDAOImpl = new TeamDAOImpl();
+            Team team =  teamDAOImpl.getTeamById(teamId);
+            player.setTeam(team);
             session.save(player);
             transaction.commit();
         }

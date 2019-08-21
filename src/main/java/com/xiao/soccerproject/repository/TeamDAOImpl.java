@@ -124,7 +124,7 @@ public class TeamDAOImpl implements TeamDAO{
     //list all teams
     @Override
     public List<Team> getTeams() {
-        String hql = "FROM Team";
+        String hql = "FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Team> query = session.createQuery(hql);
             return query.list();
@@ -133,8 +133,7 @@ public class TeamDAOImpl implements TeamDAO{
 
     @Override
     public Team getTeamById(long id) {
-//        String hql = "FROM Team t where t.id = :id ";
-        String hql = "From Team t left join fetch t.homeGames where t.id = :id";
+        String hql = "From Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames where t.id = :id";
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Team> query = session.createQuery(hql);
@@ -164,7 +163,7 @@ public class TeamDAOImpl implements TeamDAO{
 
     @Override
     public List<Player> getPlayersByTeamId(long id) {
-        String hql = "FROM Team t left join fetch t.players where t.id = :id";
+        String hql = "FROM Team t LEFT join fetch t.players where t.id = :id";
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Player> query = session.createQuery(hql);
             query.setParameter("id", id);

@@ -1,31 +1,45 @@
 package com.xiao.soccerproject.repository;
 
+import com.xiao.soccerproject.init.AppInitializer;
 import com.xiao.soccerproject.model.Game;
 import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Repository;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = AppInitializer.class)
 
 @Repository
 public class GameDAOImpl implements GameDAO{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+//    @Autowired
+//    TeamDAOImpl teamDAOImpl;
 
     @Override
     //method 1
     //save a game record
-    public boolean save(Game games,Team teams){
+    public boolean save(Game games,long homeTeamId, long awayTeamId){
         Transaction transaction = null;
         boolean isSuccess = true;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
-            games.setHomeTeam(teams);
+            TeamDAOImpl teamDAOImpl = new TeamDAOImpl();
+            Team homeTeam = teamDAOImpl.getTeamById(homeTeamId);
+            Team awayTeam = teamDAOImpl.getTeamById(awayTeamId);
+            games.setHomeTeam(homeTeam);
+            games.setAwayTeam(awayTeam);
             session.save(games);
             transaction.commit();
         }

@@ -1,5 +1,7 @@
 package com.xiao.soccerproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -29,10 +31,12 @@ public class Team {
     private int awayLoss;
 
     //relationship with Player table
+
     @OneToMany(mappedBy = "team", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Player> players;
 
     //relationship with Games table
+
     @OneToMany(mappedBy = "homeTeam",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Game> homeGames;
 

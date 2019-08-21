@@ -46,18 +46,16 @@ public class PlayerDAOImplTest {
         playerTestRecordOne = new Player();
         playerTestRecordOne.setPlayerName("Test Player 1");
         playerTestRecordOne.setAge(1);
-        playerTestRecordOne.setTeam(teamTestRecordOne);
         playerTestRecordOne.setNationality("Test Country");
         playerTestRecordOne.setPlayerPosition("GK");
-        playerDAOImpl.save(playerTestRecordOne,teamTestRecordOne);
+        playerDAOImpl.save(playerTestRecordOne,teamTestRecordOne.getId());
 
         playerTestRecordTwo = new Player();
         playerTestRecordTwo.setPlayerName("Test Player 2");
         playerTestRecordTwo.setAge(2);
-        playerTestRecordTwo.setTeam(teamTestRecordTwo);
         playerTestRecordTwo.setNationality("Test Country");
         playerTestRecordTwo.setPlayerPosition("CM");
-        playerDAOImpl.save(playerTestRecordTwo,teamTestRecordTwo);
+        playerDAOImpl.save(playerTestRecordTwo,teamTestRecordTwo.getId());
 
     }
 
@@ -68,7 +66,6 @@ public class PlayerDAOImplTest {
         teamDAOImpl.deleteById(teamTestRecordOne.getId());
         teamDAOImpl.deleteById(teamTestRecordTwo.getId());
         playerDAOImpl = null;
-        assertNull(playerDAOImpl);
     }
 
     @Test
@@ -109,7 +106,7 @@ public class PlayerDAOImplTest {
         playerTestRecordThree.setTeam(teamTestRecordTwo);
         playerTestRecordThree.setNationality("Test Country");
         playerTestRecordThree.setPlayerPosition("CB");
-        playerDAOImpl.save(playerTestRecordThree,teamTestRecordTwo);
+        playerDAOImpl.save(playerTestRecordThree,teamTestRecordTwo.getId());
 
         int deleteCount = playerDAOImpl.deletePlayerByName(playerTestRecordThree.getPlayerName());
         assertEquals(1,deleteCount);

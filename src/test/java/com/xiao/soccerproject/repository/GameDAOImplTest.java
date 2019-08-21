@@ -43,30 +43,28 @@ public class GameDAOImplTest {
 
        gameDAOImpl = new GameDAOImpl();
        gameTestRecordOne = new Game();
-       gameTestRecordOne.setHomeTeam(teamTestRecordOne);
-       gameTestRecordOne.setAwayTeam(teamTestRecordTwo);
        gameTestRecordOne.setHomeGoals(1);
        gameTestRecordOne.setHomeLosts(0);
        gameTestRecordOne.setHomeMatchResult("Win");
-       gameDAOImpl.save(gameTestRecordOne,teamTestRecordOne);
+       gameDAOImpl.save(gameTestRecordOne,teamTestRecordOne.getId(),teamTestRecordTwo.getId());
 
        gameTestRecordTwo = new Game();
-       gameTestRecordOne.setHomeTeam(teamTestRecordTwo);
-       gameTestRecordOne.setAwayTeam(teamTestRecordOne);
        gameTestRecordTwo.setHomeGoals(0);
        gameTestRecordTwo.setHomeLosts(1);
        gameTestRecordTwo.setHomeMatchResult("Lose");
-       gameDAOImpl.save(gameTestRecordTwo,teamTestRecordTwo);
+       gameDAOImpl.save(gameTestRecordTwo,teamTestRecordTwo.getId(),teamTestRecordOne.getId());
    }
 
    @After
    public void cleanup(){
-       gameDAOImpl.deleteById(gameTestRecordOne.getId());
-       gameDAOImpl.deleteById(gameTestRecordTwo.getId());
-       teamDAOImpl.deleteById(teamTestRecordOne.getId());
-       teamDAOImpl.deleteById(teamTestRecordTwo.getId());
-       gameDAOImpl = null;
-       assertNull(gameDAOImpl);
+
+       teamDAOImpl.deleteTeamByName(teamTestRecordOne.getTeamName());// use session delete instead of quary delete, when the inverse side record is  deleted, the corresponding owning side records are also deleted.
+       teamDAOImpl.deleteTeamByName(teamTestRecordTwo.getTeamName());
+
+//       gameDAOImpl.deleteById(gameTestRecordOne.getId());
+//       gameDAOImpl.deleteById(gameTestRecordTwo.getId());
+//       teamDAOImpl.deleteById(teamTestRecordOne.getId());
+//       teamDAOImpl.deleteById(teamTestRecordTwo.getId());
    }
 
     @Test

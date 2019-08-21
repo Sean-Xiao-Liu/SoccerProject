@@ -14,7 +14,7 @@ public class GameService {
     @Autowired
     private GameDAO gameDAO;
 
-    public boolean save(Game games, Team teams){return gameDAO.save(games,teams);}
+    public boolean save(Game games, long homeTeamId, long awayTeamId){return gameDAO.save(games,homeTeamId,awayTeamId);}
     public int updateHomeGoals(long id, int homeGoals){return  gameDAO.updateHomeGoals(id,homeGoals);}
     public int deleteById(long id){
         return gameDAO.deleteById(id);

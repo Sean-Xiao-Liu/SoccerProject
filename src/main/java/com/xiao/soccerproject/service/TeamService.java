@@ -15,7 +15,7 @@ public class TeamService {
     public boolean save(Team teams){return teamDAO.save(teams);}
     public int updateTeamHomeWin(long id, int homeWin){return teamDAO.updateTeamHomeWin(id,homeWin);}
     public int deleteById(long id){return teamDAO.deleteById(id);}
-    //    int deleteByName(String name);
+    public int deleteTeamByName(String teamName){return teamDAO.deleteTeamByName(teamName);}
     public List<Team> getTeams(){return teamDAO.getTeams();}
     public Team getTeamById(long id){return  teamDAO.getTeamById(id);}
     public Team getTeamByName(String teamName){return  teamDAO.getTeamByName(teamName);}

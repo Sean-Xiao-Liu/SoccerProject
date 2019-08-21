@@ -24,7 +24,7 @@ public class Player {
     @Column(name = "nationality")
     private String nationality;
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id" )// @Column will lead to duplication at this point
     private Team team;

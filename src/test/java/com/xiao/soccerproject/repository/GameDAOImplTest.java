@@ -25,7 +25,6 @@ public class GameDAOImplTest {
 
        teamDAOImpl = new TeamDAOImpl();
        teamTestRecordOne = new Team();
-//       teamTestRecordOne.setId(1);
        teamTestRecordOne.setTeamName("Test Team 1");
        teamTestRecordOne.setHomeWin(1);
        teamTestRecordOne.setAwayWin(1);
@@ -34,7 +33,6 @@ public class GameDAOImplTest {
        teamDAOImpl.save(teamTestRecordOne);
 
        teamTestRecordTwo = new Team();
-//       teamTestRecordTwo.setId(2);
        teamTestRecordTwo.setTeamName("Test Team 2");
        teamTestRecordTwo.setHomeWin(2);
        teamTestRecordTwo.setAwayWin(2);
@@ -45,7 +43,6 @@ public class GameDAOImplTest {
 
        gameDAOImpl = new GameDAOImpl();
        gameTestRecordOne = new Game();
-//       gameTestRecordOne.setId(1);
        gameTestRecordOne.setHomeTeam(teamTestRecordOne);
        gameTestRecordOne.setAwayTeam(teamTestRecordTwo);
        gameTestRecordOne.setHomeGoals(1);
@@ -54,7 +51,6 @@ public class GameDAOImplTest {
        gameDAOImpl.save(gameTestRecordOne,teamTestRecordOne);
 
        gameTestRecordTwo = new Game();
-//       gameTestRecordTwo.setId(2);
        gameTestRecordOne.setHomeTeam(teamTestRecordTwo);
        gameTestRecordOne.setAwayTeam(teamTestRecordOne);
        gameTestRecordTwo.setHomeGoals(0);

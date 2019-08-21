@@ -1,5 +1,7 @@
 package com.xiao.soccerproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +24,7 @@ public class Player {
     @Column(name = "nationality")
     private String nationality;
 
+//    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id" )// @Column will lead to duplication at this point
     private Team team;

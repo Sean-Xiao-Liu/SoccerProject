@@ -18,15 +18,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = AppInitializer.class)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = AppInitializer.class)
 
 @Repository
 public class PlayerDAOImpl implements PlayerDAO{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-//    @Autowired
-//    TeamDAOImpl teamDAOImpl;
+    @Autowired
+    TeamDAOImpl teamDAOImpl;
 
     //method 1
     //insert a new record of player

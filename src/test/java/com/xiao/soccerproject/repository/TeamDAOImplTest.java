@@ -93,7 +93,7 @@ private Game gameTestRecordOne;
         for(Team team : teams){
             System.out.println(team);
         }
-        assertEquals(3,teams.size());
+        assertEquals(2,teams.size());
     }
 
     @Test

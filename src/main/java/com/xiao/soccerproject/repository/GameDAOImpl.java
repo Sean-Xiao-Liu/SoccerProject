@@ -17,14 +17,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = AppInitializer.class)
-
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = AppInitializer.class)
 @Repository
 public class GameDAOImpl implements GameDAO{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-//    @Autowired
-//    TeamDAOImpl teamDAOImpl;
+    @Autowired
+    TeamDAOImpl teamDAOImpl;
 
     @Override
     //method 1

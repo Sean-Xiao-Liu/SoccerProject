@@ -124,7 +124,8 @@ public class TeamDAOImpl implements TeamDAO{
     //list all teams
     @Override
     public List<Team> getTeams() {
-        String hql = "FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";
+        String hql = "select distinct t FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";
+        //use select distinct to prevent duplicated row of team since the data are join fetched//
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Team> query = session.createQuery(hql);
             return query.list();
@@ -179,6 +180,33 @@ public class TeamDAOImpl implements TeamDAO{
 //            query.setParameter("id", id);
 //            return query.list();
 //        }
+//    }
+
+//    @Override
+//    public int updateTeam(Team team){
+//        Transaction transaction = null;
+//        boolean isSuccess = true;
+//        int updateCount = 0;
+//
+//        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+////            Query<User> query = session.createQuery(hql);
+//
+//            transaction = session.beginTransaction();
+//            session.saveOrUpdate(team);
+////            updateCount = query.executeUpdate();
+//            transaction.commit();
+//        }
+//        catch(Exception e){
+//            isSuccess = false;
+//            if(transaction != null) transaction.rollback();
+//            logger.error(e.getMessage());
+//        }
+//
+//        if(isSuccess) {
+//            updateCount ++;
+//            logger.debug(String.format("The team %s has been updated.",team.getTeamName()));
+//        }
+//        return updateCount;
 //    }
 
 

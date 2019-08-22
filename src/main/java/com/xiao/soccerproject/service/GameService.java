@@ -1,9 +1,9 @@
 package com.xiao.soccerproject.service;
 
 import com.xiao.soccerproject.model.Game;
-import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.repository.GameDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +19,6 @@ public class GameService {
     public int deleteById(long id){
         return gameDAO.deleteById(id);
     }
-    //    int deleteByName(String name);
-    public  List<Game> getGames(){return gameDAO.getGames();}
+    public List<Game> getGames(){return gameDAO.getGames();}
     public Game getGameById(long id){return gameDAO.getGameById(id);}
 }

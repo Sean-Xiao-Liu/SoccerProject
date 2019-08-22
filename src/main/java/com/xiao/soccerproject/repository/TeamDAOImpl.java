@@ -3,6 +3,7 @@ package com.xiao.soccerproject.repository;
 import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.util.HibernateUtil;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class TeamDAOImpl implements TeamDAO{
@@ -124,11 +126,14 @@ public class TeamDAOImpl implements TeamDAO{
     //list all teams
     @Override
     public List<Team> getTeams() {
-        String hql = "select distinct t FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";
+//        String hql = "select distinct t FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";// use select distinct to deal with duplicated data
+        String hql = "FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";
         //use select distinct to prevent duplicated row of team since the data are join fetched//
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Team> query = session.createQuery(hql);
-            return query.list();
+//           return query.list();
+//            return query.list().stream().distinct().collect(Collectors.toList());
+            return query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list(); // also works for duplicated data, remove "select distinct t" in hql when applied
         }
     }
 

@@ -97,6 +97,17 @@ public class Team {
         return players;
     }
 
+//    public Set<Player> getPlayers(){
+//        try{
+//            int size = players.size();
+//        }
+//        catch(Exception e){
+//            return null;
+//        }
+//        return players;
+//    }
+
+
     public void setPlayers(Set<Player> players) {
         this.players = players;
     }

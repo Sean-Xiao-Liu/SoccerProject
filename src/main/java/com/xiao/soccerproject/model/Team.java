@@ -93,34 +93,56 @@ public class Team {
         this.id = id;
     }
 
-    public Set<Player> getPlayers() {
-        return players;
-    }
-
-//    public Set<Player> getPlayers(){
-//        try{
-//            int size = players.size();
-//        }
-//        catch(Exception e){
-//            return null;
-//        }
+//    public Set<Player> getPlayers() {
 //        return players;
 //    }
+
+    public Set<Player> getPlayers(){
+        try{
+            int size = players.size();
+        }
+        catch(Exception e){
+            return null;
+        }
+        return players;
+    }
 
 
     public void setPlayers(Set<Player> players) {
         this.players = players;
     }
 
-    public Set<Game> getHomeGames() {
+//    public Set<Game> getHomeGames() {
+//        return homeGames;
+//    }
+
+    public Set<Game> getHomeGames(){
+        try{
+            int size = homeGames.size();
+        }
+        catch(Exception e){
+            return null;
+        }
         return homeGames;
     }
+
+
 
     public void setHomeGames(Set<Game> homeGames) {
         this.homeGames = homeGames;
     }
 
-    public Set<Game> getAwayGames() {
+//    public Set<Game> getAwayGames() {
+//        return awayGames;
+//    }
+
+    public Set<Game> getAwayGames(){
+        try{
+            int size = awayGames.size();
+        }
+        catch(Exception e){
+            return null;
+        }
         return awayGames;
     }
 

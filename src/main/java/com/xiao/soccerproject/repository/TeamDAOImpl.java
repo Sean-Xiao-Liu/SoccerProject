@@ -127,19 +127,21 @@ public class TeamDAOImpl implements TeamDAO{
     @Override
     public List<Team> getTeams() {
 //        String hql = "select distinct t FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";// use select distinct to deal with duplicated data
-        String hql = "FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";
+//        String hql = "FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";
+        String hql = "FROM Team";
         //use select distinct to prevent duplicated row of team since the data are join fetched//
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Team> query = session.createQuery(hql);
 //           return query.list();
-//            return query.list().stream().distinct().collect(Collectors.toList());
-            return query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list(); // also works for duplicated data, remove "select distinct t" in hql when applied
+            return query.list().stream().distinct().collect(Collectors.toList());
+//            return query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list(); // also works for duplicated data, remove "select distinct t" in hql when applied
         }
     }
 
     @Override
     public Team getTeamById(long id) {
-        String hql = "From Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames where t.id = :id";
+//        String hql = "From Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames where t.id = :id";
+        String hql = "From Team t where t.id = :id";
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Team> query = session.createQuery(hql);

@@ -1,5 +1,6 @@
 package com.xiao.soccerproject.controller;
 
+import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.service.TeamService;
 import org.slf4j.Logger;
@@ -52,7 +53,7 @@ public class TeamController {
     }
 
     //deleteById//
-    @RequestMapping(value = "/{teamId}", method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/{teamId}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
     public String deleteTeamById(@PathVariable long teamId){
         String msg = "the team has been deleted";
         int isSuccess = teamService.deleteById(teamId);
@@ -71,7 +72,19 @@ public class TeamController {
     }
 
     //updateTeamHomeWin//
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value = "/{teamId}/{homeWin}", method = RequestMethod.PUT,produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String updateTeamHomeWin(@PathVariable long teamId, @PathVariable int homeWin){
+        String msg = "the team win has been updated";
+        int isSuccess = teamService.updateTeamHomeWin(teamId,homeWin);
+        if(isSuccess != 1) msg = "the team win has not been updated";
+        return msg;
+    }
 
-
+    //getPlayersByTeamId//
+    @RequestMapping(method = RequestMethod.GET, params = {"teamId"},produces = {MediaType.APPLICATION_JSON_VALUE})
+    //use pass param to distinguish different //
+    List<Player> getPlayersByTeamId(@RequestParam(value = "teamId") long teamId){
+        List<Player> players = teamService.getPlayersByTeamId(teamId);
+        return players;
+    }
 }

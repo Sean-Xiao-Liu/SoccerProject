@@ -175,7 +175,8 @@ public class TeamDAOImpl implements TeamDAO{
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Player> query = session.createQuery(hql);
             query.setParameter("id", id);
-            return query.list();
+//            return query.list();
+            return query.list().stream().distinct().collect(Collectors.toList());// remove duplicated record
         }
     }
 //

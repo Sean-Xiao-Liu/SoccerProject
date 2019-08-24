@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.rmi.MarshalException;
 import java.util.List;
 
 @RestController
@@ -21,23 +22,65 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
-    @RequestMapping(value ="", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    //get all players//
+    @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Player> getPlayers(){
         return playerService.getPlayers();
     }
 
-    @RequestMapping(value = "/{playerName}",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Player getPlayerByName(@PathVariable String playerName){
+    //get players by name method//
+    @RequestMapping(method = RequestMethod.GET,params = {"playerName"}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public Player getPlayerByName(@RequestParam(value = "playerName") String playerName){
         return playerService.getPlayerByName(playerName);
     }
 
-    @RequestMapping(value = "/{team}", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public String createPlayer(@RequestBody Player player,@PathVariable String team){
-        String msg = "the player has been created";
-        boolean isSuccess = playerService.save(player, team);
-        if(!isSuccess) msg = "the player has not been created";
+    //get players by id method//
+    @RequestMapping(value = "/{playerId}",method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE})// for get request, use produce media type instead of consumes
+    public Player getPlayerById(@PathVariable long playerId){
+        return playerService.getPlayerById(playerId);
+    }
 
+    //save player method//
+    @RequestMapping(value = "/{teamId}",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public String createPlayer(@RequestBody Player player,@PathVariable long teamId){
+        String msg = "the player has been created";
+        boolean isSuccess = playerService.save(player,teamId);
+        if(!isSuccess) msg = "the player has not been created";
         return msg;
     }
+
+    //delete by team id//
+    @RequestMapping(value = "/{playerId}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String deletePlayerById(@PathVariable long playerId){
+        String msg = "the player has been deleted";
+        int isSuccess = playerService.deleteById(playerId);
+        if(isSuccess != 1) msg = "the player has not been deleted";
+        return msg;
+
+    }
+
+    //delete by team name//
+    @RequestMapping(method = RequestMethod.DELETE, params = {"playerName"},produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String deletePlayerByName(@RequestParam(value = "playerName")String playerName){
+        String msg = "the player has been deleted";
+        int isSuccess = playerService.deletePlayerByName(playerName);
+        if(isSuccess != 1) msg = "the player has not been deleted";
+        return msg;
+    }
+
+    //update player age//
+    @RequestMapping(value = "/{playerId}/{age}",method =RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String updatePlayerAge(@PathVariable long playerId, @PathVariable int age){
+        String msg = "the player age  has been updated";
+        int isSuccess = playerService.updatePlayerAge(playerId,age);
+        if(isSuccess != 1) msg = "the player age has not been changed";
+        return msg;
+    }
+
+
+
+
+
+
 
 }

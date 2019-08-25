@@ -23,12 +23,12 @@ public class Game{
     @Column(name = "home_match_result")
     private String homeMatchResult;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "home_team_id")
     private Team homeTeam;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "away_team_id")
     private Team awayTeam;

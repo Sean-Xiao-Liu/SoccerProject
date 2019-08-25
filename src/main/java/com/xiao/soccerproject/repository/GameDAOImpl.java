@@ -83,7 +83,7 @@ public class GameDAOImpl implements GameDAO{
     //list all Games
     @Override
     public List<Game> getGames() {
-        String hql = "FROM Game";
+        String hql = "FROM Game g left join fetch g.homeTeam left join fetch g.awayTeam";
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Game> query = session.createQuery(hql);
             return query.list();
@@ -114,7 +114,7 @@ public class GameDAOImpl implements GameDAO{
     }
 
     public Game getGameById(long id){
-        String hql = "FROM Game g where g.id = :id";
+        String hql = "FROM Game g left join fetch g.homeTeam left join fetch g.awayTeam where g.id = :id";
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Game> query = session.createQuery(hql);

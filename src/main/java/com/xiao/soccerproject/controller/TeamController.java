@@ -83,8 +83,17 @@ public class TeamController {
     //getPlayersByTeamId//
     @RequestMapping(method = RequestMethod.GET, params = {"teamId"},produces = {MediaType.APPLICATION_JSON_VALUE})
     //use pass param to distinguish different //
-    List<Player> getPlayersByTeamId(@RequestParam(value = "teamId") long teamId){
+    public List<Player> getPlayersByTeamId(@RequestParam(value = "teamId") long teamId){
         List<Player> players = teamService.getPlayersByTeamId(teamId);
         return players;
+    }
+
+    //update Team//
+    @RequestMapping(method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String updateTeam(@RequestBody Team team){
+        String msg = "the team info has been updated";
+        int isSuccess = teamService.updateTeam(team);
+        if(isSuccess != 1) msg = "the team info has not been updated";
+        return msg;
     }
 }

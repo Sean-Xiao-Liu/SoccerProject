@@ -190,32 +190,30 @@ public class TeamDAOImpl implements TeamDAO{
 //        }
 //    }
 
-//    @Override
-//    public int updateTeam(Team team){
-//        Transaction transaction = null;
-//        boolean isSuccess = true;
-//        int updateCount = 0;
-//
-//        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-////            Query<User> query = session.createQuery(hql);
-//
-//            transaction = session.beginTransaction();
-//            session.saveOrUpdate(team);
-////            updateCount = query.executeUpdate();
-//            transaction.commit();
-//        }
-//        catch(Exception e){
-//            isSuccess = false;
-//            if(transaction != null) transaction.rollback();
-//            logger.error(e.getMessage());
-//        }
-//
-//        if(isSuccess) {
-//            updateCount ++;
-//            logger.debug(String.format("The team %s has been updated.",team.getTeamName()));
-//        }
-//        return updateCount;
-//    }
+    @Override
+    public int updateTeam(Team team){
+        Transaction transaction = null;
+        boolean isSuccess = true;
+        int updateCount = 0;
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(team);
+            transaction.commit();
+        }
+        catch(Exception e){
+            isSuccess = false;
+            if(transaction != null) transaction.rollback();
+            logger.error(e.getMessage());
+        }
+
+        if(isSuccess) {
+            updateCount ++;
+            logger.debug(String.format("The team %s has been updated.",team.getTeamName()));
+        }
+        return updateCount;
+    }
 
 
 

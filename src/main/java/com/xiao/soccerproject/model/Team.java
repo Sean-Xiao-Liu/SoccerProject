@@ -1,6 +1,7 @@
 package com.xiao.soccerproject.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,28 +12,40 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Entity
 @Table(name = "Teams")
 public class Team {
+
+//    public interface teamInfo{};
+//    public interface playerInfo extends teamInfo{};
+//    public interface gameInfo extends teamInfo{};
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @JsonView(teamInfo.class)
     private Long id;
 
+//    @JsonView(teamInfo.class)
     @Column(name="team_name")
     private String teamName;
 
+//    @JsonView(teamInfo.class)
     @Column(name = "home_win")
     private int homeWin;
 
+//    @JsonView(teamInfo.class)
     @Column(name = "away_win")
     private int awayWin;
 
+//    @JsonView(teamInfo.class)
     @Column(name = "home_loss")
     private int homeLoss;
 
+//    @JsonView(teamInfo.class)
     @Column(name = "away_loss")
     private int awayLoss;
 
     //relationship with Player table
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+//    @JsonView(playerInfo.class)
     private Set<Player> players;
 
     //relationship with Games table

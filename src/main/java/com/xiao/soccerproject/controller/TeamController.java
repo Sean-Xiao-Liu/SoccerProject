@@ -22,13 +22,13 @@ public class TeamController {
     private TeamService teamService;
 
     //getTeams method//
-    @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value= "/getTeams", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Team> getTeams(){
         return teamService.getTeams();
     }
 
     //getTeamByName method//
-    @RequestMapping(method = RequestMethod.GET, params = {"teamName"},produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value="/getTeamByName",method = RequestMethod.GET, params = {"teamName"},produces = {MediaType.APPLICATION_JSON_VALUE})
     //use pass param to distinguish different //
     public Team getTeamByName(@RequestParam(value = "teamName") String teamName){
         Team team = teamService.getTeamByName(teamName);
@@ -36,7 +36,7 @@ public class TeamController {
     }
 
     //getTeamById method//
-    @RequestMapping(value = "/{teamId}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/getTeamById/{teamId}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE})
 //    @RequestMapping(value = "",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Team getTeamById(@PathVariable long teamId){ // to solve the ambiguous handler methods mapping problem
         Team team = teamService.getTeamById(teamId);
@@ -44,7 +44,7 @@ public class TeamController {
     }
 
     //saveTeam method//
-    @RequestMapping(value = "", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/saveTeam", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public String createTeam(@RequestBody Team team){
         String msg = "the team has been created";
         boolean isSuccess = teamService.save(team);
@@ -53,7 +53,7 @@ public class TeamController {
     }
 
     //deleteById//
-    @RequestMapping(value = "/{teamId}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/deleteTeamById/{teamId}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
     public String deleteTeamById(@PathVariable long teamId){
         String msg = "the team has been deleted";
         int isSuccess = teamService.deleteById(teamId);
@@ -62,7 +62,7 @@ public class TeamController {
     }
 
     //deleteByName//
-    @RequestMapping(method = RequestMethod.DELETE, params = {"teamName"},produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/deleteTeamByName",method = RequestMethod.DELETE, params = {"teamName"},produces = {MediaType.APPLICATION_JSON_VALUE})
     //use pass param to distinguish different //
     public String deleteTeamByName(@RequestParam(value = "teamName") String teamName){
         String msg = "the team has been deleted";
@@ -81,7 +81,7 @@ public class TeamController {
     }
 
     //getPlayersByTeamId//
-    @RequestMapping(method = RequestMethod.GET, params = {"teamId"},produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/getPlayersByTeamId",method = RequestMethod.GET, params = {"teamId"},produces = {MediaType.APPLICATION_JSON_VALUE})
     //use pass param to distinguish different //
     public List<Player> getPlayersByTeamId(@RequestParam(value = "teamId") long teamId){
         List<Player> players = teamService.getPlayersByTeamId(teamId);
@@ -89,7 +89,7 @@ public class TeamController {
     }
 
     //update Team//
-    @RequestMapping(method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/updateTeam",method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public String updateTeam(@RequestBody Team team){
         String msg = "the team info has been updated";
         int isSuccess = teamService.updateTeam(team);

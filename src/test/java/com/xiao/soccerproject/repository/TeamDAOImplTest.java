@@ -73,11 +73,11 @@ private Game gameTestRecordOne;
 
     @After
     public void cleanup(){
-        teamDAOImpl.deleteTeamByName(teamTestRecordOne.getTeamName());
-        teamDAOImpl.deleteTeamByName(teamTestRecordTwo.getTeamName());
-
-        playerDAOImpl.deleteById(playerTestRecordOne.getId());
-        playerDAOImpl.deleteById(playerTestRecordTwo.getId());
+//        teamDAOImpl.deleteTeamByName(teamTestRecordOne.getTeamName());
+//        teamDAOImpl.deleteTeamByName(teamTestRecordTwo.getTeamName());
+//
+//        playerDAOImpl.deleteById(playerTestRecordOne.getId());
+//        playerDAOImpl.deleteById(playerTestRecordTwo.getId());
 
         teamDAOImpl = null;
         playerDAOImpl=null;
@@ -93,7 +93,7 @@ private Game gameTestRecordOne;
         for(Team team : teams){
             System.out.println(team);
         }
-        assertEquals(2,teams.size());
+        assertEquals(22,teams.size());
     }
 
     @Test

@@ -113,6 +113,7 @@ public class GameDAOImpl implements GameDAO{
         return deletedCount;
     }
 
+    @Override
     public Game getGameById(long id){
         String hql = "FROM Game g left join fetch g.homeTeam left join fetch g.awayTeam where g.id = :id";
 
@@ -125,6 +126,31 @@ public class GameDAOImpl implements GameDAO{
             return query.uniqueResult();
 
         }
+    }
+
+    @Override
+    public int updateGame(Game game){
+        Transaction transaction = null;
+        boolean isSuccess = true;
+        int updateCount = 0;
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(game);
+            transaction.commit();
+        }
+        catch(Exception e){
+            isSuccess = false;
+            if(transaction != null) transaction.rollback();
+            logger.error(e.getMessage());
+        }
+
+        if(isSuccess) {
+            updateCount ++;
+            logger.debug("The game has been updated.");
+        }
+        return updateCount;
     }
 
     public static void main(String[] args) {

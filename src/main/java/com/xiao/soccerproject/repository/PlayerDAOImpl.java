@@ -177,6 +177,31 @@ public class PlayerDAOImpl implements PlayerDAO{
 
     }
 
+    @Override
+    public int updatePlayer(Player player){
+        Transaction transaction = null;
+        boolean isSuccess = true;
+        int updateCount = 0;
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(player);
+            transaction.commit();
+        }
+        catch(Exception e){
+            isSuccess = false;
+            if(transaction != null) transaction.rollback();
+            logger.error(e.getMessage());
+        }
+
+        if(isSuccess) {
+            updateCount ++;
+            logger.debug("The player has been updated");
+        }
+        return updateCount;
+    }
+
     public static void main(String[] args) {
 
     }

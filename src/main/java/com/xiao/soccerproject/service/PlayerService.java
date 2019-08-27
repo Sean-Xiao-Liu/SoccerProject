@@ -24,4 +24,5 @@ public class PlayerService {
     public List<Player> getPlayers(){return playerDAO.getPlayers();}
     public Player getPlayerById(long id){return  playerDAO.getPlayerById(id);};
     public Player getPlayerByName(String playerName){return playerDAO.getPlayerByName(playerName);}
+    public int updatePlayer(Player player){return playerDAO.updatePlayer(player);}
 }

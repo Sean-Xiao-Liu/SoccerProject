@@ -14,4 +14,5 @@ public interface PlayerDAO {
     List<Player> getPlayers();
     Player getPlayerById(long id);
     Player getPlayerByName(String name);
+    int updatePlayer(Player player);
 }

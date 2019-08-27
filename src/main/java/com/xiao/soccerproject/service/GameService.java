@@ -21,4 +21,5 @@ public class GameService {
     }
     public List<Game> getGames(){return gameDAO.getGames();}
     public Game getGameById(long id){return gameDAO.getGameById(id);}
+    public int updateGame(Game game){return gameDAO.updateGame(game);}
 }

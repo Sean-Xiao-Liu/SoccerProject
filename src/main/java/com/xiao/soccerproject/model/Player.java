@@ -8,24 +8,30 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Players")
 public class Player {
+//    public interface PlayerInfo extends Team.PlayerInfo{};
     @Id // don't forget the primary key, or lead to code 255
 //    @Column(name = "id")
+    @JsonView(Team.PlayerInfo.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @JsonView(Team.PlayerInfo.class)
     @Column(name = "player_name")
     private String playerName;
 
+    @JsonView(Team.PlayerInfo.class)
     @Column(name = "age")
     private int age;
 
+    @JsonView(Team.PlayerInfo.class)
     @Column(name = "player_position")
     private String playerPosition;
 
     @Column(name = "nationality")
+    @JsonView(Team.PlayerInfo.class)
     private String nationality;
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id" )// @Column will lead to duplication at this point
     private Team team;

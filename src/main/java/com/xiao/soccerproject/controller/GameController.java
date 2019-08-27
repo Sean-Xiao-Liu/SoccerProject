@@ -21,6 +21,7 @@ public class GameController {
     //get all games//
     /*when @JsonIgnore applied, the teamId are not available for get Games method*/
     @RequestMapping(value = "/getGames",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @JsonView(Team.GameInfo.class)
     public List<Game> getGames(){
         return gameService.getGames();
     }

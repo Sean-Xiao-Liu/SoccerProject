@@ -10,37 +10,36 @@ import com.xiao.soccerproject.model.Team;
 @Table(name = "Games")
 public class Game{
 
-    public interface GameInfo{};
-    public interface TeamInfo extends GameInfo{};
+//    public interface GameInfo{};
 
     @Id
 //    @Column(name = "id")
-    @JsonView(GameInfo.class)
+    @JsonView(Team.GameInfo.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JsonView(GameInfo.class)
+    @JsonView(Team.GameInfo.class)
     @Column(name = "home_goals")
     private int homeGoals;
 
-    @JsonView(GameInfo.class)
+    @JsonView(Team.GameInfo.class)
     @Column(name = "home_losts")
     private int homeLosts;
 
-    @JsonView(GameInfo.class)
+    @JsonView(Team.GameInfo.class)
     @Column(name = "home_match_result")
     private String homeMatchResult;
 
 //    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "home_team_id")
-    @JsonView(TeamInfo.class)
+    @JsonView(Team.GameInfo.class)
     private Team homeTeam;
 
 //    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "away_team_id")
-    @JsonView(TeamInfo.class)
+    @JsonView(Team.GameInfo.class)
     private Team awayTeam;
 
     public long getId() {

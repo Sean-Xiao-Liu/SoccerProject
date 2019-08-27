@@ -51,7 +51,7 @@ public class SecurityFilter implements Filter {
             Claims claims = JwtUtil.decodeJwtToken(token);
             String allowedResources = "/";
             switch(verb) {
-                case "GET"    : allowedResources = (String)claims.get("allowedReadResources");break;
+                case "GET"    : allowedResources = (String)claims.get("allowedReadResources");break;// cast the object to String
                 case "POST"   : allowedResources = (String)claims.get("allowedCreateResources"); break;
                 case "PUT"    : allowedResources = (String)claims.get("allowedUpdateResources"); break;
                 case "DELETE" : allowedResources = (String)claims.get("allowedDeleteResources"); break;

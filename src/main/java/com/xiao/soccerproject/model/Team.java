@@ -48,11 +48,11 @@ public class Team {
     private Set<Player> players;
 
     //relationship with Games table
-    @JsonView(GameInfo.class)
+//    @JsonView(GameInfo.class)
     @OneToMany(mappedBy = "homeTeam",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Game> homeGames;
 
-    @JsonView(GameInfo.class)
+//    @JsonView(GameInfo.class)
     @OneToMany(mappedBy = "awayTeam",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Game> awayGames;
 

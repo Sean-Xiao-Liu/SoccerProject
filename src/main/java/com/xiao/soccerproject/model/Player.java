@@ -1,6 +1,7 @@
 package com.xiao.soccerproject.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 

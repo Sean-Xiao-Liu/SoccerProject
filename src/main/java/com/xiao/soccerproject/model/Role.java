@@ -34,7 +34,7 @@ public class Role {
     private boolean allowedDelete;
 
     @ManyToMany(mappedBy = "roles",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private Set<User> users;
+    private List<User> users;
 
     public Long getId() {
         return id;
@@ -92,7 +92,7 @@ public class Role {
         this.allowedDelete = allowedDelete;
     }
 
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         try {
             int size = users.size();
         }
@@ -104,7 +104,7 @@ public class Role {
 
 
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 }

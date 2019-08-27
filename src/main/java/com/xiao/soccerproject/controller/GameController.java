@@ -1,6 +1,8 @@
 package com.xiao.soccerproject.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.xiao.soccerproject.model.Game;
+import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

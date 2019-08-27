@@ -1,5 +1,6 @@
 package com.xiao.soccerproject.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.xiao.soccerproject.model.Game;
 import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.model.User;
@@ -20,7 +21,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
     @RequestMapping(value="/getUser",method = RequestMethod.GET, params = {"email"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public User getUserByEmail(@RequestParam(value = "email") String email){
         User user = userService.getUserByEmail(email);

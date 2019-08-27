@@ -1,5 +1,6 @@
 package com.xiao.soccerproject.repository;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.util.HibernateUtil;
@@ -20,6 +21,7 @@ public class TeamDAOImpl implements TeamDAO{
 
     //method 1
     // save team info
+
     @Override
     public boolean save(Team teams){
         Transaction transaction = null;
@@ -124,6 +126,7 @@ public class TeamDAOImpl implements TeamDAO{
 
     //method 4
     //list all teams
+
     @Override
     public List<Team> getTeams() {
 //        String hql = "select distinct t FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";// use select distinct to deal with duplicated data

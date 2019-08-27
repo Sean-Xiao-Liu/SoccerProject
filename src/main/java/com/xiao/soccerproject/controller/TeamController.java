@@ -1,5 +1,6 @@
 package com.xiao.soccerproject.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.service.TeamService;
@@ -23,6 +24,7 @@ public class TeamController {
 
     //getTeams method//
     @RequestMapping(value= "/getTeams", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @JsonView(Team.TeamInfo.class)
     public List<Team> getTeams(){
         return teamService.getTeams();
     }
@@ -30,6 +32,7 @@ public class TeamController {
     //getTeamByName method//
     @RequestMapping(value="/getTeamByName",method = RequestMethod.GET, params = {"teamName"},produces = {MediaType.APPLICATION_JSON_VALUE})
     //use pass param to distinguish different //
+    @JsonView(Team.TeamInfo.class)
     public Team getTeamByName(@RequestParam(value = "teamName") String teamName){
         Team team = teamService.getTeamByName(teamName);
         return team;
@@ -38,6 +41,7 @@ public class TeamController {
     //getTeamById method//
     @RequestMapping(value = "/getTeamById/{teamId}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE})
 //    @RequestMapping(value = "",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @JsonView(Team.TeamInfo.class)
     public Team getTeamById(@PathVariable long teamId){ // to solve the ambiguous handler methods mapping problem
         Team team = teamService.getTeamById(teamId);
         return team;

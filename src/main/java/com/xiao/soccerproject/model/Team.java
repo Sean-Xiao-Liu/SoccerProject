@@ -13,46 +13,46 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "Teams")
 public class Team {
 
-//    public interface teamInfo{};
-//    public interface playerInfo extends teamInfo{};
-//    public interface gameInfo extends teamInfo{};
+    public interface TeamInfo{};
+    public interface PlayerInfo extends TeamInfo{};
+    public interface GameInfo extends TeamInfo{};
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @JsonView(teamInfo.class)
+    @JsonView(TeamInfo.class)
     private Long id;
 
-//    @JsonView(teamInfo.class)
+    @JsonView(TeamInfo.class)
     @Column(name="team_name")
     private String teamName;
 
-//    @JsonView(teamInfo.class)
+    @JsonView(TeamInfo.class)
     @Column(name = "home_win")
     private int homeWin;
 
-//    @JsonView(teamInfo.class)
+    @JsonView(TeamInfo.class)
     @Column(name = "away_win")
     private int awayWin;
 
-//    @JsonView(teamInfo.class)
+    @JsonView(TeamInfo.class)
     @Column(name = "home_loss")
     private int homeLoss;
 
-//    @JsonView(teamInfo.class)
+    @JsonView(TeamInfo.class)
     @Column(name = "away_loss")
     private int awayLoss;
 
     //relationship with Player table
-
+    @JsonView(PlayerInfo.class)
     @OneToMany(mappedBy = "team", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-//    @JsonView(playerInfo.class)
     private Set<Player> players;
 
     //relationship with Games table
-
+    @JsonView(GameInfo.class)
     @OneToMany(mappedBy = "homeTeam",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Game> homeGames;
 
+    @JsonView(GameInfo.class)
     @OneToMany(mappedBy = "awayTeam",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Game> awayGames;
 
@@ -158,6 +158,11 @@ public class Team {
         }
         return awayGames;
     }
+
+
+
+
+
 
     public void setAwayGames(Set<Game> awayGames) {
         this.awayGames = awayGames;

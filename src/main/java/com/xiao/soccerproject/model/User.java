@@ -1,5 +1,6 @@
 package com.xiao.soccerproject.model;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +39,7 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public Long getId() {
         return id;
@@ -61,7 +62,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = DigestUtils.md5Hex(password.trim());
     }
 
     public String getSecretKey() {
@@ -100,7 +101,7 @@ public class User {
 //        return roles;
 //    }
 
-    public Set<Role> getRoles(){
+    public List<Role> getRoles(){
         try{
             int size = roles.size();
         }
@@ -110,7 +111,12 @@ public class User {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("email: %s, pass: %s", email, password);
     }
 }

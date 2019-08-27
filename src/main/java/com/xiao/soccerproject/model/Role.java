@@ -22,16 +22,16 @@ public class Role {
     private String allowedResource;
 
     @Column(name = "allowed_read")
-    private String allowedRead;
+    private boolean allowedRead;
 
     @Column(name= "allowed_create")
-    private String allowedCreate;
+    private boolean allowedCreate;
 
     @Column(name = "allowed_update")
-    private String allowedUpdate;
+    private boolean allowedUpdate;
 
     @Column(name = "allowed_delete")
-    private String allowedDelete;
+    private boolean allowedDelete;
 
     @ManyToMany(mappedBy = "roles",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<User> users;
@@ -60,41 +60,37 @@ public class Role {
         this.allowedResource = allowedResource;
     }
 
-    public String getAllowedRead() {
+    public boolean isAllowedRead() {
         return allowedRead;
     }
 
-    public void setAllowedRead(String allowedRead) {
+    public void setAllowedRead(boolean allowedRead) {
         this.allowedRead = allowedRead;
     }
 
-    public String getAllowedCreate() {
+    public boolean isAllowedCreate() {
         return allowedCreate;
     }
 
-    public void setAllowedCreate(String allowedCreate) {
+    public void setAllowedCreate(boolean allowedCreate) {
         this.allowedCreate = allowedCreate;
     }
 
-    public String getAllowedUpdate() {
+    public boolean isAllowedUpdate() {
         return allowedUpdate;
     }
 
-    public void setAllowedUpdate(String allowedUpdate) {
+    public void setAllowedUpdate(boolean allowedUpdate) {
         this.allowedUpdate = allowedUpdate;
     }
 
-    public String getAllowedDelete() {
+    public boolean isAllowedDelete() {
         return allowedDelete;
     }
 
-    public void setAllowedDelete(String allowedDelete) {
+    public void setAllowedDelete(boolean allowedDelete) {
         this.allowedDelete = allowedDelete;
     }
-
-//    public Set<User> getUsers() {
-//        return users;
-//    }
 
     public Set<User> getUsers() {
         try {

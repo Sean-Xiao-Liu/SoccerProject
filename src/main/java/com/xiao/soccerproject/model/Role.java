@@ -3,6 +3,8 @@ package com.xiao.soccerproject.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -13,23 +15,30 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(User.AdvUserInfo.class)
     private Long id;
 
+    @JsonView(User.AdvUserInfo.class)
     @Column(name = "name")
     private String name;
 
+    @JsonView(User.AdvUserInfo.class)
     @Column(name = "allowed_resource")
     private String allowedResource;
 
+    @JsonView(User.AdvUserInfo.class)
     @Column(name = "allowed_read")
     private boolean allowedRead;
 
+    @JsonView(User.AdvUserInfo.class)
     @Column(name= "allowed_create")
     private boolean allowedCreate;
 
+    @JsonView(User.AdvUserInfo.class)
     @Column(name = "allowed_update")
     private boolean allowedUpdate;
 
+    @JsonView(User.AdvUserInfo.class)
     @Column(name = "allowed_delete")
     private boolean allowedDelete;
 

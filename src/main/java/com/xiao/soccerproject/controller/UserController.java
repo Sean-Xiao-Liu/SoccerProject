@@ -22,12 +22,14 @@ public class UserController {
     @Autowired
     private UserService userService;
     @RequestMapping(value="/getUser",method = RequestMethod.GET, params = {"email"}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @JsonView(User.DefUserInfo.class)
     public User getUserByEmail(@RequestParam(value = "email") String email){
         User user = userService.getUserByEmail(email);
         return user;
     }
 
     @RequestMapping(value = "/getUserByCredentials", method = RequestMethod.GET, params = {"email", "password"}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @JsonView(User.AdvUserInfo.class)
     public User getUserByCredentials(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password){
         User user = userService.getUserByCredentials(email,password);
         return user;
@@ -41,7 +43,9 @@ public class UserController {
         return msg;
     }
 
+
     @RequestMapping(value = "/getUsers",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @JsonView(User.DefUserInfo.class)
     public List<User> getUsers(){
         return userService.getUsers();
     }

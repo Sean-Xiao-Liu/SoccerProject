@@ -19,8 +19,8 @@ import java.io.IOException;
 public class SecurityFilter implements Filter {
 
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());// get logger
-    private static String AUTH_URI = "/auth";
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static String AUTH_URI = "/auth";// set the uri of authorization
 
     @Override
     public void init(FilterConfig filterConfig){

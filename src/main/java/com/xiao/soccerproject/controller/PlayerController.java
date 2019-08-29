@@ -77,10 +77,10 @@ public class PlayerController {
         return msg;
     }
 
-    @RequestMapping(value = "/updatePlayer",method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String updatePlayer(@RequestBody Player player){
+    @RequestMapping(value = "/updatePlayer/{teamId}",method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String updatePlayer(@RequestBody Player player, @PathVariable long teamId){
         String msg = "the team info has been updated";
-        int isSuccess = playerService.updatePlayer(player);
+        int isSuccess = playerService.updatePlayer(player,teamId);
         if(isSuccess != 1) msg = "the player info has not been updated";
         return msg;
     }

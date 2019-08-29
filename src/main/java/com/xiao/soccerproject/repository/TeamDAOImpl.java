@@ -203,6 +203,7 @@ public class TeamDAOImpl implements TeamDAO{
 
             transaction = session.beginTransaction();
             session.saveOrUpdate(team);
+//            session.update(team);
             transaction.commit();
         }
         catch(Exception e){

@@ -59,10 +59,10 @@ public class GameController {
         return msg;
     }
 
-    @RequestMapping(value = "/updateGame",method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String updateGame(@RequestBody Game game){
+    @RequestMapping(value = "/updateGame/{homeId}/{awayId}",method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String updateGame(@RequestBody Game game, @PathVariable long homeId, @PathVariable long awayId){
         String msg = "the team info has been updated";
-        int isSuccess = gameService.updateGame(game);
+        int isSuccess = gameService.updateGame(game,homeId,awayId);
         if(isSuccess != 1) msg = "the game info has not been updated";
         return msg;
     }

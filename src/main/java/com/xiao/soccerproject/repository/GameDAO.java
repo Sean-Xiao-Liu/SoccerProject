@@ -12,5 +12,5 @@ public interface GameDAO {
     int deleteById(long id);
     List<Game> getGames();
     Game getGameById(long id);
-    int updateGame(Game game);
+    int updateGame(Game game,long homeTeamId, long awayTeamId);
 }

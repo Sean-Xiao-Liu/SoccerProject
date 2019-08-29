@@ -129,7 +129,7 @@ public class GameDAOImpl implements GameDAO{
     }
 
     @Override
-    public int updateGame(Game game){
+    public int updateGame(Game game,long homeTeamId, long awayTeamId){
         Transaction transaction = null;
         boolean isSuccess = true;
         int updateCount = 0;
@@ -137,6 +137,11 @@ public class GameDAOImpl implements GameDAO{
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
 
             transaction = session.beginTransaction();
+            TeamDAOImpl teamDAOImpl = new TeamDAOImpl();
+            Team homeTeam = teamDAOImpl.getTeamById(homeTeamId);
+            Team awayTeam = teamDAOImpl.getTeamById(awayTeamId);
+            game.setHomeTeam(homeTeam);
+            game.setAwayTeam(awayTeam);
             session.saveOrUpdate(game);
             transaction.commit();
         }

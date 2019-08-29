@@ -178,7 +178,7 @@ public class PlayerDAOImpl implements PlayerDAO{
     }
 
     @Override
-    public int updatePlayer(Player player){
+    public int updatePlayer(Player player,long teamId){
         Transaction transaction = null;
         boolean isSuccess = true;
         int updateCount = 0;
@@ -186,6 +186,12 @@ public class PlayerDAOImpl implements PlayerDAO{
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
 
             transaction = session.beginTransaction();
+
+            // set team_id foreign key//
+            TeamDAOImpl teamDAOImpl = new TeamDAOImpl();
+            Team team =  teamDAOImpl.getTeamById(teamId);
+            player.setTeam(team);
+
             session.saveOrUpdate(player);
             transaction.commit();
         }

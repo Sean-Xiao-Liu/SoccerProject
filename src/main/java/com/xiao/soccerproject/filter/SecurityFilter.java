@@ -47,7 +47,7 @@ public class SecurityFilter implements Filter {
         String verb = req.getMethod();
         if (uri.equalsIgnoreCase(AUTH_URI)) return HttpServletResponse.SC_ACCEPTED;
         try {
-            String token = req.getHeader("Authorization").replaceAll("^(.*?) ", "");
+            String token = req.getHeader("Authorization").replaceAll("^(.*?) ", "");// use regular expression
             if (token == null || token.isEmpty()) return statusCode;
             Claims claims = JwtUtil.decodeJwtToken(token);
             String allowedResources = "/";

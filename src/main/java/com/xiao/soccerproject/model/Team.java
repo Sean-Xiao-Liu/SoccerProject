@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -160,9 +161,27 @@ public class Team {
     }
 
 
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, teamName);// generate hashCode
+    }
 
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if(this.getClass() != obj.getClass())
+            return false;
+        Team other = (Team) obj;
 
+        if(!teamName.equals(other.teamName))
+            return false;
+        return true;
+    }
 
     public void setAwayGames(Set<Game> awayGames) {
         this.awayGames = awayGames;

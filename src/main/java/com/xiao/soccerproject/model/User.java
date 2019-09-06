@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -125,6 +126,30 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email);// generate hashCode
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+       if (this == obj)
+           return true;
+       if (obj == null)
+           return false;
+       if(this.getClass() != obj.getClass())
+           return false;
+       User other = (User) obj;
+
+       if(!name.equals(other.name))
+           return false;
+
+       if(!email.equals(other.email))
+           return false;
+
+       return true;
     }
 
     @Override

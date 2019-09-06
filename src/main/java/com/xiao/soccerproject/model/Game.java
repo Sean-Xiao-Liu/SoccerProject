@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.xiao.soccerproject.model.Team;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "Games")
-public class Game{
+public class Game {
 
 //    public interface GameInfo{};
 
@@ -30,13 +32,13 @@ public class Game{
     @Column(name = "home_match_result")
     private String homeMatchResult;
 
-//    @JsonIgnore
+    //    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "home_team_id")
     @JsonView(Team.GameInfo.class)
     private Team homeTeam;
 
-//    @JsonIgnore
+    //    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "away_team_id")
     @JsonView(Team.GameInfo.class)
@@ -89,4 +91,30 @@ public class Game{
     public void setAwayTeam(Team awayTeam) {
         this.awayTeam = awayTeam;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, homeTeam, awayTeam);// generate hashCode
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (this.getClass() != obj.getClass())
+            return false;
+        Game other = (Game) obj;
+
+        if (!homeTeam.equals(other.homeTeam))
+            return false;
+
+        if (!awayTeam.equals(other.awayTeam))
+            return false;
+
+        return true;
+    }
 }
+
+

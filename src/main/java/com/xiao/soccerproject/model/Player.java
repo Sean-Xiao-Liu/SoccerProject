@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Players")
@@ -82,5 +83,26 @@ public class Player {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, playerName);// generate hashCode
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if(this.getClass() != obj.getClass())
+            return false;
+        Player other = (Player) obj;
+
+        if(!playerName.equals(other.playerName))
+            return false;
+
+        return true;
     }
 }

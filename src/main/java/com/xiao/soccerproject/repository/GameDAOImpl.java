@@ -21,7 +21,10 @@ import java.util.List;
 //@SpringBootTest(classes = AppInitializer.class)
 @Repository
 public class GameDAOImpl implements GameDAO{
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+//    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private Logger logger;
+
     @Autowired
     TeamDAOImpl teamDAOImpl;
 

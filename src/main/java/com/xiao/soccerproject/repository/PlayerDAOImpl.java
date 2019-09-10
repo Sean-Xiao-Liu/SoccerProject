@@ -23,7 +23,9 @@ import java.util.List;
 
 @Repository
 public class PlayerDAOImpl implements PlayerDAO{
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+//    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private Logger logger;
 
     @Autowired
     TeamDAOImpl teamDAOImpl;

@@ -1,5 +1,6 @@
 package com.xiao.soccerproject.controller;
 
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import com.xiao.soccerproject.model.User;
 import com.xiao.soccerproject.service.UserService;
 import com.xiao.soccerproject.util.JwtUtil;
@@ -11,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping(value = "/auth")
@@ -47,6 +52,23 @@ public class Authentication {
         return ResponseEntity.status(HttpServletResponse.SC_OK).body(tokenKeyWord + ":" + tokenType + " " + token);
     }
 
+    public boolean saveFile(MultipartFile multipartFile, String filePath){// save file to local path
+        boolean isSuccess = false;
+
+        try{
+            File directory = new File(filePath);
+            if(!directory.exists())  directory.mkdir();
+            Path filepath = Paths.get(filePath, multipartFile.getOriginalFilename());
+            multipartFile.transferTo(filepath);
+            isSuccess = true;
+            logger.info(String.format("The file %s is saved in the folder %s",multipartFile.getOriginalFilename(),filePath));
+        }
+        catch (Exception e){
+            logger.error(e.getMessage());
+        }
+
+        return isSuccess;
+    }
 
 
 

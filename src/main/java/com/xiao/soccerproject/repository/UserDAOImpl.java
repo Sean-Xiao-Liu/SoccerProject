@@ -18,7 +18,10 @@ import java.util.stream.Collectors;
 @Repository
 public class UserDAOImpl implements UserDAO{
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+//    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private Logger logger;
 
     @Override
     public boolean save(User user) {

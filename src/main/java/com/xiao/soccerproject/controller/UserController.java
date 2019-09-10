@@ -21,6 +21,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
     @RequestMapping(value="/getUser",method = RequestMethod.GET, params = {"email"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @JsonView(User.DefUserInfo.class)
     public User getUserByEmail(@RequestParam(value = "email") String email){

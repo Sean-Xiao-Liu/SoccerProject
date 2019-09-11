@@ -48,13 +48,8 @@ public class AppInitializer {
         return AmazonSQSClientBuilder
                 .standard()
                 .withCredentials(new DefaultAWSCredentialsProviderChain())
-                .withRegion(Regions.US_EAST_2)
+                .withRegion(Regions.US_EAST_1)
                 .build();
     }
-
-
-
-
-
 
 }

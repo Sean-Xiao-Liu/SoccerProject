@@ -52,25 +52,5 @@ public class Authentication {
         return ResponseEntity.status(HttpServletResponse.SC_OK).body(tokenKeyWord + ":" + tokenType + " " + token);
     }
 
-    public boolean saveFile(MultipartFile multipartFile, String filePath){// save file to local path
-        boolean isSuccess = false;
-
-        try{
-            File directory = new File(filePath);
-            if(!directory.exists())  directory.mkdir();
-            Path filepath = Paths.get(filePath, multipartFile.getOriginalFilename());
-            multipartFile.transferTo(filepath);
-            isSuccess = true;
-            logger.info(String.format("The file %s is saved in the folder %s",multipartFile.getOriginalFilename(),filePath));
-        }
-        catch (Exception e){
-            logger.error(e.getMessage());
-        }
-
-        return isSuccess;
-    }
-
-
-
 
 }

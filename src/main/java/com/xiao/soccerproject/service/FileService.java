@@ -1,22 +1,36 @@
 package com.xiao.soccerproject.service;
 
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.HttpMethod;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.apigatewayv2.model.transform.ApiJsonUnmarshaller;
 import com.amazonaws.services.dynamodbv2.xspec.L;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.Bucket;
-import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
-import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.*;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.List;
+
+import java.io.*;
+
+
+/*
+* Object Key and Metadata
+*
+* object = file ; key = file name
+* https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html
+*
+* */
 
 @Service
 public class FileService {
@@ -48,6 +62,24 @@ public class FileService {
         return amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString();
     }
 
+    // save file, save file to local
+    public boolean saveFile(MultipartFile multipartFile, String filePath){
+        boolean isSuccess = false;
+        try{
+            File directory = new File(filePath);
+            if(!directory.exists()) directory.mkdir();
+            Path filepath = Paths.get(filePath, multipartFile.getOriginalFilename());
+            multipartFile.transferTo(filepath);
+            isSuccess = true;
+            logger.info(String.format("This file %s is saved in the folder %s", multipartFile.getOriginalFilename(),filePath));
+        }
+        catch (Exception e){
+            logger.error(e.getMessage());
+        }
+        return isSuccess;
+    }
+
+    //upload file method
     public String uploadFile(String bucketName, MultipartFile file) throws IOException {
         try {
             if (amazonS3.doesObjectExist(bucketName, file.getOriginalFilename())) {
@@ -68,12 +100,88 @@ public class FileService {
     }
 
 
+    // get file method
+    // https://docs.aws.amazon.com/AmazonS3/latest/dev/RetrievingObjectUsingJava.html
+    public void getFile(String bucketName, MultipartFile file) throws IOException {
+        S3Object downloadedFile = null;
+        try {
+            if (!amazonS3.doesObjectExist(bucketName, file.getOriginalFilename())) {
+                logger.info(String.format("The file '%s' does not exists in the bucket %s", file.getOriginalFilename(), bucketName));
+            }
+
+            // get a file and print its contents
+            System.out.println("Downloading an object");
+            downloadedFile = amazonS3.getObject(new GetObjectRequest(bucketName, file.getOriginalFilename()));
+            System.out.println("Content-Type:\n" + downloadedFile.getObjectMetadata().getContentType());
+            System.out.println("Content:\n");
+//            display???
+//            displayTextInputStream(downloadedFile.getObjectContent());
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        } finally {
+            // To ensure that the network connection doesn't remain open, close any open input streams.
+            if (downloadedFile != null) {
+                downloadedFile.close();
+            }
+        }
+    }
+
+    // list files method
+    // https://docs.aws.amazon.com/AmazonS3/latest/dev/ListingObjectKeysUsingJava.html
+    public void listFile(String bucketName) throws IOException {
+        try{
+            System.out.println("Listing objects");
+            ListObjectsV2Request req = new ListObjectsV2Request().withBucketName(bucketName).withMaxKeys(2);
+            ListObjectsV2Result result;
+
+            do {
+                result = amazonS3.listObjectsV2(req);
+
+                for (S3ObjectSummary objectSummary : result.getObjectSummaries()) {
+                    System.out.printf(" - %s (size: %d)\n", objectSummary.getKey(), objectSummary.getSize());
+                }
+                // If there are more than maxKeys keys in the bucket, get a continuation token
+                // and list the next objects.
+                String token = result.getNextContinuationToken();
+                System.out.println("Next Continuation Token: " + token);
+                req.setContinuationToken(token);
+            } while (result.isTruncated());
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
+    }
 
 
+    // delete file method
+    // https://docs.aws.amazon.com/AmazonS3/latest/dev/DeletingOneObjectUsingJava.html
+    public void deleteFile(String bucketName, MultipartFile file) throws IOException {
+        try {
+            if (!amazonS3.doesObjectExist(bucketName, file.getOriginalFilename())) {
+                logger.info(String.format("The file '%s' does not exists in the bucket %s", file.getOriginalFilename(), bucketName));
+            }
 
-
-
-
-
+            amazonS3.deleteObject(new DeleteObjectRequest(bucketName,file.getOriginalFilename()));
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
+    }
 
 }

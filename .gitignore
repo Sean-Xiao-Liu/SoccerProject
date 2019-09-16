@@ -6,4 +6,4 @@ target/
 *.logs
 *.iml
 .idea/
-.eclipse
+.eclipse.idea

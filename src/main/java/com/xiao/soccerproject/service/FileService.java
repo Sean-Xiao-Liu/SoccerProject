@@ -62,6 +62,18 @@ public class FileService {
         return amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString();
     }
 
+    //display text input stream, co-work with getFile method
+    public static void displayTextInputStream(InputStream input) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+        while (true) {
+            String line = reader.readLine();
+            if (line == null) break;
+            System.out.println("    " + line);
+        }
+        System.out.println();
+    }
+
+
     // save file, save file to local
     public boolean saveFile(MultipartFile multipartFile, String filePath){
         boolean isSuccess = false;
@@ -115,7 +127,7 @@ public class FileService {
             System.out.println("Content-Type:\n" + downloadedFile.getObjectMetadata().getContentType());
             System.out.println("Content:\n");
 //            display???
-//            displayTextInputStream(downloadedFile.getObjectContent());
+            displayTextInputStream(downloadedFile.getObjectContent());
         } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process
             // it, so it returned an error response.

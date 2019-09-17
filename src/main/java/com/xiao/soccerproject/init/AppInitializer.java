@@ -51,5 +51,4 @@ public class AppInitializer {
                 .withRegion(Regions.US_EAST_1)
                 .build();
     }
-
 }

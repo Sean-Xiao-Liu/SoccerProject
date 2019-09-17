@@ -30,7 +30,8 @@ public class FileController {
     @Autowired
     private MessageService messageService;
 
-    @RequestMapping(value = "/{bucketName}", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    //upload file to certain bucket
+    @RequestMapping(value = "/uploadFile/{bucketName}", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity uploadFile(@PathVariable String bucketName, @RequestParam("file") MultipartFile file) {
         String msg = String.format("The file name=%s, size=%d could not be uploaded.", file.getOriginalFilename(), file.getSize());
         ResponseEntity responseEntity = ResponseEntity.status(HttpServletResponse.SC_NOT_ACCEPTABLE).body(msg);
@@ -51,7 +52,9 @@ public class FileController {
         }
         return responseEntity;
     }
-    @RequestMapping(value = "/{fileName}", method = RequestMethod.GET, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+
+    @RequestMapping(value = "/downloadFile/{fileName}", method = RequestMethod.GET, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Object> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         Resource resource = null;
         String msg = "The file doesn't exist.";

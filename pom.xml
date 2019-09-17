@@ -92,6 +92,12 @@
       <artifactId>aws-java-sdk</artifactId>
       <version>1.11.592</version>
     </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>

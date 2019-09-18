@@ -48,7 +48,8 @@ public class FileServiceTest {
 //        fileService.createBucket("com.xiao.soccerproject.test");// has to use global unique bucket name
         logger.info(">>>>>>>>>>>>>>>>>>>test start<<<<<<<<<<<<<<<<<");
         fakeFileUrl = new URL("http://www.fakeQueueUrl.com/xiao/soccerproject/fake");
-        File file = new File("/Users/xiaoliu/IdeaProjects/SoccerProject/uploadFileTest.txt");
+//        File file = new File("/Users/xiaoliu/IdeaProjects/SoccerProject/uploadFileTest.txt");
+        File file = new File("/Users/xiaoliu/IdeaProjects/SoccerProject/fileServiceTest.txt");
         FileInputStream input = new FileInputStream(file);
         multipartFile = new MockMultipartFile("file", file.getName(), "text/plain" , IOUtils.toByteArray(input));
         path = System.getProperty("user.dir") + File.separator + "temp";
@@ -66,7 +67,7 @@ public class FileServiceTest {
         for(Bucket bucket : buckets){
             System.out.println(bucket);
         }
-        assertEquals(2,buckets.size());
+        assertEquals(1,buckets.size());
     }
 
     @Test

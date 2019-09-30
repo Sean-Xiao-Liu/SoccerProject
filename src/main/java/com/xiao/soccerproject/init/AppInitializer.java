@@ -17,6 +17,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
@@ -34,7 +35,7 @@ public class AppInitializer extends SpringBootServletInitializer {
     }
 
     @Bean
-    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON) // establish the connection between s3 and sqs, thus SQS message consumer will work
     public AmazonS3 getAmazonS3(){
         return AmazonS3ClientBuilder
                 .standard()
@@ -45,6 +46,7 @@ public class AppInitializer extends SpringBootServletInitializer {
 
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+//    @Profile({"dev","staging","prod"})
     public AmazonSQS getAmazonSQS(){
         return AmazonSQSClientBuilder
                 .standard()

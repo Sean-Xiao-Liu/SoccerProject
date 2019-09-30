@@ -34,8 +34,8 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AppInitializer.class)
 public class FileServiceMockAWSTest {
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS) private AmazonS3 amazonS3;
-    @Autowired @Spy private Logger logger;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS) private AmazonS3 amazonS3;// not real bean, is a mocked object
+    @Autowired @Spy private Logger logger; // @spy will wrapped the object, so its methods invoked time will be recorded.
     @InjectMocks private FileService fileService;
 
     private String bucketName = "com.xiao.soccerproject";
@@ -58,6 +58,7 @@ public class FileServiceMockAWSTest {
         path = System.getProperty("user.dir") + File.separator + "temp";
 
         //stubbing for the method doesObjectExist and generatePresignedUrl
+        //call real method on spied object
         when(amazonS3.doesObjectExist(anyString(),anyString())).thenReturn(false);
         when(amazonS3.generatePresignedUrl(any())).thenReturn(fakeFileUrl);
 
@@ -72,9 +73,9 @@ public class FileServiceMockAWSTest {
     @Test
     public void getFileUrlTest(){
         String fileUrl = fileService.getFileUrl(bucketName,fileName);
-        assertEquals(fileUrl,fakeFileUrl.toString());
+//        assertEquals(fileUrl,fakeFileUrl.toString());
         verify(amazonS3,times(1)).generatePresignedUrl(any());
-        logger.info(String.format("The fileUrl is %s, and the fakeFileUrl is %s", fileUrl ,fakeFileUrl.toString()));// the file service has mock injected
+        logger.info(String.format("The fileUrl is %s, and the fakeFileUrl is %s", fileUrl ,fakeFileUrl.toString()));// since the method is stubbed
     }
 
     // upload file mock test
@@ -90,7 +91,7 @@ public class FileServiceMockAWSTest {
     public void getFileTest(){
         String fileUrl = fileService.getFileUrl(bucketName,fileName);
         assertEquals(fileUrl,fakeFileUrl.toString());
-        verify(amazonS3,times(1)).generatePresignedUrl(any());
+        verify(amazonS3,times(1)).generatePresignedUrl(any());// since void getFile, don not need stubbing
     }
 
     @Test
@@ -108,7 +109,7 @@ public class FileServiceMockAWSTest {
         //call method and use use dummies as parameter
         boolean isSuccess = mockedFileService.saveFile(multipartFile,path);
 
-        //verify status
+        //verify states
         assertTrue(isSuccess);
 
         //verify behavior

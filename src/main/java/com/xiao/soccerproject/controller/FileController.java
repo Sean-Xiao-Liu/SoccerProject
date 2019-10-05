@@ -36,7 +36,7 @@ public class FileController {
         String msg = String.format("The file name=%s, size=%d could not be uploaded.", file.getOriginalFilename(), file.getSize());
         ResponseEntity responseEntity = ResponseEntity.status(HttpServletResponse.SC_NOT_ACCEPTABLE).body(msg);
         try {
-            String path = System.getProperty("user.dir") + File.separator + "temp";
+            String path = System.getProperty("user.dir") + File.separator + "temp";// save the file which needs to be uploaded to a local path called temp
             fileService.saveFile(file, path);
             String url = fileService.uploadFile(bucketName, file);
             if (url != null) {
@@ -53,9 +53,36 @@ public class FileController {
         return responseEntity;
     }
 
+    //upload multiple files to given bucket
+    @RequestMapping(value = "/uploadMultipleFile/{bucketName}", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity uploadMultipleFiles(@PathVariable String bucketName, @RequestParam("file") MultipartFile[] files){
+        String msg = "no content";
+        ResponseEntity responseEntity = ResponseEntity.status(HttpServletResponse.SC_NO_CONTENT).body(msg);
+       for(int i = 0; i < files.length ;i++) {
+           msg = String.format("The file name=%s, size=%d could not be uploaded.", files[i].getOriginalFilename(), files[i].getSize());
+           responseEntity = ResponseEntity.status(HttpServletResponse.SC_NOT_ACCEPTABLE).body(msg);
+           try {
+               String path = System.getProperty("user.dir") + File.separator + "temp";// save the file which needs to be uploaded to a local path called temp
+               fileService.saveFile(files[i], path);
+               String url = fileService.uploadFile(bucketName, files[i]);
+               if (url != null) {
+                   msg = String.format("The file name=%s, size=%d was uploaded, url=%s", files[i].getOriginalFilename(), files[i].getSize(), url);
+                   messageService.sendMessage(queueName, url);
+                   responseEntity = ResponseEntity.status(HttpServletResponse.SC_OK).body(msg);
+               }
+               logger.info(msg);
+           } catch (Exception e) {
+               responseEntity = ResponseEntity.status(HttpServletResponse.SC_NOT_ACCEPTABLE).body(e.getMessage());
+               logger.error(e.getMessage());
+           }
+       }
+        return responseEntity;
+    }
+
+
 
     @RequestMapping(value = "/downloadFile/{fileName}", method = RequestMethod.GET, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Object> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+    public ResponseEntity downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         Resource resource = null;
         String msg = "The file doesn't exist.";
         ResponseEntity responseEntity;
@@ -77,5 +104,18 @@ public class FileController {
         }
         return responseEntity;
     }
+
+
+    // delete a file from given bucket
+    //https://springbootdev.com/2018/08/02/upload-and-delete-files-with-amazon-s3-and-spring-boot/
+
+//    @RequestMapping(value = "/deleteFile/{bucketName}", method = RequestMethod.DELETE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    public ResponseEntity deleteFile(@PathVariable String bucketName,@RequestParam("file") MultipartFile file){
+//        String msg = String.format("the file %s doesn't exist in the bucket %s", file.getOriginalFilename(),bucketName);
+//        ResponseEntity responseEntity = ResponseEntity.status(HttpServletResponse.SC_NO_CONTENT).body(msg);
+//        try{
+//
+//        }
+//    }
 }
 

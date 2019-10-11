@@ -88,8 +88,8 @@ public class TeamController {
     @RequestMapping(value = "/getPlayersByTeamId",method = RequestMethod.GET, params = {"teamId"},produces = {MediaType.APPLICATION_JSON_VALUE})
     //use pass param to distinguish different //
     @JsonView(Team.PlayerInfo.class)
-    public List<Player> getPlayersByTeamId(@RequestParam(value = "teamId") long teamId){
-        List<Player> players = teamService.getPlayersByTeamId(teamId);
+    public Team getPlayersByTeamId(@RequestParam(value = "teamId") long teamId){
+        Team players = teamService.getPlayersByTeamId(teamId);
         return players;
     }
 

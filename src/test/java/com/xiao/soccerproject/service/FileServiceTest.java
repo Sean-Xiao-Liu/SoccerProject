@@ -71,7 +71,6 @@ public class FileServiceTest {
     }
 
     @Test
-    @Transactional
     public void uploadFileTest() throws IOException{
         String fileUrl = fileService.uploadFile(bucketName, multipartFile);
         Assert.assertNotNull(fileUrl);

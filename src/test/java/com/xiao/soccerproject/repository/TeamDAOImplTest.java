@@ -132,8 +132,8 @@ private Game gameTestRecordOne;
 
     @Test
     public void getPlayersByTeamTest(){
-        List<Player> players = teamDAOImpl.getPlayersByTeamId(teamTestRecordOne.getId());
-        assertEquals(1,players.size());
+        Team team = teamDAOImpl.getPlayersByTeamId(teamTestRecordOne.getId());
+        assertEquals(2,team.getPlayers().size());
     }
 
     @Test

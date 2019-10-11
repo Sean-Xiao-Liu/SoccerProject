@@ -75,9 +75,8 @@ public class PlayerServiceTest {
     public void cleanup(){
         playerService.deleteById(playerTestRecordOne.getId());
         playerService.deleteById(playerTestRecordTwo.getId());
-        teamService.deleteById(teamTestRecordOne.getId());
-        teamService.deleteById(teamTestRecordTwo.getId());
-        playerService = null;
+        teamService.deleteTeamByName(teamTestRecordOne.getTeamName());
+        teamService.deleteTeamByName(teamTestRecordTwo.getTeamName());
     }
 
     @Test
@@ -86,7 +85,7 @@ public class PlayerServiceTest {
         for(Player player : players){
             System.out.println(player);
         }
-        assertEquals(2,players.size());//
+        assertEquals(8,players.size());//
     }
 
     @Test
@@ -103,7 +102,6 @@ public class PlayerServiceTest {
     }
 
     @Test
-    @Transactional
     public void getPlayerByNameTest(){
         playerService.getPlayerByName(playerTestRecordOne.getPlayerName());
         assertNotNull(playerService.getPlayerByName(playerTestRecordOne.getPlayerName()));

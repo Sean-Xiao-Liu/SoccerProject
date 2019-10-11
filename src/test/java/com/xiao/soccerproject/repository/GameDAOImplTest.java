@@ -76,10 +76,11 @@ public class GameDAOImplTest {
    @After
    public void cleanup(){
 
-       teamDAOImpl.deleteTeamByName(teamTestRecordOne.getTeamName());// use session delete instead of quary delete, when the inverse side record is  deleted, the corresponding owning side records are also deleted.
-       teamDAOImpl.deleteTeamByName(teamTestRecordTwo.getTeamName());
        gameDAOImpl.deleteById(gameTestRecordOne.getId());
        gameDAOImpl.deleteById(gameTestRecordTwo.getId());
+       teamDAOImpl.deleteTeamByName(teamTestRecordOne.getTeamName());// use session delete instead of quary delete, when the inverse side record is  deleted, the corresponding owning side records are also deleted.
+       teamDAOImpl.deleteTeamByName(teamTestRecordTwo.getTeamName());
+
 //       teamDAOImpl.deleteById(teamTestRecordOne.getId());
 //       teamDAOImpl.deleteById(teamTestRecordTwo.getId());
    }

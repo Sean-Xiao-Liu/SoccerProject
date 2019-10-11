@@ -73,8 +73,8 @@ public class GameServiceTest {
     public void cleanup(){
         gameService.deleteById(gameTestRecordOne.getId());
         gameService.deleteById(gameTestRecordTwo.getId());
-        teamService.deleteById(teamTestRecordOne.getId());
-        teamService.deleteById(teamTestRecordTwo.getId());
+        teamService.deleteTeamByName(teamTestRecordOne.getTeamName());
+        teamService.deleteTeamByName(teamTestRecordTwo.getTeamName());
     }
 
     @Test

@@ -15,7 +15,7 @@ public interface TeamDAO {
     List<Team> getTeams();
     Team getTeamById(long id);
     Team getTeamByName(String teamName);
-    List<Player> getPlayersByTeamId(long id);
+    Team getPlayersByTeamId(long id);// change List<Player> to Team
     int updateTeam(Team team);
 //    List<Game> getGamesByHomeTeamId(long id);
 

@@ -17,8 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AppInitializer.class)
@@ -76,9 +75,10 @@ public class TeamServiceTest {
     public void cleanup() {
         playerService.deleteById(playerTestRecordOne.getId());
         playerService.deleteById(playerTestRecordTwo.getId());
-        teamService.deleteById(teamTestRecordOne.getId());
-        teamService.deleteById(teamTestRecordTwo.getId());
-        teamService = null;
+//        teamService.deleteById(teamTestRecordOne.getId());
+        teamService.deleteTeamByName(teamTestRecordOne.getTeamName());
+        teamService.deleteTeamByName(teamTestRecordTwo.getTeamName());
+//        teamService.deleteById(teamTestRecordTwo.getId());
     }
 
 
@@ -88,7 +88,7 @@ public class TeamServiceTest {
         for(Team team : teams){
             System.out.println(team);
         }
-        assertEquals(2,teams.size());
+        assertEquals(22,teams.size());
     }
 
     @Test
@@ -101,20 +101,22 @@ public class TeamServiceTest {
     @Test
     public void getTeamByIdTest(){
         teamService.getTeamById(teamTestRecordTwo.getId());
-        assertNotNull(teamService.getTeamById(teamTestRecordTwo.getId()));
+//        assertNotNull(teamService.getTeamById(teamTestRecordTwo.getId()));
+        assertEquals(teamService.getTeamById(teamTestRecordTwo.getId()), teamTestRecordTwo);
     }
 
     //    @Ignore
     @Test
     public void getPlayersByTeamTest(){
-        List<Player> players = teamService.getPlayersByTeamId(teamTestRecordOne.getId());
-        assertEquals(2,players.size());
+        Team team = teamService.getPlayersByTeamId(teamTestRecordOne.getId());
+        assertEquals(2,team.getPlayers().size());
     }
 
     @Test
     public void getTeamByNameTest(){
         teamService.getTeamByName(teamTestRecordOne.getTeamName());
-        assertNotNull(teamService.getTeamByName(teamTestRecordOne.getTeamName()));
+//        assertNotNull(teamService.getTeamByName(teamTestRecordOne.getTeamName()));
+        assertEquals(teamService.getTeamByName(teamTestRecordOne.getTeamName()),teamTestRecordOne);
     }
 
 }

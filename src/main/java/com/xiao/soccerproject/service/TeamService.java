@@ -22,6 +22,6 @@ public class TeamService {
     public List<Team> getTeams(){return teamDAO.getTeams();}
     public Team getTeamById(long id){return  teamDAO.getTeamById(id);}
     public Team getTeamByName(String teamName){return  teamDAO.getTeamByName(teamName);}
-    public List<Player> getPlayersByTeamId(long id){return teamDAO.getPlayersByTeamId(id);}
+    public Team getPlayersByTeamId(long id){return teamDAO.getPlayersByTeamId(id);}
     public int updateTeam(Team team){return teamDAO.updateTeam(team);}
 }

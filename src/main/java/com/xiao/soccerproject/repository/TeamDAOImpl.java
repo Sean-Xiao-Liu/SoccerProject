@@ -185,14 +185,14 @@ public class TeamDAOImpl implements TeamDAO{
     }
 
     @Override
-    public List<Player> getPlayersByTeamId(long id) {
+    public Team getPlayersByTeamId(long id) {
         String hql = "FROM Team t LEFT join fetch t.players where t.id = :id";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try  {
-            Query<Player> query = session.createQuery(hql);
+            Query<Team> query = session.createQuery(hql);
             query.setParameter("id", id);
 //            return query.list();
-            return query.list().stream().distinct().collect(Collectors.toList());// remove duplicated record
+            return query.uniqueResult();// remove duplicated record
         } finally {
             session.close();
         }

@@ -8,10 +8,8 @@ import org.junit.runners.Suite;
                 PlayerServiceTest.class,
                 GameServiceTest.class,
                 TeamServiceTest.class,
-                FileServiceTest.class,
-                MessageServiceTest.class
+                FileServiceTest.class
         }
 )
-
 public class ServiceTestAll {
 }

@@ -29,8 +29,8 @@ public class TeamDAOImpl implements TeamDAO{
     public boolean save(Team teams){
         Transaction transaction = null;
         boolean isSuccess = true;
-
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
             transaction = session.beginTransaction();
             session.save(teams);
             transaction.commit();
@@ -40,6 +40,8 @@ public class TeamDAOImpl implements TeamDAO{
             isSuccess = false;
             if(transaction != null) transaction.rollback();
             logger.error(e.getMessage());
+        } finally {
+            session.close();
         }
 
         if (isSuccess)  logger.info("the team is saved");
@@ -54,8 +56,9 @@ public class TeamDAOImpl implements TeamDAO{
         String hql = "UPDATE Team as t set t.homeWin = :homeWin WHERE t.id = :id";
         int updatedCount = 0;
         Transaction transaction = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try{
             Query<Team> query = session.createQuery(hql);
             query.setParameter("homeWin", homeWin);
             query.setParameter("id",id);
@@ -69,6 +72,8 @@ public class TeamDAOImpl implements TeamDAO{
         catch(Exception e){
             if(transaction != null) transaction.rollback();
             logger.error(e.getMessage());
+        } finally {
+            session.close();
         }
         logger.info(String.format("The team %s was updated, total updated record(s): %d", id, updatedCount));
         return updatedCount;
@@ -82,7 +87,8 @@ public class TeamDAOImpl implements TeamDAO{
         int deletedCount = 0;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Query<Team> query = session.createQuery(hql);
             query.setParameter("id",id);
 
@@ -109,8 +115,6 @@ public class TeamDAOImpl implements TeamDAO{
             transaction = session.beginTransaction();
 
             Team team = getTeamByName(teamName);
-//            logger.info(String.format(">>>>>> Team: " + team.toString()));
-
             session.delete(team);
             transaction.commit();
             deletedCount = 1;
@@ -136,11 +140,14 @@ public class TeamDAOImpl implements TeamDAO{
 //        String hql = "FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";
         String hql = "FROM Team";
         //use select distinct to prevent duplicated row of team since the data are join fetched//
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
             Query<Team> query = session.createQuery(hql);
 //           return query.list();
             return query.list().stream().distinct().collect(Collectors.toList());
 //            return query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list(); // also works for duplicated data, remove "select distinct t" in hql when applied
+        } finally {
+            session.close();
         }
     }
 
@@ -148,41 +155,46 @@ public class TeamDAOImpl implements TeamDAO{
     public Team getTeamById(long id) {
 //        String hql = "From Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames where t.id = :id";
         String hql = "From Team t where t.id = :id";
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
             Query<Team> query = session.createQuery(hql);
             query.setParameter("id",id);
 
             Team team = query.uniqueResult();
             logger.info(team.toString());
             return query.uniqueResult();
-
+        } finally {
+            session.close();
         }
     }
 
     @Override
     public Team getTeamByName(String teamName){
         String hql = "From Team as t where t.teamName = :name";
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
             Query<Team> query = session.createQuery(hql);
             query.setParameter("name",teamName);
 
             Team team = query.uniqueResult();
             logger.info(team.toString());
             return query.uniqueResult();
-
+        } finally {
+            session.close();
         }
     }
 
     @Override
     public List<Player> getPlayersByTeamId(long id) {
         String hql = "FROM Team t LEFT join fetch t.players where t.id = :id";
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try  {
             Query<Player> query = session.createQuery(hql);
             query.setParameter("id", id);
 //            return query.list();
             return query.list().stream().distinct().collect(Collectors.toList());// remove duplicated record
+        } finally {
+            session.close();
         }
     }
 //
@@ -202,8 +214,8 @@ public class TeamDAOImpl implements TeamDAO{
         boolean isSuccess = true;
         int updateCount = 0;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-
+        try{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
             session.saveOrUpdate(team);
 //            session.update(team);

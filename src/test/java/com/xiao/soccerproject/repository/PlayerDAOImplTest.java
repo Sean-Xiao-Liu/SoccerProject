@@ -1,10 +1,15 @@
 package com.xiao.soccerproject.repository;
 
+import com.xiao.soccerproject.init.AppInitializer;
 import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -12,12 +17,21 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = AppInitializer.class)
+
 public class PlayerDAOImplTest {
-    private PlayerDAOImpl playerDAOImpl;
+
+    @Autowired
+    private PlayerDAO playerDAOImpl;
+
     private Player playerTestRecordOne;
     private Player playerTestRecordTwo;
     private Player playerTestRecordThree;
-    private TeamDAOImpl teamDAOImpl;
+
+    @Autowired
+    private TeamDAO teamDAOImpl;
+
     private Team teamTestRecordOne;
     private Team teamTestRecordTwo;
 
@@ -91,14 +105,12 @@ public class PlayerDAOImplTest {
     }
 
     @Test
-    @Transactional
     public void getPlayerByNameTest(){
         playerDAOImpl.getPlayerByName(playerTestRecordOne.getPlayerName());
         assertNotNull(playerDAOImpl.getPlayerByName(playerTestRecordOne.getPlayerName()));
     }
 
     @Test
-    @Transactional
     public void deletePlayerByNameTest(){
         playerTestRecordThree = new Player();
         playerTestRecordThree.setPlayerName("Test Player 3");

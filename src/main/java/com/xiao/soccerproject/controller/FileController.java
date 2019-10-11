@@ -30,6 +30,23 @@ public class FileController {
     @Autowired
     private MessageService messageService;
 
+    //create a new bucket in s3
+    @RequestMapping(value = "/createBucket/{bucketName}", method = RequestMethod.POST, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String createBucket(@PathVariable String bucketName){
+        String message = "The bucket already Exist";
+        if(fileService.ifBucketExist(bucketName)){
+            try{
+                fileService.createBucket(bucketName);
+                message = "The bucket has been created successful";
+            }catch (Exception e){
+                message = "Failed to create the bucket";
+                e.printStackTrace();
+            }
+        }
+        logger.info(message);
+        return message;
+    }
+
     //upload file to certain bucket
     @RequestMapping(value = "/uploadFile/{bucketName}", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity uploadFile(@PathVariable String bucketName, @RequestParam("file") MultipartFile file) {
@@ -106,7 +123,7 @@ public class FileController {
     }
 
 
-    // delete a file from given bucket
+    // delete a file from the bucket
     //https://springbootdev.com/2018/08/02/upload-and-delete-files-with-amazon-s3-and-spring-boot/
 
 //    @RequestMapping(value = "/deleteFile/{bucketName}", method = RequestMethod.DELETE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)

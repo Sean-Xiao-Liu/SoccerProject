@@ -41,6 +41,10 @@ public class FileService {
     @Autowired
     private AmazonS3 amazonS3;
 
+    public boolean ifBucketExist(String bucketName){
+        return !amazonS3.doesBucketExistV2(bucketName);
+    }
+
     public void createBucket(String bucketName){
         if(!amazonS3.doesBucketExistV2(bucketName)) amazonS3.createBucket(bucketName);
     }
@@ -112,7 +116,7 @@ public class FileService {
     }
 
 
-    // get file method
+    // get file method, display the content of the file
     // https://docs.aws.amazon.com/AmazonS3/latest/dev/RetrievingObjectUsingJava.html
     public void getFile(String bucketName, MultipartFile file) throws IOException {
         S3Object downloadedFile = null;

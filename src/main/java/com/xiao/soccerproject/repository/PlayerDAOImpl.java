@@ -28,7 +28,7 @@ public class PlayerDAOImpl implements PlayerDAO{
     private Logger logger;
 
     @Autowired
-    TeamDAOImpl teamDAOImpl;
+    TeamDAO teamDAOImpl;
 
     //method 1
     //insert a new record of player
@@ -39,7 +39,7 @@ public class PlayerDAOImpl implements PlayerDAO{
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
-            TeamDAOImpl teamDAOImpl = new TeamDAOImpl();
+//            TeamDAOImpl teamDAOImpl = new TeamDAOImpl();
             Team team =  teamDAOImpl.getTeamById(teamId);
             player.setTeam(team);
             session.save(player);

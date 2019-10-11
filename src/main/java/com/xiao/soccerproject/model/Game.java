@@ -32,13 +32,13 @@ public class Game {
     @Column(name = "home_match_result")
     private String homeMatchResult;
 
-    //    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "home_team_id")
     @JsonView(Team.GameInfo.class)
     private Team homeTeam;
 
-    //    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "away_team_id")
     @JsonView(Team.GameInfo.class)

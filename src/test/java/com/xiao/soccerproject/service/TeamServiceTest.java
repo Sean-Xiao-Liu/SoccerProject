@@ -83,7 +83,6 @@ public class TeamServiceTest {
 
 
     @Test
-    @Transactional
     public void getTeamsTest(){
         List<Team> teams = teamService.getTeams();
         for(Team team : teams){
@@ -93,7 +92,6 @@ public class TeamServiceTest {
     }
 
     @Test
-    @Transactional
     public void updateTeamByIdTest(){
         int updatedCount = teamService.updateTeamHomeWin(teamTestRecordOne.getId(),3);
         teamService.getTeamById(teamTestRecordOne.getId()).toString();
@@ -101,7 +99,6 @@ public class TeamServiceTest {
     }
 
     @Test
-    @Transactional
     public void getTeamByIdTest(){
         teamService.getTeamById(teamTestRecordTwo.getId());
         assertNotNull(teamService.getTeamById(teamTestRecordTwo.getId()));
@@ -109,14 +106,12 @@ public class TeamServiceTest {
 
     //    @Ignore
     @Test
-    @Transactional
     public void getPlayersByTeamTest(){
         List<Player> players = teamService.getPlayersByTeamId(teamTestRecordOne.getId());
         assertEquals(2,players.size());
     }
 
     @Test
-    @Transactional
     public void getTeamByNameTest(){
         teamService.getTeamByName(teamTestRecordOne.getTeamName());
         assertNotNull(teamService.getTeamByName(teamTestRecordOne.getTeamName()));

@@ -36,7 +36,7 @@ import static org.mockito.Mockito.*;
 public class FileServiceMockAWSTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS) private AmazonS3 amazonS3;// not real bean, is a mocked object
     @Autowired @Spy private Logger logger; // @spy will wrapped the object, so its methods invoked time will be recorded.
-    @InjectMocks private FileService fileService;
+    @InjectMocks private FileService fileService; // @InjectMocks is for DI
 
     private String bucketName = "com.xiao.soccerproject";
     private String fileName = "fileServiceTest.txt";

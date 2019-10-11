@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
-@SpringBootApplication(scanBasePackages = {"com.xiao.soccerproject"})
+@SpringBootApplication(scanBasePackages = {"com.xiao.soccerproject"})//achieve DI and make Bean
 @ServletComponentScan(basePackages = {"com.xiao.soccerproject.filter"})
 public class AppInitializer extends SpringBootServletInitializer {
     public static void main(String[] args) {

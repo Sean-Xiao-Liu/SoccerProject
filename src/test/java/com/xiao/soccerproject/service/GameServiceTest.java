@@ -80,17 +80,15 @@ public class GameServiceTest {
     }
 
     @Test
-    @Transactional
     public void getGamesTest(){
         List<Game> games = gameService.getGames();
         for(Game game : games){
             System.out.println(game);
         }
-        assertEquals(2,games.size());
+        assertEquals(4,games.size());
     }
 
     @Test
-    @Transactional
     public void updateHomeGoalsTest(){
         int updatedCount = gameService.updateHomeGoals(gameTestRecordOne.getId(),2);
         assertEquals(1,updatedCount);
@@ -98,7 +96,6 @@ public class GameServiceTest {
 
 
     @Test
-    @Transactional
     public void getGameByIdTest(){
         gameService.getGameById(gameTestRecordOne.getId());
         assertNotNull(gameService.getGameById(gameTestRecordTwo.getId()));

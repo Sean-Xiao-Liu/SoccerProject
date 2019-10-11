@@ -26,7 +26,8 @@ public class GameDAOImpl implements GameDAO{
     private Logger logger;
 
     @Autowired
-    TeamDAOImpl teamDAOImpl;
+    TeamDAO teamDAOImpl;
+
 
     @Override
     //method 1
@@ -35,9 +36,10 @@ public class GameDAOImpl implements GameDAO{
         Transaction transaction = null;
         boolean isSuccess = true;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
-            TeamDAOImpl teamDAOImpl = new TeamDAOImpl();
+//            TeamDAOImpl teamDAOImpl = new TeamDAOImpl();
             Team homeTeam = teamDAOImpl.getTeamById(homeTeamId);
             Team awayTeam = teamDAOImpl.getTeamById(awayTeamId);
             games.setHomeTeam(homeTeam);
@@ -62,21 +64,22 @@ public class GameDAOImpl implements GameDAO{
         String hql = "UPDATE Game as g set g.homeGoals = :homeGoals WHERE g.id = :id";
         int updatedCount = 0;
         Transaction transaction = null;
-
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
             Query<Game> query = session.createQuery(hql);
             query.setParameter("homeGoals", homeGoals);
             query.setParameter("id",id);
 
             transaction = session.beginTransaction();
             updatedCount = query.executeUpdate();
-//            session.saveOrUpdate(Game);
             transaction.commit();
         }
 
         catch(Exception e){
             if(transaction != null) transaction.rollback();
             logger.error(e.getMessage());
+        } finally {
+            session.close();
         }
         logger.info(String.format("The home goal number of %s was updated, total updated record(s): %d", id, updatedCount));
         return updatedCount;
@@ -87,9 +90,12 @@ public class GameDAOImpl implements GameDAO{
     @Override
     public List<Game> getGames() {
         String hql = "FROM Game g left join fetch g.homeTeam left join fetch g.awayTeam";
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
             Query<Game> query = session.createQuery(hql);
             return query.list();
+        } finally {
+            session.close();
         }
     }
 
@@ -99,7 +105,8 @@ public class GameDAOImpl implements GameDAO{
         int deletedCount = 0;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Query<Game> query = session.createQuery(hql);
             query.setParameter("id",id);
 
@@ -119,15 +126,17 @@ public class GameDAOImpl implements GameDAO{
     @Override
     public Game getGameById(long id){
         String hql = "FROM Game g left join fetch g.homeTeam left join fetch g.awayTeam where g.id = :id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Game> query = session.createQuery(hql);
             query.setParameter("id",id);
 
             Game game = query.uniqueResult();
             logger.info(game.toString());
             return query.uniqueResult();
-
+        } finally {
+            session.close();
         }
     }
 
@@ -137,10 +146,10 @@ public class GameDAOImpl implements GameDAO{
         boolean isSuccess = true;
         int updateCount = 0;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-
+        try{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
-            TeamDAOImpl teamDAOImpl = new TeamDAOImpl();
+
             Team homeTeam = teamDAOImpl.getTeamById(homeTeamId);
             Team awayTeam = teamDAOImpl.getTeamById(awayTeamId);
             game.setHomeTeam(homeTeam);

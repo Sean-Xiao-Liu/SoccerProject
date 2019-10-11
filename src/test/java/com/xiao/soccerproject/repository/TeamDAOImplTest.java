@@ -59,13 +59,14 @@ private Game gameTestRecordOne;
         teamTestRecordTwo.setAwayLoss(2);
         teamDAOImpl.save(teamTestRecordTwo);
 
-        teamTestRecordThree = new Team();
-        teamTestRecordThree.setTeamName("Test Team 3");
-        teamTestRecordThree.setHomeWin(3);
-        teamTestRecordThree.setAwayWin(3);
-        teamTestRecordThree.setHomeLoss(3);
-        teamTestRecordThree.setAwayLoss(3);
-        teamDAOImpl.save(teamTestRecordThree);
+        /* teamTestRecordThree is used to test delete team by name test*/
+//        teamTestRecordThree = new Team();
+//        teamTestRecordThree.setTeamName("Test Team 3");
+//        teamTestRecordThree.setHomeWin(3);
+//        teamTestRecordThree.setAwayWin(3);
+//        teamTestRecordThree.setHomeLoss(3);
+//        teamTestRecordThree.setAwayLoss(3);
+//        teamDAOImpl.save(teamTestRecordThree);
 
 //        playerDAOImpl = new PlayerDAOImpl();
         playerTestRecordOne = new Player();
@@ -92,11 +93,11 @@ private Game gameTestRecordOne;
 
     @After
     public void cleanup(){
-//        teamDAOImpl.deleteTeamByName(teamTestRecordOne.getTeamName());
-//        teamDAOImpl.deleteTeamByName(teamTestRecordTwo.getTeamName());
-//
-//        playerDAOImpl.deleteById(playerTestRecordOne.getId());
-//        playerDAOImpl.deleteById(playerTestRecordTwo.getId());
+        playerDAOImpl.deleteById(playerTestRecordOne.getId()); // needs to delete players first or it will violate the players_teams_fk
+        playerDAOImpl.deleteById(playerTestRecordTwo.getId());
+        teamDAOImpl.deleteTeamByName(teamTestRecordOne.getTeamName());
+        teamDAOImpl.deleteTeamByName(teamTestRecordTwo.getTeamName());
+//        teamDAOImpl.deleteTeamByName(teamTestRecordThree.getTeamName());
 
         teamDAOImpl = null;
         playerDAOImpl=null;
@@ -111,7 +112,7 @@ private Game gameTestRecordOne;
         for(Team team : teams){
             System.out.println(team);
         }
-        assertEquals(23,teams.size());
+        assertEquals(22,teams.size());
     }
 
     @Test
@@ -125,19 +126,21 @@ private Game gameTestRecordOne;
     @Test
     public void getTeamByIdTest(){
         teamDAOImpl.getTeamById(teamTestRecordTwo.getId());
-        assertNotNull(teamDAOImpl.getTeamById(teamTestRecordTwo.getId()));
+//        assertNotNull(teamDAOImpl.getTeamById(teamTestRecordTwo.getId()));
+        assertEquals(teamDAOImpl.getTeamById(teamTestRecordTwo.getId()),teamTestRecordTwo);
     }
 
     @Test
     public void getPlayersByTeamTest(){
         List<Player> players = teamDAOImpl.getPlayersByTeamId(teamTestRecordOne.getId());
-        assertEquals(2,players.size());
+        assertEquals(1,players.size());
     }
 
     @Test
     public void getTeamByNameTest(){
         teamDAOImpl.getTeamByName(teamTestRecordOne.getTeamName());
-        assertNotNull(teamDAOImpl.getTeamByName(teamTestRecordOne.getTeamName()));
+//        assertNotNull(teamDAOImpl.getTeamByName(teamTestRecordOne.getTeamName()));
+        assertEquals(teamDAOImpl.getTeamByName(teamTestRecordOne.getTeamName()),teamTestRecordOne);
     }
 
 //

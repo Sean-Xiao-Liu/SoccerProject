@@ -38,7 +38,7 @@ public class PlayerDAOImplTest {
     @Before
     public void init(){
 
-        teamDAOImpl = new TeamDAOImpl();
+//        teamDAOImpl = new TeamDAOImpl();
         teamTestRecordOne = new Team();
         teamTestRecordOne.setTeamName("Test Team 1");
         teamTestRecordOne.setHomeWin(1);
@@ -56,7 +56,7 @@ public class PlayerDAOImplTest {
         teamDAOImpl.save(teamTestRecordTwo);
 
         // seed two records for test
-        playerDAOImpl = new PlayerDAOImpl();
+//        playerDAOImpl = new PlayerDAOImpl();
         playerTestRecordOne = new Player();
         playerTestRecordOne.setPlayerName("Test Player 1");
         playerTestRecordOne.setAge(1);
@@ -77,9 +77,9 @@ public class PlayerDAOImplTest {
     public void cleanup(){
         playerDAOImpl.deleteById(playerTestRecordOne.getId());
         playerDAOImpl.deleteById(playerTestRecordTwo.getId());
-        teamDAOImpl.deleteById(teamTestRecordOne.getId());
-        teamDAOImpl.deleteById(teamTestRecordTwo.getId());
-        playerDAOImpl = null;
+        teamDAOImpl.deleteTeamByName(teamTestRecordOne.getTeamName());// use session delete instead of quary delete, when the inverse side record is  deleted, the corresponding owning side records are also deleted.
+        teamDAOImpl.deleteTeamByName(teamTestRecordTwo.getTeamName());
+
     }
 
     @Test
@@ -88,7 +88,7 @@ public class PlayerDAOImplTest {
         for(Player player : players){
             System.out.println(player);
         }
-        assertEquals(2,players.size());//
+        assertEquals(8,players.size());//
     }
 
     @Test
@@ -101,13 +101,15 @@ public class PlayerDAOImplTest {
     @Test
     public void getPlayerByIdTest(){
         playerDAOImpl.getPlayerById(playerTestRecordOne.getId());
-        assertNotNull(playerDAOImpl.getPlayerById(playerTestRecordOne.getId()));
+//        assertNotNull(playerDAOImpl.getPlayerById(playerTestRecordOne.getId()));
+        assertEquals(playerDAOImpl.getPlayerById(playerTestRecordOne.getId()),playerTestRecordOne);
     }
 
     @Test
     public void getPlayerByNameTest(){
         playerDAOImpl.getPlayerByName(playerTestRecordOne.getPlayerName());
-        assertNotNull(playerDAOImpl.getPlayerByName(playerTestRecordOne.getPlayerName()));
+//        assertNotNull(playerDAOImpl.getPlayerByName(playerTestRecordOne.getPlayerName()));
+        assertEquals(playerDAOImpl.getPlayerByName(playerTestRecordOne.getPlayerName()),playerTestRecordOne);
     }
 
     @Test

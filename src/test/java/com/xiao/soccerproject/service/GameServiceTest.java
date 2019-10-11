@@ -75,8 +75,6 @@ public class GameServiceTest {
         gameService.deleteById(gameTestRecordTwo.getId());
         teamService.deleteById(teamTestRecordOne.getId());
         teamService.deleteById(teamTestRecordTwo.getId());
-        gameService = null;
-        teamService = null;
     }
 
     @Test
@@ -85,7 +83,7 @@ public class GameServiceTest {
         for(Game game : games){
             System.out.println(game);
         }
-        assertEquals(4,games.size());
+        assertEquals(6,games.size());
     }
 
     @Test

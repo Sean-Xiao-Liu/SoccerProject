@@ -37,9 +37,9 @@ public class PlayerDAOImpl implements PlayerDAO{
         Transaction transaction = null;
         boolean isSuccess = true;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
-//            TeamDAOImpl teamDAOImpl = new TeamDAOImpl();
             Team team =  teamDAOImpl.getTeamById(teamId);
             player.setTeam(team);
             session.save(player);
@@ -62,9 +62,12 @@ public class PlayerDAOImpl implements PlayerDAO{
     @Override
     public List<Player> getPlayers() {
         String hql = "FROM Player";
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
             Query<Player> query = session.createQuery(hql);
             return query.list();
+        } finally {
+            session.close();
         }
     }
 
@@ -75,21 +78,23 @@ public class PlayerDAOImpl implements PlayerDAO{
         String hql = "UPDATE Player as p set p.age = :age WHERE p.id = :id";
         int updatedCount = 0;
         Transaction transaction = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Player> query = session.createQuery(hql);
             query.setParameter("age", age);
             query.setParameter("id",id);
 
             transaction = session.beginTransaction();
             updatedCount = query.executeUpdate();
-//            session.saveOrUpdate(teams);
             transaction.commit();
         }
 
         catch(Exception e){
             if(transaction != null) transaction.rollback();
             logger.error(e.getMessage());
+        } finally {
+            session.close();
         }
         logger.info(String.format("The player %s was updated, total updated record(s): %d", id, updatedCount));
         return updatedCount;
@@ -105,7 +110,8 @@ public class PlayerDAOImpl implements PlayerDAO{
         int deletedCount = 0;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Query<Player> query = session.createQuery(hql);
             query.setParameter("id",id);
 
@@ -151,30 +157,32 @@ public class PlayerDAOImpl implements PlayerDAO{
     @Override
     public Player getPlayerById(long id) {
         String hql = "FROM Player p where p.id = :id";
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
             Query<Player> query = session.createQuery(hql);
             query.setParameter("id",id);
 
             Player player = query.uniqueResult();
             logger.info(player.toString());
             return query.uniqueResult();
-
+        } finally {
+            session.close();
         }
     }
 
     @Override
     public Player getPlayerByName(String name){
             String hql = "From Player as p where p.playerName = :name";
-
-            try (Session session = HibernateUtil.getSessionFactory().openSession()){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            try {
                 Query<Player> query = session.createQuery(hql);
                 query.setParameter("name",name);
 
                 Player player = query.uniqueResult();
 //                logger.info(player.toString());
                 return query.uniqueResult();
-
+            } finally {
+                session.close();
             }
 
     }
@@ -185,8 +193,8 @@ public class PlayerDAOImpl implements PlayerDAO{
         boolean isSuccess = true;
         int updateCount = 0;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-
+        try{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
 
             // set team_id foreign key//

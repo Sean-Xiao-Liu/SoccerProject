@@ -7,6 +7,8 @@ import com.xiao.soccerproject.service.TeamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,7 @@ public class TeamController {
     private TeamService teamService;
 
     //getTeams method//
+    @Cacheable(value = "teams") // cacheable teams, redis
     @RequestMapping(value= "/getTeams", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     @JsonView(Team.TeamInfo.class)
     public List<Team> getTeams(){
@@ -48,6 +51,7 @@ public class TeamController {
     }
 
     //saveTeam method//
+    @CachePut(value = "teams", key = "#team.id", unless = "#team.teamName == null")
     @RequestMapping(value = "/saveTeam", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public String createTeam(@RequestBody Team team){
         String msg = "the team has been created";

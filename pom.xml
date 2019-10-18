@@ -163,10 +163,14 @@
           <artifactId>flyway-maven-plugin</artifactId>
           <version>${flyway.version}</version>
           <configuration>
-            <driver>org.postgresql.Driver</driver>
-            <url>jdbc:postgresql://localhost:5431/SoccerProject_Test_db</url>
-            <user>admin</user>
-            <password>123456</password>
+            <!--suppress UnresolvedMavenProperty -->
+            <driver>${db_driver}</driver>
+            <!--suppress UnresolvedMavenProperty -->
+            <url>jdbc:postgresql://${db_url}/${db_name}</url>
+            <!--suppress UnresolvedMavenProperty -->
+            <user>${db_user}</user>
+            <!--suppress UnresolvedMavenProperty -->
+            <password>${db_password}</password>
             <schemas>
               <schema>public</schema>
             </schemas>

@@ -6,6 +6,7 @@ import com.amazonaws.util.IOUtils;
 import com.xiao.soccerproject.init.AppInitializer;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
@@ -79,6 +80,7 @@ public class FileServiceMockAWSTest {
     }
 
     // upload file mock test
+    @Ignore
     @Test
     public void uploadFileTest() throws IOException {
         fileService.uploadFile(bucketName,multipartFile);

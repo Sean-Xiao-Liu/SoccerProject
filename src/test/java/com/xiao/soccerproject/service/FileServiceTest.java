@@ -3,10 +3,7 @@ package com.xiao.soccerproject.service;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.util.IOUtils;
 import com.xiao.soccerproject.init.AppInitializer;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +67,7 @@ public class FileServiceTest {
         assertEquals(1,buckets.size());
     }
 
+    @Ignore
     @Test
     public void uploadFileTest() throws IOException{
         String fileUrl = fileService.uploadFile(bucketName, multipartFile);

@@ -28,7 +28,7 @@ public class MessageServiceTest {
     public void getQueueUrlTest(){
         String queueName = "soccer-project-queue";
         String result = messageService.getQueueUrl(queueName);
-        assertEquals(1, result.length());
+        assertEquals(69, result.length());
     }
 
 

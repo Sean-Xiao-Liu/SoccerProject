@@ -46,7 +46,8 @@ public class FileServiceTest {
         logger.info(">>>>>>>>>>>>>>>>>>>test start<<<<<<<<<<<<<<<<<");
         fakeFileUrl = new URL("http://www.fakeQueueUrl.com/xiao/soccerproject/fake");
 //        File file = new File("/Users/xiaoliu/IdeaProjects/SoccerProject/uploadFileTest.txt");
-        File file = new File("/Users/xiaoliu/IdeaProjects/SoccerProject/fileServiceTest.txt");
+//        File file = new File("/Users/xiaoliu/IdeaProjects/SoccerProject/fileServiceTest.txt");
+        File file = new File("../SoccerProject/fileServiceTest.txt");// use relative
         FileInputStream input = new FileInputStream(file);
         multipartFile = new MockMultipartFile("file", file.getName(), "text/plain" , IOUtils.toByteArray(input));
         path = System.getProperty("user.dir") + File.separator + "temp";

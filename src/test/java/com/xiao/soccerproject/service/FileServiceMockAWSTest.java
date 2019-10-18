@@ -53,7 +53,8 @@ public class FileServiceMockAWSTest {
         MockitoAnnotations.initMocks(this);
 
         fakeFileUrl = new URL("http://www.fakeQueueUrl.com/xiao/soccerproject/fake");
-        File file = new File("/Users/xiaoliu/IdeaProjects/SoccerProject/uploadFileTest.txt");
+//        File file = new File("/Users/xiaoliu/IdeaProjects/SoccerProject/uploadFileTest.txt");
+        File file = new File("../SoccerProject/uploadFileTest.txt");
         FileInputStream input = new FileInputStream(file);
         multipartFile = new MockMultipartFile("file", file.getName(), "text/plain" , IOUtils.toByteArray(input));
         path = System.getProperty("user.dir") + File.separator + "temp";

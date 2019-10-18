@@ -13,4 +13,6 @@ temp/
 *.txt
 *.zip
 
+cicd/
+*.war
 

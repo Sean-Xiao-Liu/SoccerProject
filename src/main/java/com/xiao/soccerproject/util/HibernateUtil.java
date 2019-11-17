@@ -42,6 +42,7 @@ public class HibernateUtil {
                 settings.put(Environment.PASS, dbPassword);
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+//                settings.put(Environment.HBM2DDL_AUTO,"validate"); // do schema checking prior the server started
                 configuration.setProperties(settings);
 
                 EntityScanner.scanPackages(modelPackages).addTo(configuration);

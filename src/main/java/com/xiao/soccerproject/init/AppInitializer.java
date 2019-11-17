@@ -6,6 +6,8 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import com.xiao.soccerproject.util.HibernateUtil;
+import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,13 @@ public class AppInitializer extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(AppInitializer.class, args);
     }
+
+//    @Bean
+//    public SessionFactory getSessionFactory() throws Exception{
+//        SessionFactory sf = HibernateUtil.getSessionFactory();
+//        if(sf == null) throw new Exception("building session factory failed");
+//        return sf;
+//    }
 
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)

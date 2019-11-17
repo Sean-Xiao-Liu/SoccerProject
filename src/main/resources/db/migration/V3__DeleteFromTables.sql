@@ -1,0 +1,3 @@
+DELETE FROM Games;
+DELETE FROM Players;
+DELETE FROM Teams;

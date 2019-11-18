@@ -41,8 +41,7 @@ private Game gameTestRecordOne;
 
     @Before
     public void init(){
-        // seed a record for test
-//        teamDAOImpl = new TeamDAOImpl();
+
         teamTestRecordOne = new Team();
         teamTestRecordOne.setTeamName("Test Team 1");
         teamTestRecordOne.setHomeWin(1);
@@ -59,16 +58,6 @@ private Game gameTestRecordOne;
         teamTestRecordTwo.setAwayLoss(2);
         teamDAOImpl.save(teamTestRecordTwo);
 
-        /* teamTestRecordThree is used to test delete team by name test*/
-//        teamTestRecordThree = new Team();
-//        teamTestRecordThree.setTeamName("Test Team 3");
-//        teamTestRecordThree.setHomeWin(3);
-//        teamTestRecordThree.setAwayWin(3);
-//        teamTestRecordThree.setHomeLoss(3);
-//        teamTestRecordThree.setAwayLoss(3);
-//        teamDAOImpl.save(teamTestRecordThree);
-
-//        playerDAOImpl = new PlayerDAOImpl();
         playerTestRecordOne = new Player();
         playerTestRecordOne.setPlayerName("Test Player 1");
         playerTestRecordOne.setAge(1);
@@ -82,13 +71,7 @@ private Game gameTestRecordOne;
         playerTestRecordTwo.setNationality("Test Country");
         playerTestRecordTwo.setPlayerPosition("CM");
         playerDAOImpl.save(playerTestRecordTwo,teamTestRecordOne.getId());
-//
-//        gameDAOImpl = new GameDAOImpl();
-//        gameTestRecordOne = new Game();
-//        gameTestRecordOne.setHomeGoals(1);
-//        gameTestRecordOne.setHomeLosts(0);
-//        gameTestRecordOne.setHomeMatchResult("Win");
-//        gameDAOImpl.save(gameTestRecordOne,teamTestRecordOne.getId(),teamTestRecordTwo.getId());
+
     }
 
     @After
@@ -97,7 +80,6 @@ private Game gameTestRecordOne;
         playerDAOImpl.deleteById(playerTestRecordTwo.getId());
         teamDAOImpl.deleteTeamByName(teamTestRecordOne.getTeamName());
         teamDAOImpl.deleteTeamByName(teamTestRecordTwo.getTeamName());
-//        teamDAOImpl.deleteTeamByName(teamTestRecordThree.getTeamName());
 
         teamDAOImpl = null;
         playerDAOImpl=null;
@@ -142,13 +124,6 @@ private Game gameTestRecordOne;
 //        assertNotNull(teamDAOImpl.getTeamByName(teamTestRecordOne.getTeamName()));
         assertEquals(teamDAOImpl.getTeamByName(teamTestRecordOne.getTeamName()),teamTestRecordOne);
     }
-
-//
-//    @Test
-//    public void getGameByHomeTeamIdTest(){
-//        List<Game> games = teamDAOImpl.getGamesByHomeTeamId(gameTestRecordOne.getId());
-//        assertEquals(1,games.size());
-//    }
 
     @Test
     public void deleteTeamByNameTest(){

@@ -92,7 +92,7 @@ public class GameDAOImplTest {
         for(Game game : games){
             System.out.println(game);
         }
-        assertEquals(6,games.size());//
+        assertEquals(2,games.size());//
     }
 
     @Test

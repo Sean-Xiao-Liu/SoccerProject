@@ -88,7 +88,7 @@ public class PlayerDAOImplTest {
         for(Player player : players){
             System.out.println(player);
         }
-        assertEquals(8,players.size());//
+        assertEquals(2,players.size());//
     }
 
     @Test
@@ -124,6 +124,11 @@ public class PlayerDAOImplTest {
 
         int deleteCount = playerDAOImpl.deletePlayerByName(playerTestRecordThree.getPlayerName());
         assertEquals(1,deleteCount);
+    }
+
+    @Test
+    public void updatePlayerTest(){
+        long teamId = 
     }
 
 }

@@ -101,11 +101,10 @@ public class TeamServiceTest {
     @Test
     public void getTeamByIdTest(){
         teamService.getTeamById(teamTestRecordTwo.getId());
-//        assertNotNull(teamService.getTeamById(teamTestRecordTwo.getId()));
         assertEquals(teamService.getTeamById(teamTestRecordTwo.getId()), teamTestRecordTwo);
     }
 
-    //    @Ignore
+
     @Test
     public void getPlayersByTeamTest(){
         Team team = teamService.getPlayersByTeamId(teamTestRecordOne.getId());
@@ -118,5 +117,8 @@ public class TeamServiceTest {
 //        assertNotNull(teamService.getTeamByName(teamTestRecordOne.getTeamName()));
         assertEquals(teamService.getTeamByName(teamTestRecordOne.getTeamName()),teamTestRecordOne);
     }
+
+    @Test
+    public void 
 
 }

@@ -8,7 +8,8 @@ import org.junit.runners.Suite;
         {
                 PlayerDAOImplTest.class,
                 GameDAOImplTest.class,
-                TeamDAOImplTest.class
+                TeamDAOImplTest.class,
+                UserDAOImplTest.class
         }
 )
 

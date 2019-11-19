@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,6 +22,9 @@ import static org.junit.Assert.assertNotNull;
 @SpringBootTest(classes = AppInitializer.class)
 
 public class PlayerServiceTest {
+
+    @Autowired
+    private Logger logger;
 
     @Autowired
     private PlayerService playerService;
@@ -86,7 +90,7 @@ public class PlayerServiceTest {
         for(Player player : players){
             System.out.println(player);
         }
-        assertEquals(8,players.size());//
+        assertEquals(2,players.size());//
     }
 
     @Test
@@ -109,7 +113,14 @@ public class PlayerServiceTest {
     }
 
     @Test
-    
+    public void updatePlayerTest(){
+        long teamId = teamTestRecordOne.getId();
+        playerTestRecordOne.setPlayerPosition("ST");
+        logger.info(String.format("The player %s 's position is %s now",playerTestRecordOne.getPlayerName(),playerTestRecordOne.getPlayerPosition()));
+        int updateCount = playerService.updatePlayer(playerTestRecordOne,teamId);
+        assertEquals(1,updateCount);
+
+    }
 }
 
 

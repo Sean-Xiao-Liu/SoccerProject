@@ -9,6 +9,7 @@ insert into users (name, password, first_name, last_name, email) values
 ('xyhuang', '25f9e794323b453885f5181f1b624d0b', 'Xinyue', 'Huang', 'xyhuang@ascending.com')
 ;
 commit;
+
 insert into users_role values
 (1, 1),
 (2, 2),

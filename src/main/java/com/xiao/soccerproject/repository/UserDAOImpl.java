@@ -44,10 +44,14 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public User getUserByEmail(String email) {
         String hql = "FROM User as u where lower(u.email) = :email";
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try  {
+
             Query<User> query = session.createQuery(hql);
             query.setParameter("email", email.toLowerCase());
             return query.uniqueResult();
+        } finally {
+            session.close();
         }
     }
     @Override

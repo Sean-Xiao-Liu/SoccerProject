@@ -83,7 +83,7 @@ public class GameServiceTest {
         for(Game game : games){
             System.out.println(game);
         }
-        assertEquals(6,games.size());
+        assertEquals(2,games.size());
     }
 
     @Test
@@ -99,5 +99,15 @@ public class GameServiceTest {
         assertNotNull(gameService.getGameById(gameTestRecordTwo.getId()));
     }
 
+    @Test
+    public void updateGameTest(){
+        long homeTeamId = teamTestRecordOne.getId();
+        long awayTeamId = teamTestRecordTwo.getId();
+        gameTestRecordOne.setHomeGoals(10);
+        gameTestRecordOne.setHomeLosts(10);
+        gameTestRecordOne.setHomeMatchResult("Draw");
+        int updateCount = gameService.updateGame(gameTestRecordOne,homeTeamId,awayTeamId);
+        assertEquals(1,updateCount);
+    }
 
 }

@@ -74,7 +74,8 @@ public class PlayerServiceTest {
     @After
     public void cleanup(){
         playerService.deleteById(playerTestRecordOne.getId());
-        playerService.deleteById(playerTestRecordTwo.getId());
+//        playerService.deleteById(playerTestRecordTwo.getId());
+        playerService.deletePlayerByName(playerTestRecordTwo.getPlayerName());
         teamService.deleteTeamByName(teamTestRecordOne.getTeamName());
         teamService.deleteTeamByName(teamTestRecordTwo.getTeamName());
     }
@@ -106,6 +107,9 @@ public class PlayerServiceTest {
         playerService.getPlayerByName(playerTestRecordOne.getPlayerName());
         assertNotNull(playerService.getPlayerByName(playerTestRecordOne.getPlayerName()));
     }
+
+    @Test
+    
 }
 
 

@@ -88,7 +88,7 @@ public class TeamServiceTest {
         for(Team team : teams){
             System.out.println(team);
         }
-        assertEquals(22,teams.size());
+        assertEquals(2,teams.size());
     }
 
     @Test
@@ -114,11 +114,14 @@ public class TeamServiceTest {
     @Test
     public void getTeamByNameTest(){
         teamService.getTeamByName(teamTestRecordOne.getTeamName());
-//        assertNotNull(teamService.getTeamByName(teamTestRecordOne.getTeamName()));
         assertEquals(teamService.getTeamByName(teamTestRecordOne.getTeamName()),teamTestRecordOne);
     }
 
     @Test
-    public void 
+    public void udpateTeamTest(){
+        teamTestRecordOne.setTeamName("Updated test team 1");
+        int updateCount = teamService.updateTeam(teamTestRecordOne);
+        assertEquals(1,updateCount);
+    }
 
 }

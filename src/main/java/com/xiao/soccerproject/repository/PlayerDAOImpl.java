@@ -198,7 +198,6 @@ public class PlayerDAOImpl implements PlayerDAO{
             transaction = session.beginTransaction();
 
             // set team_id foreign key//
-            TeamDAOImpl teamDAOImpl = new TeamDAOImpl();
             Team team =  teamDAOImpl.getTeamById(teamId);
             player.setTeam(team);
 

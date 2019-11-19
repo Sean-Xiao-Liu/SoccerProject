@@ -110,4 +110,15 @@ public class GameDAOImplTest {
         assertNotNull(gameDAOImpl.getGameById(gameTestRecordTwo.getId()));
     }
 
+    @Test
+    public void updateGameTest(){
+       long homeTeamId = teamTestRecordOne.getId();
+       long awayTeamId = teamTestRecordTwo.getId();
+       gameTestRecordOne.setHomeLosts(10);
+       gameTestRecordOne.setHomeLosts(10);
+       gameTestRecordOne.setHomeMatchResult("Draw");
+       int updateCount = gameDAOImpl.updateGame(gameTestRecordOne,homeTeamId,awayTeamId);
+       assertEquals(1,updateCount);
+    }
+
 }

@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,6 +22,9 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest(classes = AppInitializer.class)
 
 public class PlayerDAOImplTest {
+
+    @Autowired
+    private Logger logger;
 
     @Autowired
     private PlayerDAO playerDAOImpl;
@@ -128,7 +132,11 @@ public class PlayerDAOImplTest {
 
     @Test
     public void updatePlayerTest(){
-        long teamId = 
+        long teamId = teamTestRecordOne.getId();
+        playerTestRecordOne.setPlayerPosition("ST");
+        logger.info(String.format("The position of player %s is %s now", playerTestRecordOne.getPlayerName(),playerTestRecordOne.getPlayerPosition()));
+        int updateCount = playerDAOImpl.updatePlayer(playerTestRecordOne,teamId);
+        assertEquals(1,updateCount);
     }
 
 }

@@ -1,10 +1,10 @@
-#Soccer Betting Project
+# Soccer Betting Project
 
-##Getting Started
+## Getting Started
 
-##Running the Tests
+## Running the Tests
 
-##Deployment
+## Deployment
 
 Migrate database schema
 ```

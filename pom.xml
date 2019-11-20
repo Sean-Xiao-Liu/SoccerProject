@@ -164,7 +164,7 @@
           <version>${flyway.version}</version>
           <configuration>
             <!--suppress UnresolvedMavenProperty -->
-            <driver>${db_driver}</driver>
+            <driver>org.postgresql.Driver</driver>
             <!--suppress UnresolvedMavenProperty -->
             <url>jdbc:postgresql://${db_url}:${db_port}/${db_name}</url>
             <!--suppress UnresolvedMavenProperty -->

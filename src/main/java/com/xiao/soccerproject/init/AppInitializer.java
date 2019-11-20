@@ -30,12 +30,12 @@ public class AppInitializer extends SpringBootServletInitializer {
         SpringApplication.run(AppInitializer.class, args);
     }
 
-//    @Bean
-//    public SessionFactory getSessionFactory() throws Exception{
-//        SessionFactory sf = HibernateUtil.getSessionFactory();
-//        if(sf == null) throw new Exception("building session factory failed");
-//        return sf;
-//    }
+    @Bean
+    public SessionFactory getSessionFactory() throws Exception{
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        if(sf == null) throw new Exception("building session factory failed");
+        return sf;
+    }
 
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)

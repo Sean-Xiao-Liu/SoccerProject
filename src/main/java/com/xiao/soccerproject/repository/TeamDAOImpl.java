@@ -6,6 +6,7 @@ import com.xiao.soccerproject.model.Team;
 import com.xiao.soccerproject.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
@@ -19,6 +20,8 @@ import java.util.stream.Collectors;
 @Repository
 public class TeamDAOImpl implements TeamDAO{
 //    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Autowired
     private Logger logger;
@@ -29,7 +32,7 @@ public class TeamDAOImpl implements TeamDAO{
     public boolean save(Team teams){
         Transaction transaction = null;
         boolean isSuccess = true;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try{
             transaction = session.beginTransaction();
             session.save(teams);
@@ -56,7 +59,7 @@ public class TeamDAOImpl implements TeamDAO{
         String hql = "UPDATE Team as t set t.homeWin = :homeWin WHERE t.id = :id";
         int updatedCount = 0;
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
 
         try{
             Query<Team> query = session.createQuery(hql);
@@ -88,7 +91,7 @@ public class TeamDAOImpl implements TeamDAO{
         Transaction transaction = null;
 
         try{
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Session session = sessionFactory.getCurrentSession();
             Query<Team> query = session.createQuery(hql);
             query.setParameter("id",id);
 
@@ -111,7 +114,7 @@ public class TeamDAOImpl implements TeamDAO{
         Transaction transaction = null;
 
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();// use getCurrentSession instead of OpenSession, don't need close session manually.
+            Session session = sessionFactory.getCurrentSession();// use getCurrentSession instead of OpenSession, don't need close session manually.
             transaction = session.beginTransaction();
 
             Team team = getTeamByName(teamName);
@@ -140,7 +143,7 @@ public class TeamDAOImpl implements TeamDAO{
 //        String hql = "FROM Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames";
         String hql = "FROM Team";
         //use select distinct to prevent duplicated row of team since the data are join fetched//
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try{
             Query<Team> query = session.createQuery(hql);
 //           return query.list();
@@ -155,7 +158,7 @@ public class TeamDAOImpl implements TeamDAO{
     public Team getTeamById(long id) {
 //        String hql = "From Team t LEFT join fetch t.players left join fetch t.homeGames left join fetch t.awayGames where t.id = :id";
         String hql = "From Team t where t.id = :id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Team> query = session.createQuery(hql);
             query.setParameter("id",id);
@@ -171,7 +174,7 @@ public class TeamDAOImpl implements TeamDAO{
     @Override
     public Team getTeamByName(String teamName){
         String hql = "From Team as t where t.teamName = :name";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Team> query = session.createQuery(hql);
             query.setParameter("name",teamName);
@@ -187,7 +190,7 @@ public class TeamDAOImpl implements TeamDAO{
     @Override
     public Team getPlayersByTeamId(long id) {
         String hql = "FROM Team t LEFT join fetch t.players where t.id = :id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try  {
             Query<Team> query = session.createQuery(hql);
             query.setParameter("id", id);
@@ -215,7 +218,7 @@ public class TeamDAOImpl implements TeamDAO{
         int updateCount = 0;
 
         try{
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Session session = sessionFactory.getCurrentSession();
             transaction = session.beginTransaction();
             session.saveOrUpdate(team);
 //            session.update(team);
@@ -233,11 +236,4 @@ public class TeamDAOImpl implements TeamDAO{
         }
         return updateCount;
     }
-
-
-
-    public static void main(String[] args) {
-
-    }
-
 }

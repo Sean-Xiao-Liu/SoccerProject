@@ -59,6 +59,7 @@ public class FileServiceTest {
         logger.info(">>>>>>>>>>>>>>>>>>>test end<<<<<<<<<<<<<<<<<");
     }
 
+    @Ignore
     @Test
     public void listBucketTest(){
         List<Bucket> buckets = fileService.listBuckets();
@@ -75,22 +76,26 @@ public class FileServiceTest {
         Assert.assertNotNull(fileUrl);
     }
 
+    @Ignore
     @Test
     public void listFileTest() throws IOException{
        fileService.listFile(bucketName);
     }
 
+    @Ignore
     @Test
     public void deleteFileTest() throws IOException{
         fileService.deleteFile(bucketName,multipartFile);
     }
 
+    @Ignore
     @Test
     public void saveFileTest() throws IOException{
         String savePath = "/Users/xiaoliu/Documents/Miso";
         fileService.saveFile(multipartFile,savePath);
     }
 
+    @Ignore
     @Test
     public void getFileTest() throws IOException{
         fileService.getFile(bucketName,multipartFile);

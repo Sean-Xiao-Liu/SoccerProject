@@ -81,7 +81,7 @@ public class FileServiceMockAWSTest {
     }
 
     // upload file mock test
-    @Ignore
+
     @Test
     public void uploadFileTest() throws IOException {
         fileService.uploadFile(bucketName,multipartFile);

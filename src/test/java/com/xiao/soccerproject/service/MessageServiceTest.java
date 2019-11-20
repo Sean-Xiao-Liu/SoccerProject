@@ -2,6 +2,7 @@ package com.xiao.soccerproject.service;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.xiao.soccerproject.init.AppInitializer;
+import org.junit.Ignore;
 import org.junit.Test;
 import com.xiao.soccerproject.init.AppInitializer;
 import com.xiao.soccerproject.service.MessageService;
@@ -24,6 +25,7 @@ public class MessageServiceTest {
     @Autowired
     private MessageService messageService;
 
+    @Ignore
     @Test
     public void getQueueUrlTest(){
         String queueName = "soccer-project-queue";

@@ -14,6 +14,6 @@ mvn clean compile flyway:migrate -Ddb_url=${db_url} -Ddb_name=${db_name} -Ddb_us
 
 Test the methods
 ```
-mvn test -Ddb_driver=org.postgresql.Driver -Ddatabase.dialect=org.hibernate.dialect.PostgreSQL9Dialect -Ddatabase.url=${db_url} -Ddatabase.user=${db_user} -Ddatabase.password=${db_password} -Dsecret.key=123456 -Dlogging.level.org.springframework=INFO 
+mvn test -Ddatabase.driver=org.postgresql.Driver -Ddatabase.dialect=org.hibernate.dialect.PostgreSQL9Dialect -Ddatabase.url=${db_url} -Ddatabase.user=${db_user} -Ddatabase.password=${db_password} -Dsecret.key=123456 -Dlogging.level.org.springframework=INFO 
 ```
 

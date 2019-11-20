@@ -5,6 +5,7 @@ import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -84,6 +85,7 @@ public class PlayerServiceTest {
         teamService.deleteTeamByName(teamTestRecordTwo.getTeamName());
     }
 
+    @Ignore
     @Test
     public void getPlayersTest(){
         List<Player> players = playerService.getPlayers();
@@ -93,6 +95,7 @@ public class PlayerServiceTest {
         assertEquals(2,players.size());//
     }
 
+    @Ignore
     @Test
     public void updatePlayerByIdTest(){ // why there is no logger in console?
         int updatedCount = playerService.updatePlayerAge(playerTestRecordOne.getId(),3);
@@ -100,18 +103,21 @@ public class PlayerServiceTest {
     }
 
 
+    @Ignore
     @Test
     public void getPlayerByIdTest(){
         playerService.getPlayerById(playerTestRecordOne.getId());
         assertNotNull(playerService.getPlayerById(playerTestRecordOne.getId()));
     }
 
+    @Ignore
     @Test
     public void getPlayerByNameTest(){
         playerService.getPlayerByName(playerTestRecordOne.getPlayerName());
         assertNotNull(playerService.getPlayerByName(playerTestRecordOne.getPlayerName()));
     }
 
+    @Ignore
     @Test
     public void updatePlayerTest(){
         long teamId = teamTestRecordOne.getId();

@@ -7,6 +7,7 @@ import com.xiao.soccerproject.model.Player;
 import com.xiao.soccerproject.model.Team;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,7 @@ public class TeamServiceTest {
         assertEquals(2,teams.size());
     }
 
+    @Ignore
     @Test
     public void updateTeamByIdTest(){
         int updatedCount = teamService.updateTeamHomeWin(teamTestRecordOne.getId(),3);
@@ -98,6 +100,7 @@ public class TeamServiceTest {
         assertEquals(1,updatedCount);
     }
 
+    @Ignore
     @Test
     public void getTeamByIdTest(){
         teamService.getTeamById(teamTestRecordTwo.getId());
@@ -105,18 +108,21 @@ public class TeamServiceTest {
     }
 
 
+    @Ignore
     @Test
     public void getPlayersByTeamTest(){
         Team team = teamService.getPlayersByTeamId(teamTestRecordOne.getId());
         assertEquals(2,team.getPlayers().size());
     }
 
+    @Ignore
     @Test
     public void getTeamByNameTest(){
         teamService.getTeamByName(teamTestRecordOne.getTeamName());
         assertEquals(teamService.getTeamByName(teamTestRecordOne.getTeamName()),teamTestRecordOne);
     }
 
+    @Ignore
     @Test
     public void udpateTeamTest(){
         teamTestRecordOne.setTeamName("Updated test team 1");
